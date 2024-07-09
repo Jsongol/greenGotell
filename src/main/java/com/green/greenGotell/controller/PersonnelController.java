@@ -13,5 +13,11 @@ public class PersonnelController {
 		return "/views/personnel/list";
 	}
 	
+	@GetMapping("/personnel/write")
+	public String write() {
+		return "/views/personnel/write";
+	}
+	
+	
 
 }
