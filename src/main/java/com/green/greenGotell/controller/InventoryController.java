@@ -2,6 +2,7 @@ package com.green.greenGotell.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 
 @Controller
@@ -11,9 +12,9 @@ public class InventoryController {
 	public String list() {
 		return "/views/test/list";
 	}
-	@GetMapping("/inventory/new")
-	public String write() {
-		return "/views/test/write";
+	@GetMapping("/inventory/{no}")
+	public String detail(@PathVariable("no") long no) {
+		return "/views/test/detail";
 	}
 	
 }
