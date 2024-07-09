@@ -11,5 +11,9 @@ public class InventoryController {
 	public String list() {
 		return "/views/test/list";
 	}
+	@GetMapping("/inventory/new")
+	public String write() {
+		return "/views/test/write";
+	}
 	
 }
