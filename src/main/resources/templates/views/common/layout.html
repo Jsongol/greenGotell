@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout(pHead,pMain)">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- 공통적용-->
+	
+	<link rel="stylesheet" href="/css/common/reset.css"> 
+	<link rel="stylesheet" href="/css/common/cmdesign.css">
+	<link rel="stylesheet" href="/css/common/cmlayout.css">
+	<script src="/js/common/jquery-3.7.1.min.js" defer></script> 
+	<script src="https://kit.fontawesome.com/890a398c47.js" crossorigin="anonymous"></script>
+    <script src="/js/common/common.js" defer></script> 
+	
+	<!--각 html 마다 적용-->
+	<th:block th:insert="${pHead}">
+<title>죠트</title>
+</head>
+
+<body>
+	
+	<div class="layoutWrap">
+		
+		<th:block th:replace="~{/views/common/header}"/>
+		
+		<th:block th:replace="~{/views/common/nav}"/>
+		
+		
+		<th:block th:replace="${pMain}"/>
+		
+	
+		<footer th:replace="~{/views/common/footer}"></footer>
+		
+		
+	</div>
+
+
+
+</body>
+
+
+</html>
