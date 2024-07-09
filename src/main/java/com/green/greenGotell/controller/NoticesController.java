@@ -9,6 +9,7 @@ public class NoticesController {
 	@GetMapping("/notices")
 	public String list() {
 		
+		
 		return "/views/notices/list";
 	}
 
