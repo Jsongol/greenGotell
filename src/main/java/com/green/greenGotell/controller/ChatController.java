@@ -13,4 +13,10 @@ public class ChatController {
 		return "/views/chat/list";
 	}
 	
+	@GetMapping("/caht/new")
+	public String write() {
+		return "/views/chat/wirte";
+	}
+	
+	
 }
