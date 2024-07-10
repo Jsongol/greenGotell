@@ -1,0 +1,57 @@
+@charset "UTF-8";
+
+/*공통 헤더 설정*/
+.cmheader {
+	display: flex;
+	align-items: center;
+	height: 100px;
+}
+
+.cmheader-wrap {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.cmheader-icon ul {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+.cmheader-icon li {
+	margin-right: 20px;
+}
+
+.cmheader-icon li:last-child {
+	margin-right: 20px;
+}
+
+.cmheader-icon i {
+	color: blueviolet;
+}
+
+.search-wrapper {
+	position: relative;
+	display: flex;
+	align-items: center;
+}
+
+.search-wrapper i {
+	position: absolute;
+	left: 10px;
+}
+
+.search-wrapper input {
+	width: 300px;
+	height: 30px;
+	padding-left: 30px;
+	box-sizing: border-box;
+	background-color: #E7E4F2;
+	border: none;
+	border-radius: 14px;
+}

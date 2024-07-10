@@ -21,6 +21,7 @@ a{ color: inherit; text-decoration: none; display: block;}
 :root {
   /*컬러 변수*/
   --main-color: #364659;
+  --sub-color: #E7E4F2;
   --background-color1: #fff;
   --subnav-background: rgba(255, 255, 255, 0.8);
   
