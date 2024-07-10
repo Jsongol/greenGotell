@@ -62,5 +62,5 @@ display: grid; grid-template-columns: 200px calc(100% - 200px); grid-template-ar
 
 /*js 적용*/
 .spanhidden{display:none;}
-.spanshow{display: block; position:absolute; top:0; left: 30px; width: 100px;padding: 5px; background-color:var(--main-color);border-radius: 5px;}
+.spanshow{display: block; position:absolute; top:0; left: 40px; width: 100px;padding: 5px; background-color:var(--main-color);border-radius: 5px;}
 

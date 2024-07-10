@@ -27,7 +27,7 @@ a{ color: inherit; text-decoration: none; display: block;}
   /*폰트사이즈 변수*/
   
   --main-title:21px;  /*메인메뉴,서브메뉴*/
-  --sub-title:18px;   /*본문서브메뉴의 타이틀*/
+  --sub-title:20px;   /*본문서브메뉴의 타이틀*/
   --body-text:16px    /*바디 텍스트*/ 
 }
 

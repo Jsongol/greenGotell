@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 			} else {
 				span.classList.add('spanhidden');
-				layoutWrap.style.gridTemplateColumns = "65px calc(100% - 65px)";
+				layoutWrap.style.gridTemplateColumns = "75px calc(100% - 75px)";
 				
 				menua.forEach(function(a){
 					a.style.textAlign = 'center';
