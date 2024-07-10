@@ -1,9 +1,38 @@
+ /*담당자: 전송희*/
+
+
 @charset "UTF-8";
+/*기본지정 폰트입니다.*/
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
 
+
+/*폰트적용*/
 body{font-family: "Noto Sans KR", sans-serif;}
+
+
+/*디자인을 위한 리셋 적용*/
 *{margin: 0;padding: 0; box-sizing: border-box;}
 ul,ol,li{list-style: none;}
 a{ color: inherit; text-decoration: none; display: block;}
 
+
+/*공통 지정 변수*/
+
+:root {
+  /*컬러 변수*/
+  --main-color: #364659;
+  --background-color1: #fff;
+  --subnav-background: rgba(255, 255, 255, 0.8);
+  
+  /*폰트사이즈 변수*/
+  
+  --main-title:21px;  /*메인메뉴,서브메뉴*/
+  --sub-title:18px;   /*본문서브메뉴의 타이틀*/
+  --body-text:16px    /*바디 텍스트*/ 
+}
+
+
+/*화면에 출력하지 않을 h1태그 설정*/
 .comment{position: absolute; top: 0; left: -99999px}
+
+
