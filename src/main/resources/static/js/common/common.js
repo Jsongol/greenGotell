@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	if(!cmsubnav){
 		
 		main.style.gridTemplateColumns ="0 100%"
-		main.style.padding ="10px 15px 0px 0px"
+		main.style.padding ="10px 10px 10px 10px"
 	}
 	
 	
