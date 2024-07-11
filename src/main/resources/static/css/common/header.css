@@ -99,6 +99,8 @@ input:checked + .slider:before {
 	display: flex;
 	align-items: center;
 	height: 100px;
+	color: var(--main-color);
+	font-size: var(--sub-title);
 }
 
 .cmheader-wrap {
@@ -147,5 +149,5 @@ input:checked + .slider:before {
 	box-sizing: border-box;
 	background-color: #E7E4F2;
 	border: none;
-	border-radius: 14px;
+	border-radius: 10px;
 }

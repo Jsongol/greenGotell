@@ -8,7 +8,7 @@ body{background-color:var(--body-color); }
 
 
  /*전체 레이이아웃 구조 설정*/
-.layoutWrap{display: grid; grid-template-columns: 200px auto; grid-template-rows: 74px auto; position:relative;
+.layoutWrap{display: grid; grid-template-columns: 200px auto; grid-template-rows: 74px calc(100vh - 74px); position:relative;
 grid-template-areas:
 'a b b'
 'a c c'
@@ -45,11 +45,11 @@ grid-template-areas:
 
 /*공통 메인 설정*/
 main{width: 100%; height: auto; grid-area: c;
-background-image: url(https://products.ls.graphics/mesh-gradients/images/61.-Lavender.jpg); background-repeat: no-repeat; background-position: center; background-size: cover; border-radius: 33px 0 0 0;
+background-image: url(https://products.ls.graphics/mesh-gradients/images/61.-Lavender.jpg); background-repeat: no-repeat; background-position: center; background-size: cover; border-radius: 15px 0 0 0;
 display: grid; grid-template-columns: 200px auto; grid-template-areas:'d e'; padding: 10px  10px 0px 10px}
 
 /*공통 서브메뉴설정*/
-.cmsubnav{grid-area: d; background-color: var(--subnav-background); border-radius: 25px 25px 0px 0px; padding: 15px 12.5px 0px 12.5px}
+.cmsubnav{grid-area: d; background-color: var(--subnav-background); border-radius: 15px 15px 0px 0px; padding: 15px 12.5px 0px 12.5px}
 .cmsubnav> ul >li > ul{padding-left: 10px}
 .cmsubnav> ul > li > span{display:inline-block; font-size: var(--main-title); font-weight: 600; color:var(--main-color); margin-bottom: 10px;padding-bottom: 2px;border-bottom: 1px solid var(--main-color); width: 100%}
 .cmsubnav> ul > li > ul >li>span{display:block; padding-left:18px; margin-bottom: 8px; font-weight: 500}
@@ -58,7 +58,7 @@ display: grid; grid-template-columns: 200px auto; grid-template-areas:'d e'; pad
 .cmsubnav> ul > li > ul >li>ul>li{padding-left:30px; font-size: 15px; margin-bottom: 6px}
 .cmsubnav> ul > li > ul >li>ul>li:hover{font-weight: 700;}
 /*메인컨텐츠 설정*/
-.cmcontents{grid-area: e; background-color: var(--subnav-background); border-radius: 25px 25px 0px 0px; padding: 15px 12.5px 0px 12.5px; margin-left: 10px; overflow-y: auto;}
+.cmcontents{grid-area: e; background-color: var(--subnav-background); border-radius: 15px 15px 0px 0px; padding: 15px 12.5px 0px 12.5px; margin-left: 10px; overflow-y: auto;}
 
 
 
