@@ -18,7 +18,7 @@ body {
 .dark-mode .spanshow,
 .dark-mode .menubarhover,
 .dark-mode .cmnav a:hover{
-    background-color:var(--sub-color2);
+    background-color:var(--main-color);
     color: white;
 }
 .dark-mode .cmcontents{background-color:var(--darkmod-background-color)}
