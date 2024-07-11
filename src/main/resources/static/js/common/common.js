@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 			} else {
 				span.classList.add('spanhidden');
-				layoutWrap.style.gridTemplateColumns = "65px calc(100% - 65px)";
+				layoutWrap.style.gridTemplateColumns = "75px calc(100% - 75px)";
 				
 				menua.forEach(function(a){
 					a.style.textAlign = 'center';
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	if(!cmsubnav){
 		
 		main.style.gridTemplateColumns ="0 100%"
-		main.style.padding ="10px 15px 0px 0px"
+		main.style.padding ="10px 10px 10px 10px"
 	}
 	
 	
