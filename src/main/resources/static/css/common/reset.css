@@ -25,6 +25,10 @@ a{ color: inherit; text-decoration: none; display: block;}
   --background-color1: #fff;
   --subnav-background: rgba(255, 255, 255, 0.8);
   
+  /*dark-mode color  */
+  --darkmod-background-color:rgba(0,0,0, 0.8);
+  --darkmod-background-colo2:#17181B;
+  
   /*폰트사이즈 변수*/
   
   --main-title:21px;  /*메인메뉴,서브메뉴*/
