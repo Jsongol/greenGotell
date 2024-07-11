@@ -24,7 +24,6 @@ repositories {
 }
 
 dependencies {
-
 	//webjars
 	implementation 'org.webjars:webjars-locator-core:0.59'
 	implementation 'org.webjars:jquery:3.7.1'
