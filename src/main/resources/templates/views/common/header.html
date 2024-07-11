@@ -1,5 +1,25 @@
-
-
-<header class="cmheader">
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
 	
+	</head>
+<header class="cmheader">
+	<div class="cmheader-wrap">
+		<div class="cmnav-search">
+			<form action="/" method="get">
+				  <div class="search-wrapper">
+				    <i class="fa-solid fa-search"></i>
+				    <input type="text" name="search" placeholder="Search" />
+				  </div>
+			</form>
+		</div>
+		
+		<div class="cmheader-icon">
+			<ul>
+				<li><i class="fa fa-bell" aria-hidden="true"></i></li>
+				<li>프로필 이미지</li>
+				<li>부서명</li>
+				<li>닉네임</li>
+			</ul>
+		</div>
+	</div>
 </header>
