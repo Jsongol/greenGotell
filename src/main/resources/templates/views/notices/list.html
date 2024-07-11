@@ -2,49 +2,68 @@
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{views/common/layout :: layout(~{::head} ,~{::main} ) }">
 <head>
 	<link rel="stylesheet" href="/css/samplel/sample.css">
+	<link rel="stylesheet" href="/css/notices/notice.css">
 	<script src="/js/sample/sample.js" defer></script>  
 </head>
-<main>
-	<th:block th:replace="~{/views/notices/cmsubmenu}"/>
-	<!--
-	<h1>고객센터</h1>
-	<div class="wrap  view-size">
+<body>
+	<!--  -->
+	<main class="sample"><!--본인담당 기능대표명 클래스에 작성 -->
+		<!--여기에 서브메뉴가 필요하신 경우 작성해주세요. 클래스 명은 반드시 cmsubnav 포함시켜주세요 -->
+	    <th:block th:replace="~{/views/notices/cmsubmenu}"/>
 		
-		<section id="notice">
-			<h1>공지사항</h1>
-			<div class="wrap">
-				<div class="sub flex around">
-					<a href="./1">전체 공지</a>
-					<a href="./2">영화관 공지</a>
-				</div>
-				<form class="search-form " action="#" method="get">
-					<select>
-						<option>제목</option>
-						<option>내용</option>
-						<option>제목+내용</option>
-					</select>
-					<input type="text" placeholder="검색어를 입력해주세요.">
-					<button type="submit">검색</button>
-				</form>
-				<ul>
-					<li class="flex tit">
-						<span>번호</span>
-						<span>구분</span>
-						<span>제목</span>
-						<span>등록일</span>
-					</li>
-					<li class="flex list" th:each="dto:${list}" th:classappend="${dto.fixed}? 'fixed-color'" >
-						<span th:text="${dto.fixed} ? '❗' : ${dto.no} " class="no">번호</span>
-						<span th:text="${dto.division}">구분</span>
-						<span>
-							<a  th:href="|/cscenter/notices/${dto.no}|" th:text="${dto.title}">제목</a>
-						</span>
-						<span th:text="${dto.updatedAt.toLocalDate}">등록일</span>
-					</li>
-				</ul>
-			</div>
-		</section>
-	</div>
-	-->
-</main>
+		<!--메인 컨텐츠는 여기에 작성해주세요. 반드시 클래스명에 cmcontents  포함시켜주세요 -->
+		<div class="cmcontents">
+					<div class="wrap  view-size">
+							<section id="notice">
+								<div class="wrap">
+									<form class="write" action="#" method="get">
+										<button type="submit">글쓰기</button>
+									</form>
+									<form class="search-form " action="#" method="get">
+										<select>
+											<option>전체공지</option>
+											<option>인사부</option>
+											<option>재무부</option>
+											<option>마케팅부</option>
+										</select>
+										<select>
+											<option>제목</option>
+											<option>내용</option>
+											<option>제목+내용</option>
+										</select>
+										<input type="text" placeholder="검색어를 입력해주세요.">
+										<button type="submit">검색</button>
+									</form>
+									<ul>
+										<li class="flex tit">
+											<span>번호</span>
+											<span>카테고리</span>
+											<span>제목</span>
+											<span>등록일</span>
+											<span>글쓴이</span>
+										</li>
+										<li class="flex list" th:each="dto:${list}" th:classappend="${dto.fixed}? 'fixed-color'" >
+											<span th:text="${dto.fixed} ? '❗' : ${dto.no} " class="no">번호</span>
+											<span th:text="${dto.division}">구분</span>
+											<span>
+												<a  th:href="|/cscenter/notices/${dto.no}|" th:text="${dto.title}">제목</a>
+											</span>
+											<span th:text="${dto.updatedAt.toLocalDate}">등록일</span>
+										</li>
+									</ul>
+								</div>
+							</section>
+						</div>
+			
+		</div>
+		
+		
+		
+
+	</main>
+
+</body>
+</html>
+
+
 </html>
