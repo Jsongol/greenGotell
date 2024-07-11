@@ -13,11 +13,11 @@ public class NoticesController {
 		return "views/notices/list";
 	}
 	
-//	@GetMapping("/notices/new")
-//	public String write(@PathVariable("no") long no) {
-//		return "/views/notices/write";
-//	}
-//
+	@GetMapping("/new")
+	public String write() {
+		return "/views/notices/write";
+	}
+
 //	@GetMapping("/notices/{no}")
 //	public String detail(@PathVariable("no") long no) {
 //		return "/views/notices/detail";
