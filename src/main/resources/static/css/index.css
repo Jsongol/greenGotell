@@ -1,59 +1,45 @@
+
 @charset "UTF-8";
+.index{display: grid; grid-template-columns: 0.5fr 1fr 1.5fr; grid-template-rows:40% 58%;
+grid-template-areas:
+'ia ib ib'
+'ic id ie';
 
-
-/* header 조정  */
-
-header{float: left; z-index: 10;position: absolute; color: white;}
-.logo{color: white; }
-header .header-top{border-bottom: 1px solid #fff;}
-.nav-top > li:nth-of-type(n+2):nth-of-type(-n+5) > a::before{background-color: white;}
-
-
-
-.indexslide-container{width: 100%;  position: relative; }
-
-.indexslide-wrap{width: 100%;position:absolute;}
-
-.indexslide{
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position:center;
-	width: 100%;
-	height:774px;
-	position: absolute;
-	top: 50%;
-	transform:translateY(-50%);
-	
-}
-
-
-.indexslide-wrap>li:nth-of-type(1) {
-	background-image: url("https://cf2.lottecinema.co.kr/lotte_image/2024/Junsu/Junsu_19207742.jpg");
+gap:15px;
 
 }
 
+main .cmcontents{background-color:initial; padding: 0px;}
 
-.indexslide-wrap>li:nth-of-type(2) {
-	background-image: url("https://cf2.lottecinema.co.kr/lotte_image/2024/NoWayUp/NoWayUp_1920774.jpg");
 
+
+
+.dashboard{
+	width: 100%
+}
+
+.index > div:nth-child(1){
+	grid-area: ia;
 }
 
 
-.indexslide-wrap>li:nth-of-type(3) {
-	background-image: url("https://cf2.lottecinema.co.kr/lotte_image/2024/YouShineInTheMoonlight/YouShineInTheMoonlight_1920774.jpg");
-
+.index > div:nth-child(2){
+	grid-area: ib;
 }
 
-.indexslide-container:before{content: ""; display: block; position:absolute;  top:0;left: 0;width: 100%; height: 130px;  
-background-image: linear-gradient(to bottom, rgba(0,0,0,0.6),rgba(0,0,0,0.3), rgba(0,0,0,0)); z-index: 1}
 
-.indexslide-container:after{content: ""; display: block; position:absolute; bottom:0;  left: 0;width: 100%; height: 120px;  
-background-image: linear-gradient(to top,  rgba(0,0,0,1), rgba(0,0,0,0.7),rgba(0,0,0,0)); z-index: 1}
-
-#prev{position: absolute; left:10%; top:50%; transform:translateY(-50%); font-size: 2.5em; color: #fff}
-#next{position: absolute; left:90%; top:50%; transform:translateY(-50%); font-size: 2.5em; color: #fff}
-
-.indexslide-wrap.animated{
-	-webkit-transition: left .3s ease-in;
-	transition:left .3s ease-in;
+.index > div:nth-child(3){
+	grid-area: ic;
 }
+
+.index > div:nth-child(4){
+	grid-area: id;
+}
+
+
+.index > div:nth-child(5){
+	grid-area: ie;
+}
+
+
+.dashboard{background-color: var(--subnav-background); border-radius: 30px;}
