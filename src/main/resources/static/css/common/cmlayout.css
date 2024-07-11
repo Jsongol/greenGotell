@@ -50,11 +50,13 @@ display: grid; grid-template-columns: 200px calc(100% - 200px); grid-template-ar
 
 /*공통 서브메뉴설정*/
 .cmsubnav{grid-area: d; background-color: var(--subnav-background); border-radius: 25px 25px 0px 0px; padding: 15px 12.5px 0px 12.5px}
+.cmsubnav> ul >li > ul{padding-left: 10px}
 .cmsubnav> ul > li > span{display:inline-block; font-size: var(--main-title); font-weight: 600; color:var(--main-color); margin-bottom: 10px;padding-bottom: 2px;border-bottom: 1px solid var(--main-color); width: 100%}
-.cmsubnav> ul > li > ul >li>a{padding-left:18px; margin-bottom: 3px; font-weight: 500}
-.cmsubnav> ul > li > ul >li{position: relative; margin-bottom: 10px}
-.cmsubnav> ul > li > ul >li >a:before{content:"\f101"; font-family: "Font Awesome 5 Free"; font-weight: 900;  display:block; position: absolute; top: 5px; left: 0; font-size: 14px; }
-.cmsubnav> ul > li > ul >li>ul>li{padding-left:30px; font-size: 15px; margin-bottom: 1.5px}
+.cmsubnav> ul > li > ul >li>span{display:block; padding-left:18px; margin-bottom: 8px; font-weight: 500}
+.cmsubnav> ul > li > ul >li{position: relative; margin-bottom: 25px}
+.cmsubnav> ul > li > ul >li >span:before{content:"\f0da"; font-family: "Font Awesome 5 Free"; font-weight: 900;  display:block; position: absolute; top: 5px; left: 0; font-size: 14px; }
+.cmsubnav> ul > li > ul >li>ul>li{padding-left:30px; font-size: 15px; margin-bottom: 6px}
+.cmsubnav> ul > li > ul >li>ul>li:hover{font-weight: 700;}
 /*메인컨텐츠 설정*/
 .cmcontents{grid-area: e; background-color: var(--subnav-background); border-radius: 25px 25px 0px 0px; padding: 15px 12.5px 0px 12.5px; margin-left: 10px}
 
@@ -62,5 +64,5 @@ display: grid; grid-template-columns: 200px calc(100% - 200px); grid-template-ar
 
 /*js 적용*/
 .spanhidden{display:none;}
-.spanshow{display: block; position:absolute; top:0; left: 40px; width: 100px;padding: 5px; background-color:var(--main-color);border-radius: 5px;}
+.spanshow{display: block; position:absolute; top:0; left: 40px; width: 100px;padding: 5px; background-color:var(--main-color);border-radius: 5px; z-index: 10;}
 
