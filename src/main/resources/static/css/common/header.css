@@ -31,6 +31,8 @@ body {
 
 
 #darkMode{
+	margin-top: 65px;
+    margin-right: 15px;
 	display: inline-block;
 	align-items: center;
 	justify-content: center;
