@@ -42,4 +42,4 @@ main .cmcontents{background-color:initial; padding: 0px;}
 }
 
 
-.dashboard{background-color: var(--subnav-background); border-radius: 30px;}
+.dashboard{background-color: var(--subnav-background); border-radius: 10px;}
