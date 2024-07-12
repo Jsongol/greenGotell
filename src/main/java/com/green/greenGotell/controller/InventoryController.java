@@ -12,6 +12,9 @@ public class InventoryController {
 	public String list() {
 		return "/views/inventory/list";
 	}
-	
+	@GetMapping("/inventory-add")
+	public String add() {
+		return "/views/inventory/write";
+	}
 
 }
