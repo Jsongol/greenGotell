@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 	//메뉴바 기능을 위한 변수
+	const nav=document.querySelector('.cmnav');
 	const layoutWrap =document.querySelector('.layoutWrap');
 	const menubar = document.querySelector('.menubar');
 	const menuspan = document.querySelectorAll('.cmnav-bttom span, .logo');
@@ -32,7 +33,8 @@ document.addEventListener("DOMContentLoaded", function() {
 		menuspan.forEach(function(span) {
 			if (span.classList.contains('spanhidden')) {
 				span.classList.remove('spanhidden');
-				layoutWrap.style.gridTemplateColumns = "200px calc(100% - 200px)";
+				
+				layoutWrap.style.gridTemplateColumns = "200px auto";
 				
 				menua.forEach(function(a){
 					a.style.textAlign = 'left';
@@ -41,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 			} else {
 				span.classList.add('spanhidden');
-				layoutWrap.style.gridTemplateColumns = "75px calc(100% - 75px)";
+				layoutWrap.style.gridTemplateColumns = "75px auto";
 				
 				menua.forEach(function(a){
 					a.style.textAlign = 'center';

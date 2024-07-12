@@ -33,7 +33,11 @@ a{ color: inherit; text-decoration: none; display: block;}
   
   --main-title:21px;  /*메인메뉴,서브메뉴*/
   --sub-title:20px;   /*본문서브메뉴의 타이틀*/
-  --body-text:16px    /*바디 텍스트*/ 
+  --body-text:16px;    /*바디 텍스트*/ 
+  
+  /*보더굴곡*/
+  --menu-border-radius :5px;
+  --main-border-radius :15% 15% 0px 0px;
 }
 
 

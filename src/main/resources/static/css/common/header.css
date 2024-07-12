@@ -18,7 +18,7 @@ body {
 .dark-mode .spanshow,
 .dark-mode .menubarhover,
 .dark-mode .cmnav a:hover{
-    background-color:var(--sub-color2);
+    background-color:var(--main-color);
     color: white;
 }
 .dark-mode .cmcontents{background-color:var(--darkmod-background-color)}
@@ -31,6 +31,8 @@ body {
 
 
 #darkMode{
+	margin-top: 65px;
+    margin-right: 15px;
 	display: inline-block;
 	align-items: center;
 	justify-content: center;
@@ -99,6 +101,8 @@ input:checked + .slider:before {
 	display: flex;
 	align-items: center;
 	height: 100px;
+	color: var(--main-color);
+	font-size: var(--sub-title);
 }
 
 .cmheader-wrap {
@@ -147,5 +151,5 @@ input:checked + .slider:before {
 	box-sizing: border-box;
 	background-color: #E7E4F2;
 	border: none;
-	border-radius: 14px;
+	border-radius: 10px;
 }

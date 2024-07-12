@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{views/common/layout :: layout(~{::head} ,~{::main} ) }">
+<head>
+	<link rel="stylesheet" href="/css/samplel/sample.css">
+	<link rel="stylesheet" href="/css/notices/notice.css">
+	<script src="/js/sample/sample.js" defer></script>  
+</head>
+<body>
+	<!--  -->
+	<main class="sample"><!--본인담당 기능대표명 클래스에 작성 -->
+		<!--여기에 서브메뉴가 필요하신 경우 작성해주세요. 클래스 명은 반드시 cmsubnav 포함시켜주세요 -->
+	    <th:block th:replace="~{/views/notices/cmsubmenu}"/>
+		
+		<!--메인 컨텐츠는 여기에 작성해주세요. 반드시 클래스명에 cmcontents  포함시켜주세요 -->
+		<div class="cmcontents">
+				<div id="notices-write">
+					<form action="/cscenter/notices" method="post">
+						<ul>
+							<li>
+								<b>구분 : </b>
+								<select name="division">
+									<option value="전체">전체</option>
+									<option value="영화관">영화관</option>
+								</select>
+							</li>
+							<li>
+								<b>고정여부</b>
+								<input type="radio" id="r1" name="fixed" value="1"><label for="r1">고정함</label>
+								<input type="radio" id="r2" name="fixed" value="0" checked="checked"><label for="r2">고정안함</label>
+							</li>
+							<li>
+								<b>제목 : </b>
+								<input type="text" placeholder="제목입력" name="title" required="required">
+							</li>
+							<li>
+								<b>내용</b>
+								<br>
+								<textarea name="content" placeholder="내용을 입력하세요" required="required"></textarea>
+							</li>
+							<li>
+								<button type="submit">공지등록</button>
+							</li>
+						</ul>
+					</form>
+				</div>
+			</div>
+		</main>
+</body>
+</html>
