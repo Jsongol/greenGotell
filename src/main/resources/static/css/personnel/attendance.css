@@ -1,15 +1,16 @@
 @charset "UTF-8";
 /*게시판 간격조정*/
-#cmposting-format ul> li >span:nth-child(1){width: 5%}
+#cmposting-format ul> li >span:nth-child(1){width: 10%}
 #cmposting-format ul> li >span:nth-child(2){width: 5%}
 #cmposting-format ul> li >span:nth-child(3){width: 5%}
 #cmposting-format ul> li >span:nth-child(4){width: 5%}
-#cmposting-format ul> li >span:nth-child(5){width: 15%}
-#cmposting-format ul> li >span:nth-child(6){width: 25%}
+#cmposting-format ul> li >span:nth-child(5){width: 10%}
+#cmposting-format ul> li >span:nth-child(6){width: 10%}
 #cmposting-format ul> li >span:nth-child(7){width: 10%}
 #cmposting-format ul> li >span:nth-child(8){width: 10%}
 #cmposting-format ul> li >span:nth-child(9){width: 5%}
-.personnel-list button{padding: 2px 5px; font-size: 13px; line-height: 15px; }
+#cmposting-format ul> li >span:nth-child(10){width: 30%}
+
 /*  */
 .personnel{position: relative; overflow: hidden;}
 
@@ -42,3 +43,12 @@ border: 2px solid var(--sub-color2); border-right:none; border-radius: 10px 0px 
 	font-size: 12px;
 	color: red;
 }
+
+/*휴가*/
+.leave-requset-list ul> li >span:nth-child(1){width: 5%}
+.leave-requset-list ul> li >span:nth-child(2){width: 5%}
+.leave-requset-list ul> li >span:nth-child(3){width: 10%}
+.leave-requset-list ul> li >span:nth-child(4){width: 5%}
+.leave-requset-list ul> li >span:nth-child(5){width: 20%}
+.leave-requset-list ul> li >span:nth-child(6){width: 20%}
+.leave-requset-list ul> li >span:nth-child(7){width: 5%}
