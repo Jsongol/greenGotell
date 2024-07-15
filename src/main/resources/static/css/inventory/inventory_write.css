@@ -1,48 +1,91 @@
-.checkbox-container {
-	display: inline-block;
-	flex-direction: column;
-	gap: 10px;
-	margin: 20px auto;
+
+select {padding: 10px; border: 1px solid #cfd8e2; border-radius: 5px; margin-right: 5px}
+
+.charang{
+	border-radius: 5px;
+	padding-top:20px;
+	margin: 0 auto;
+	text-align:center;
+	width:400px;
+	background-color: #dddddd;
+}
+.charang .bom{
+	padding: 0 100px;
+}
+.charang P{
+	text-align: left;
+}
+
+.charang input {
 	padding: 10px;
-	background-color: #f9f9f9;
+	border: 1px solid #cfd8e2;
+	border-radius: 5px;
+	margin-right: 5px
 }
 
-.checkbox-container input[type="checkbox"] {
-	display: none;
+.date {
+	padding: 10px;
+	border: 1px solid #cfd8e2;
+	border-radius: 5px;
+	margin-right: 5px
 }
 
-.checkbox-container label {
-	position: relative;
-	padding-left: 25px;
+.charang button {
+	background-color: var(--sub-color2);
+	padding: 10px 10px;
+	border-radius: 5px;
+	border: none;
+	font-size: 16px;
+	margin-right:10px;
+	color: #fff;
+	line-height: 14px
+}
+
+.filebox {
+	margin-top: 20px;
+}
+
+.filebox .upload-name {
+	display: inline-block;
+	height: 40px;
+	padding: 0 10px;
+	vertical-align: middle;
+	border: 1px solid #dddddd;
+	width: 30%;
+	color: #999999;
+}
+
+.filebox input {
+	border-radius: 5px;
+}
+
+.filebox label {
+	display: inline-block;
+	padding: 10px 20px;
+	color: #fff;
+	vertical-align: middle;
+	border-radius: 5px;
+	background-color: var(--sub-color2);
 	cursor: pointer;
-	user-select: none;
+	height: 40px;
+	margin-left: 10px;
 }
 
-.checkbox-container label::before {
-	content: "";
+.filebox input[type="file"] {
 	position: absolute;
-	left: 0;
-	top: 0;
-	width: 18px;
-	height: 18px;
-	border: 2px solid #007BFF;
-	border-radius: 3px;
-	background-color: #fff;
+	width: 0;
+	height: 0;
+	padding: 0;
+	overflow: hidden;
+	border: 0;
 }
 
-.checkbox-container input[type="checkbox"]:checked+label::before {
-	background-color: #007BFF;
-	border-color: #007BFF;
+.input-container {
+	margin-top: 20px;
 }
+#textInput{width: 78%; height: 300px}
 
-.checkbox-container input[type="checkbox"]:checked+label::after {
-	content: "";
-	position: absolute;
-	left: 6px;
-	top: 2px;
-	width: 6px;
-	height: 12px;
-	border: solid white;
-	border-width: 0 2px 2px 0;
-	transform: rotate(45deg);
+.char-count {
+	font-size: 0.9em;
+	color: gray;
 }

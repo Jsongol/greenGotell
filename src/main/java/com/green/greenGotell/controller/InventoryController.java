@@ -9,12 +9,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class InventoryController {
 	
 	@GetMapping("/inventory")
+	public String itemList() {
+		return "/views/inventory/item-list";
+	}
+	@GetMapping("/inventory-add")
+	public String itemAdd() {
+		return "/views/inventory/item-write";
+	}
+	@GetMapping("/item")
 	public String list() {
 		return "/views/inventory/list";
 	}
-	@GetMapping("/inventory-add")
+	@GetMapping("/item-write")
 	public String add() {
 		return "/views/inventory/write";
 	}
-
 }
