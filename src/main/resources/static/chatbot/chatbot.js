@@ -61,7 +61,7 @@ function connect() {
 			var tag = `<div class="flex center date">${date}</div>
 						<div class="msg bot flex">
 							<div class="icon">
-								<img src="/images/icon/robot-solid.svg">
+								<img src="images/logo.ico">
 							</div>
 							<div class="message">
 								<div class="part">

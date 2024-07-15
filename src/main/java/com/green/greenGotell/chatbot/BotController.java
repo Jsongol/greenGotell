@@ -15,19 +15,32 @@ import lombok.RequiredArgsConstructor;
 
 
 @Controller
+@RequiredArgsConstructor
 public class BotController {
 
-	@GetMapping("/chatbot")
-	public String list() {
-		return "/views/chatbot/list";
-	}
-	
-	
-	@MessageMapping("/hello")
-	@SendTo("/topic/Goting")
-	public Goting greeting(HelloMessage message) throws Exception {
-		System.out.println("클라이언트에서 이름을을 객체로 보냈어요>>>>"+message.getName());
-		return new Goting("Hello, " + HtmlUtils.htmlEscape(message.getName()) + "!");
-	}
-	
+		private final SimpMessagingTemplate messagingTemplate;
+		private final KomoranService komoranService;
+		
+		@GetMapping("/chatbot")
+		public String list() {
+			return "/views/chatbot/list";
+		}
+		
+		@MessageMapping("/question") 
+		public void bot(Question dto) {
+			System.out.println(">>>:"+dto);
+			komoranService.nlpProcess(dto.getContent());
+		}
+		
+		@MessageMapping("/hello") 
+		public void hello(Question dto) {
+			System.out.println(">>>:"+dto);
+			long key = dto.getKey();
+			String pattern = "{0}님 안녕하세요!";
+			
+			messagingTemplate.convertAndSend("/topic/bot/"+key, 
+					MessageFormat.format(pattern, dto.getName())
+					);
+		}
+		
 }
