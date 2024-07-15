@@ -5,8 +5,8 @@
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain; 
-	background-size: 70%;
-	background-image: url("/images/message.png");
+	background-size: 100%;
+	background-image: url("/images/chatbot.png");
 	position: fixed;
     bottom: 100px;
     right: 0;
@@ -21,6 +21,7 @@
    
 }
 
+
 #conversation>.wrap>.container{
     right: 100px;
 	width: 360px;
@@ -31,22 +32,22 @@
 
 	z-index: 99;
 	display: none;
-	border-top-left-radius: 20px; 
-    border-bottom-left-radius: 20px; 
-    border-top-right-radius: 20px; 
-    border-bottom-right-radius: 20px;
-	box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+	border-top-left-radius: 10px; 
+    border-bottom-left-radius: 10px; 
+    border-top-right-radius: 10px; 
+    border-bottom-right-radius: 10px;
+	box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
 	
 }
 #conversation>.wrap>.container>.c-header{
 	height: 38px;
-	background-color: rgb(216, 176, 255);
+	background-color: #bd9ff4;
 	color: #fff;
 	padding: 0 15px;
 	border-radius: 3px 3px 0 0;
-	border-top-left-radius: 20px; 
+	border-top-left-radius: 10px; 
     border-bottom-left-radius: 0; 
-    border-top-right-radius: 20px; 
+    border-top-right-radius: 10px; 
     border-bottom-right-radius: 0;
 	
 }
@@ -58,12 +59,11 @@
 	content: "";
 	display: inline-flex;
 	margin-right: 2px;
-	width: 25px;
-	height: 25px;
+	width: 35px;
+	height: 35px;
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain; 
-	background-image: url("/images/Robot.png");
 	filter: brightness(0) invert(1) grayscale(100%) contrast(100%);
 	
 	
@@ -73,8 +73,8 @@
 	padding: 20px;
 	cursor: pointer;
 	display: inline-flex;
-	width: 18px;
-	height: 18px;
+	width: 20px;
+	height: 20px;
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 50%;
@@ -84,20 +84,20 @@
 #conversation>.wrap>.container>.c-content{
 	padding: 15px;
 	height: 450px;
-	background-color: #f0f2f5;
+	background-color: #f8f5fe;
 	overflow-y: auto;
 }
 
 #conversation>.wrap>.container>.c-question{
 	padding: 0 15px;
 	height: 52px;
-	background-color: #50566933;
+	background-color:#E7E4F2;
 	border-radius: 0 0 3px 3px;
 	
 	border-top-left-radius: 0; 
-    border-bottom-left-radius: 20px; 
+    border-bottom-left-radius: 10px; 
     border-top-right-radius: 0; 
-    border-bottom-right-radius: 20px;
+    border-bottom-right-radius: 10px;
 }
 #conversation>.wrap>.container>.c-question>.q-wrap{
 	display: inline-flex;
@@ -122,7 +122,7 @@
 	display: flex;
 	width: 36px;
 	height: 36px;
-	background-color: #dab5ff;
+	background-color:#bd9ff4;
 	border: none;
 	border-radius: 0 3px 3px 0;
 	
@@ -187,3 +187,17 @@
 	border: 1px solid #e5e5e5;
 	
 }
+
+
+
+
+/*  *{padding: 0;margin: 0;box-sizing: border-box;}  */
+/*  h1{position: absolute;left: -9999px;}  */
+.bot-menu>li{list-style: none;}
+.flex{display: flex;}
+.center{justify-content: center;}
+.between{justify-content: space-between;}
+.end{justify-content: end;}
+.col-center{align-items: center;}
+
+.view-size{width: 1180px; margin: 0 auto;}
