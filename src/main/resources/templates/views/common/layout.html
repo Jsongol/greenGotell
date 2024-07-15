@@ -10,7 +10,6 @@
 	<link rel="stylesheet" href="/css/common/cmlayout.css">
 	<link rel="stylesheet" href="/css/common/header.css">
 	<script src="/js/common/jquery-3.7.1.min.js" defer></script> 
-	<link rel="stylesheet" href="/css/inventory/inventory_page.css">
     <script src="https://kit.fontawesome.com/890a398c47.js" crossorigin="anonymous"></script> 
     <script src="/js/common/common.js" defer></script> 
 	<script src="/js/common/header.js"></script>
@@ -24,7 +23,7 @@
 <body>
 	
 	<div class="layoutWrap">
-		
+
 		<th:block th:replace="~{/views/common/header}"/>
 		
 		<th:block th:replace="~{/views/common/nav}"/>
@@ -34,6 +33,10 @@
 		
 	    <!--사용하지 않습니다.-->
 	    <!--<footer th:replace="~{/views/common/footer}"></footer> -->
+	    
+	    <th:block th:replace="~{/views/chatbot/list}"/>
+	    
+	    
 	    
 	   
 		

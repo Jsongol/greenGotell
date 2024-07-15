@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{views/common/layout :: layout(~{::head} ,~{::main} ) }">
+<head>
+	<link rel="stylesheet" href="/css/personnel/attendance.css">
+	<!-- <script src="/js/personnel/personnel.js" defer></script>   -->
+</head>
+<body>
+
+	<main class="personnel"><!--본인담당 기능대표명 클래스에 작성 -->
+		<!--여기에 서브메뉴가 필요하신 경우 작성해주세요. 클래스 명은 반드시 cmsubnav 포함시켜주세요 -->
+	    <th:block th:replace="~{/views/personnel/cmsubmenu}"/> 
+		
+		
+		<section class="cmcontents">
+		
+			<div id="cmcreate">
+				<h1>휴가 및 병가 기록</h1>
+				
+			</div>
+
+			<div id="cmsearch-form">
+				<form class="search-form " action="#" method="get">
+					<input type="date" class="cminput" required>
+					<span>~</span>
+					<input type="date" class="cminput" required>
+
+					<select>
+						<option>전체</option>
+						<option>프론트오피스부</option>
+						<option>식음료부</option>
+						<option>시설관리부</option>
+						<option>보안부</option>
+						<option>인사부</option>
+						<option>지원부</option>
+						<option>마케팅부</option>
+					</select> 
+				
+					
+					<select>
+						<option>휴가</option>
+						<option>병가</option>
+						<option></option>
+						<option></option>
+					</select> 
+					
+					<input type="text" placeholder="이름을 입력해주세요.">
+					<button type="submit">검색</button>
+				</form>
+			</div>
+			
+			<div id="cmposting-format" class="leave-requset-list">
+				<ul>
+					<li> <!--목차입니다.-->
+						<span>신청번호</span>
+						<span>신청자</span>
+						<span>신청일</span>
+						<span>유형</span>
+						<span>시작일</span>
+						<span>종료일</span>
+						<span>승인상태</span>
+					</li>
+					
+					<li><!--타임리프 적용하려야하는 곳 입니다.-->
+						<span>15321</span>
+						<span>전젠틀</span>
+						<span>2024/07/15</span>
+						<span>병가</span>
+						<span>2024/07/15</span>
+						<span>2024/07/15</span>
+						<span>승인대기</span>
+					</li>
+					
+				</ul>
+			</div>
+
+
+			<div id="create-employee">
+				<button type="button" class="cmbutton cancelbtn">
+					<i class="fa-solid fa-arrow-left"></i><span>취소하기</span>
+				</button>
+
+				<div>
+				 	<p>신규직원추가</p>
+
+					<form action="/personnel" method="post">
+					
+						<div class="create-form-wrap">
+							<label for="name" class="cmlabel">이름</label><br> 
+							<input type="text" id="name" name="name" class="cminput" required> <br>
+							<div class="error name-failure hide">2글자 이상,문자만 입력가능합니다</div>
+							
+						</div>
+						
+						<div class="create-form-wrap">
+							<label for="email" class="cmlabel">이메일</label> <br> 
+							<input type="email"id="email" name="email" class="cminput" required> <br>
+							<div class="error email-failure hide">이메일 형식이 맞지 않습니다</div>
+						
+						</div>
+						
+						
+						<div class="create-form-wrap">
+							<label for="pass" class="cmlabel">비밀번호</label> <br> 
+							<input type="password" id="pass" name="pass" class="cminput" required> <br>
+							<div class="error pass-failure hide">6글자 이상(영문자,숫자,!@$%*)</div>
+						
+						</div>
+						
+						<div class="create-form-wrap">
+									
+							<label for="department" class="cmlabel">부서</label> <br> 
+							<select class="cmselect" id="department" name="department" required>
+								<option value="">부서 선택</option>
+								<option value="HR">인사</option>
+								<option value="IT">IT</option>
+								<option value="Sales">영업</option>
+							</select> 
+							
+						</div>
+						
+						<div class="create-form-wrap">
+								
+							<label for="position" class="cmlabel">직급</label> <br>
+							<select class="cmselect" id="position"name="position" required>
+								<option value="">직급 선택</option>
+								<option value="Manager">매니저</option>
+								<option value="Staff">직원</option>
+								<option value="Intern">인턴</option>
+							</select> <br>
+						
+						</div>
+						
+						<div class="create-form-wrap">
+							<label for="hireDate" class="cmlabel">입사일</label> <br> 
+							<input type="date"id="hireDate" name="hireDate" class="cminput" required> <br>
+						
+						</div>
+						
+						
+						<div class="create-form-wrap">
+								
+							<label for="status" class="cmlabel">상태</label><br> 
+							<select id="status" name="status" class="cmselect" required>
+								<option value="">상태 선택</option>
+								<option value="Active">재직</option>
+								<option value="Inactive">휴직</option>
+								<option value="Inactive">퇴사</option>
+							</select> <br>
+						
+						</div>
+									
+						<div class="optionbtn-wrap">
+							<button type="submit" class="cmbutton">추가</button>
+							<button type="reset" class="cmbutton2">초기화</button>
+						</div>
+					
+
+
+
+					</form>
+
+				</div>
+
+
+
+			</div>
+
+
+
+
+
+		</section>
+
+
+
+
+	</main>
+
+</body>
+</html>
