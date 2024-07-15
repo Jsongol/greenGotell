@@ -17,7 +17,7 @@ public class NoticesController {
 	public String write() {
 		return "/views/notices/write";
 	}
-
+}
 //	@GetMapping("/notices/{no}")
 //	public String detail(@PathVariable("no") long no) {
 //		return "/views/notices/detail";
@@ -27,5 +27,5 @@ public class NoticesController {
 //	public String update(@PathVariable("no") long no) {
 //		return "redirect:/notices";
 //	}
-}
+
 

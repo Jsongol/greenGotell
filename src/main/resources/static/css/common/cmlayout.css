@@ -69,3 +69,5 @@ display: grid; grid-template-columns: 190px auto; grid-template-areas:'d e'; pad
 .spanhidden{display:none;}
 .spanshow{display: block; position:absolute; top:0; left: 40px; width: 100px;padding: 5px; background-color:var(--main-color);border-radius: 5px; z-index: 100;}
 
+
+

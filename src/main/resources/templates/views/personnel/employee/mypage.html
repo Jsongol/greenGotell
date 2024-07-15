@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{views/common/layout :: layout(~{::head} ,~{::main} ) }">
+<head>
+	<link rel="stylesheet" href="/css/personnel/mypage.css">
+	<script src="/js/personnel/mypage.js" defer></script>  
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</head>
+<body>
+	<!--  -->
+	<main class="personnel"><!--본인담당 기능대표명 클래스에 작성 -->
+		
+		<section class="mypage cmcontents">
+
+			<div id="cmcreate" class="cmbox profile-edit">
+				<h1>마이페이지</h1>
+				<div>
+					<button type="button" class="editbtn"><i class="fa-solid fa-plus"></i><span>프로필수정</span></button>
+					<button type="button" class="createbtn"><i class="fa-solid fa-plus"></i><span>휴가 및 병가신청</span></button>
+				
+				</div>
+				
+			</div>
+			
+			
+			<div class="wrap">
+			
+				<div class="Profile cmbox" >
+				    <h1 class="subfont">프로필</h1>
+					<img src="https://i.pinimg.com/564x/a5/e8/4d/a5e84dd8104ba6287b72e16401d173d7.jpg" alt="프로필 사진">
+					<p>테스트</p>
+					<div>
+						
+						<p>
+							이메일(아이디) <br><span>test01@naver.com</span>
+						</p>
+						<p>
+							비밀번호  <button class="cmbutton2 edit-pass-btn">새비밀번호</button> <br><span>******</span>
+						</p>
+						<p>
+							연락처 <br><span>01012345678</span>
+						</p>
+						<p>
+							부서 <br> <span>마케팅부</span>
+						</p>
+						<p>
+							직급 <br> <span>부장</span>
+						</p>
+						<p>
+							주소 <br> <span>댕댕시 냥냥동 123-15번지</span>
+						</p>
+						<p>
+							입사일 <br> <span>2024-07-13</span>
+						</p>
+	
+					</div>
+				</div>  <!--프로필 끝-->
+
+
+				<div>
+					<div class="leave-request-status cmbox">
+						<h1 class="subfont">휴가 및 병가 신청내역</h1>
+						<div id="cmsearch-form">
+							<form class="search-form " action="#" method="get">
+
+							    <input type="date"id="hireDate" name="hireDate" class="cminput" required>
+							     <span>~</span>
+							     <input type="date"id="hireDate" name="hireDate" class="cminput" required>
+								
+								<select>
+									<option>승인대기중</option>
+									<option>승인완료</option>
+								</select> 
+								<button type="submit">검색</button>
+							</form>
+						</div>
+
+						<div id="cmposting-format">
+							<ul>
+								<li>
+									<!--목차입니다.--> 
+									<span>신청일</span>
+									<span>종류</span> 
+									<span>신청자</span> 
+									<span>시작일</span>
+									<span>종료일</span> 
+									<span>승인여부</span> 
+									
+								</li>
+
+								<li>
+									<!--타임리프 적용하려야하는 곳 입니다.-->
+									<span>2024/7/14</span>
+									<span>병가</span> 
+									<span>전젠틀</span> 
+									<span>2024/7/14</span>
+									<span>2024/7/14</span> 
+									<span>승인대기중</span> 
+
+								</li>
+
+							</ul>
+						</div>
+
+					</div>
+					
+					
+					<div class="salary-status cmbox">
+					<h1 class="subfont">급여 내역</h1>
+					<div id="cmsearch-form">
+							<form class="search-form " action="#" method="get">
+
+							    <input type="date"id="hireDate" name="hireDate" class="cminput" required>
+							    <span>~</span>
+							    <input type="date"id="hireDate" name="hireDate" class="cminput" required>
+								<button type="submit">검색</button>
+							</form>
+					</div>
+					<div id="cmposting-format">
+							<ul>
+								<li>
+									<!--목차입니다.--> 
+									<span>지급날짜</span>
+									<span>기본급</span> 
+									<span>성과급</span> 
+									<span>보너스</span>
+									<span>총급여</span>  
+									
+								</li>
+
+								<li>
+									<!--타임리프 적용하려야하는 곳 입니다.-->
+									<span>2024/7/14</span>
+									<span>2,300,000</span> 
+									<span>200,000</span> 
+									<span>0</span>
+									<span>2,500,000</span> 
+								</li>
+
+							</ul>
+						</div>
+					
+					</div>
+				</div>
+
+
+			</div>
+
+
+
+			
+			
+			
+
+
+
+
+
+
+			<!-- 실제 적용 할 html 
+			<div class="Profile">
+				<img th:src="@{${employee.profilePictureUrl}}" alt="프로필 사진">
+				<h2>
+					이름: <span th:text="${employee.name}"></span>
+				</h2>
+				<p>
+					이메일(아이디): <span th:text="${employee.email}"></span>
+				</p>
+				<p>
+					비밀번호: <span th:text="*'.repeat(${employee.password}.length())"></span>
+				</p>
+				<p>
+					연락처: <span th:text="${employee.phone}"></span>
+				</p>
+				<p>
+					부서: <span th:text="${employee.department}"></span>
+				</p>
+				<p>
+					직급: <span th:text="${employee.position}"></span>
+				</p>
+				<p>
+					주소: <span th:text="${employee.address}"></span>
+				</p>
+				<p>
+					입사일: <span th:text="${employee.hireDate}"></span>
+				</p>
+				
+			</div> -->
+
+
+
+
+		</section>
+		
+			<!--새비밀번호 모달-->
+		
+		<div class="cmbox edit-pass-wrap hide">
+			<div>
+				<p class="subfont">비밀번호 변경</p>
+
+				<button type="button" class="cmbutton pass-cancel-btn">
+					<i class="fa-solid fa-xmark"></i>
+				</button>
+			</div>
+		
+			 <form action="/personnel" method="post" id="edit-pass-form">
+			 
+			 <div class="edit-form-wrap">
+				<label for="current-password" class="cmlabel">현재비밀번호</label> <br> 
+				<input type="password" id="current-password" name="pass" class="cminput" required> <br>
+			 </div>
+			 	
+			 <div class="edit-form-wrap">
+				<label for="new-password" class="cmlabel">새비밀번호</label> <br> 
+				<input type="password" id="new-password" name="pass" class="cminput" required> <br>
+				<div class="error new-pass-failure hide">6글자 이상(영문자,숫자,!@$%*)</div>
+							
+			 </div>
+			 
+			  <div class="edit-form-wrap">
+				<label for="confirm-new-password" class="cmlabel">새비밀번호 확인</label> <br> 
+				<input type="password" id="confirm-new-password" name="pass" class="cminput" required> <br>
+				<div class="error confirm-pass-failure hide">새비밀번호가 동일하지 않습니다</div>
+							
+			  </div>
+				
+				<div class="optionbtn-wrap">
+					<button type="submit" class="cmbutton">수정</button>
+					<button type="reset" class="cmbutton2">초기화</button>
+				</div>
+			 
+			 </form>
+		
+		</div>
+		
+		
+		
+	
+		
+		<div id="edit-profile">
+				<button type="button" class="cmbutton cancelbtn">
+					<i class="fa-solid fa-arrow-left"></i><span>취소하기</span>
+				</button>
+
+				<div>
+				 	<p>프로필 수정</p>
+
+					<form action="/personnel" method="post" class="edit-profile-form">
+					
+					
+						<div class="edit-form-wrap">
+							<label for="profile-image" class="cmlabel">프로필이미지</label> <br> 
+							<input type="file"id="profile-image" name="profile-image" class="cminput"><br>
+						
+						</div>
+					
+					
+						
+						<div class="edit-form-wrap">
+							<label for="email" class="cmlabel">이메일</label> <br> 
+							<input type="email"id="email" name="email" class="cminput" required> <br>
+							<div class="error email-failure hide">이메일 형식이 맞지 않습니다</div>
+						
+						</div>
+					
+						
+						<div class="edit-form-wrap">
+									
+							<label for="phone" class="cmlabel">휴대폰</label> <br> 
+							<input type="text" id="phone" class="cminput" maxlength="13"  pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{3,4}" required/>
+							<div class="error phone-failure hide">올바른 번호양식이 아닙니다</div>
+							
+						</div>
+						
+						<div class="edit-form-wrap">
+								
+							<label for="address" class="cmlabel">주소</label> 
+							<button class="cmbutton2" id="search-btn">찾기</button><br> 
+							<input type="text" class="cminput"  disabled id="roadAddress" required />  <br>
+							<input type="text" class="cminput" placeholder="상세주소를 입력해주세요." id="roadAddressDetail" required />
+						</div>
+						
+				
+					
+									
+						<div class="optionbtn-wrap">
+							<button type="submit" class="cmbutton">수정</button>
+							<button type="reset" class="cmbutton2">초기화</button>
+						</div>
+					
+
+
+
+					</form>
+
+				</div>
+				
+			</div>
+
+
+
+
+	</main>
+
+</body>
+</html>
