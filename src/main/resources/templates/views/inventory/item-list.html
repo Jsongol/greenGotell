@@ -3,6 +3,7 @@
 
 <head>
 	<link rel="stylesheet" href="/css/inventory/inventory_list.css">
+	<script src="/js/inventory/item.js"></script>
 </head>
 
 <body>
@@ -20,20 +21,33 @@
 			</div>
 			<!--메인 컨텐츠 중 게시판 서치 양식 입니다. 반드시 div 아이디에 cmsearch-form포함 -->
 			<div id="cmsearch-form">
+
+
 				<form action="#" method="get">
-					<li><span>기간 </span><input type="date" id="formDate" name="formDate"><span> ~ </span><input
-							type="date" id="formDate" name="formDate">
-					</li>
-					<select>
-						<option>전체</option>
-						<option>프론트오피스부</option>
-						<option>식음료부</option>
-						<option>시설관리부</option>
-						<option>보안부</option>
-						<option>인사부</option>
-						<option>지원부</option>
-						<option>마케팅부</option>
-					</select> <input type="text" placeholder="검색어를 입력해주세요.">
+					<label for="main-category">대분류:</label>
+					<select id="main-category" onchange="updateSubCategory()">
+						<option value="">선택하세요</option>
+						<option value="의류">의류</option>
+						<option value="식품">식품</option>
+						<option value="주방용품">주방용품</option>
+						<option value="생활용품">생활용품</option>
+						<option value="인테리어">인테리어</option>
+						<option value="가전 디지털">가전 디지털</option>
+						<option value="문구/오피스">문구/오피스</option>
+						<option value="스포츠">스포츠</option>
+						<option value="기타">기타</option>
+					</select>
+
+					<label for="sub-category">중분류:</label>
+					<select id="sub-category" onchange="updateSubSubCategory()">
+						<option value="">선택하세요</option>
+					</select>
+
+					<label for="sub-sub-category">소분류:</label>
+					<select id="sub-sub-category">
+						<option value="">선택하세요</option>
+					</select>
+					<input type="text" placeholder="검색어를 입력해주세요.">
 					<button type="submit">검색</button>
 				</form>
 			</div>
@@ -50,7 +64,6 @@
 
 					<li><!--타임리프 적용하려야하는 곳 입니다.-->
 						<span>코드</span>
-						<span>부서</span>
 						<span>이름</span>
 						<span>규격</span>
 						<span>공급처</span>
