@@ -1,14 +1,12 @@
-package com.green.greenGotell.chatbot;
+package com.green.greenGotell.controller;
 
-import java.text.MessageFormat;
+
 
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.util.HtmlUtils;
+import com.green.greenGotell.chatbot.KomoranService;
+import com.green.greenGotell.domain.entity.QuestionEntity;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,7 +16,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class BotController {
 
-		private final SimpMessagingTemplate messagingTemplate;
 		private final KomoranService komoranService;
 		
 		@GetMapping("/chatbot")
@@ -27,20 +24,17 @@ public class BotController {
 		}
 		
 		@MessageMapping("/question") 
-		public void bot(Question dto) {
+		public void bot(QuestionEntity dto) {
 			System.out.println(">>>:"+dto);
-			komoranService.nlpProcess(dto.getContent());
+			komoranService.nlpProcess(dto.getQuestion());
 		}
 		
 		@MessageMapping("/hello") 
-		public void hello(Question dto) {
+		public void hello(QuestionEntity dto) {
 			System.out.println(">>>:"+dto);
-			long key = dto.getKey();
+			long questionNo = dto.getQuestionNo();
 			String pattern = "{0}님 안녕하세요!";
 			
-			messagingTemplate.convertAndSend("/topic/bot/"+key, 
-					MessageFormat.format(pattern, dto.getName())
-					);
 		}
 		
 }
