@@ -50,8 +50,8 @@ const categories = {
             const mainCategory = document.getElementById("main-category").value;
             const subCategory = document.getElementById("sub-category");
             const subSubCategory = document.getElementById("sub-sub-category");
-            subCategory.innerHTML = '<option value="">선택하세요</option>';
-            subSubCategory.innerHTML = '<option value="">선택하세요</option>';
+            subCategory.innerHTML = '<option value="">중분류</option>';
+            subSubCategory.innerHTML = '<option value="">소분류</option>';
             if (mainCategory && categories[mainCategory]) {
                 for (const sub in categories[mainCategory]) {
                     const option = document.createElement("option");
