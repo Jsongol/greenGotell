@@ -1,4 +1,4 @@
-package com.green.greenGotell.chatbot;
+package com.green.greenGotell.service;
 
 import java.util.List;
 

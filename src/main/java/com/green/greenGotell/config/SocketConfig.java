@@ -1,4 +1,4 @@
-package com.green.greenGotell.chatbot;
+package com.green.greenGotell.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

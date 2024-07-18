@@ -1,4 +1,4 @@
-package com.green.greenGotell.chatbot;
+package com.green.greenGotell.config;
 
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
