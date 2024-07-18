@@ -10,6 +10,7 @@ import com.green.greenGotell.domain.enums.Department;
 import com.green.greenGotell.domain.enums.EmployeeStatus;
 import com.green.greenGotell.domain.enums.Role;
 
+
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
@@ -68,22 +69,31 @@ public class EmployeesEntity extends BaseEntity {
 	
 	//부서
 	@Enumerated(EnumType.STRING)
-	@Column(nullable = false, columnDefinition = "DATE")
+	@Column(nullable = false)
 	private Department department ;
 	
 	//상태
 	@Enumerated(EnumType.STRING)
-	@Column(nullable = false, columnDefinition = "DATE")
+	@Column(nullable = false)
 	private EmployeeStatus employeeStatus ;
 	
 	//롤
 	@Enumerated(EnumType.STRING) 
 	@CollectionTable(name = "role"
-					,joinColumns = @JoinColumn(name="employeesr_id"))
+					,joinColumns = @JoinColumn(name="employees_id"))
 	@ElementCollection(fetch = FetchType.EAGER) 
 	@Builder.Default 
 	@Column(name = "role_name") 
 	private Set<Role> roles=new HashSet<>();
+	
+	//Role 등록하기 위한 편의 메서드 
+	public EmployeesEntity addRole(Role role) {
+		roles.add(role);
+		
+		return this;
+	}
+
+
 	
 	
 	

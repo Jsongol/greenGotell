@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{views/common/layout :: layout(~{::head} ,~{::main} ) }">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" th:replace="~{views/common/layout :: layout(~{::head} ,~{::main} ) }">
 <head>
 	<link rel="stylesheet" href="/css/personnel/personnel.css">
 	<script src="/js/personnel/personnel.js" defer></script>  
@@ -83,7 +83,7 @@
 				<div>
 				 	<p>신규직원추가</p>
 
-					<form action="/personnel" method="post">
+					<form action="/personnel/create" method="post">
 					
 						<div class="create-form-wrap">
 							<label for="name" class="cmlabel">이름</label><br> 
@@ -111,10 +111,9 @@
 									
 							<label for="department" class="cmlabel">부서</label> <br> 
 							<select class="cmselect" id="department" name="department" required>
-								<option value="">부서 선택</option>
-								<option value="HR">인사</option>
-								<option value="IT">IT</option>
-								<option value="Sales">영업</option>
+								<th:block th:each="department : ${T(com.green.greenGotell.domain.enums.Department).values()}">
+									<option th:value="${department.KoName}">[[${department.koName}]]</option>								
+								</th:block>
 							</select> 
 							
 						</div>
@@ -122,11 +121,10 @@
 						<div class="create-form-wrap">
 								
 							<label for="position" class="cmlabel">직급</label> <br>
-							<select class="cmselect" id="position"name="position" required>
-								<option value="">직급 선택</option>
-								<option value="Manager">매니저</option>
-								<option value="Staff">직원</option>
-								<option value="Intern">인턴</option>
+							<select class="cmselect" id="position"name="role" required>
+								<th:block th:each="role : ${T(com.green.greenGotell.domain.enums.Role).values()}">
+									<option th:value="${role.roleName}">[[${role.roleName}]]</option>
+							    </th:block>
 							</select> <br>
 						
 						</div>
@@ -141,11 +139,10 @@
 						<div class="create-form-wrap">
 								
 							<label for="status" class="cmlabel">상태</label><br> 
-							<select id="status" name="status" class="cmselect" required>
-								<option value="">상태 선택</option>
-								<option value="Active">재직</option>
-								<option value="Inactive">휴직</option>
-								<option value="Inactive">퇴사</option>
+							<select id="status" name="employeeStatus" class="cmselect" required>
+								<th:block th:each="employeeStatus : ${T(com.green.greenGotell.domain.enums.EmployeeStatus).values()}">
+									<option th:value="${employeeStatus.KoName}">[[${employeeStatus.KoName}]]</option>
+							    </th:block>
 							</select> <br>
 						
 						</div>

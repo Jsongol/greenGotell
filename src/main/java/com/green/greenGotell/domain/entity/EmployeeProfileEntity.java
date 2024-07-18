@@ -42,7 +42,7 @@ public class EmployeeProfileEntity {
     
     //프로필을 설정한 직원
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "employee_id", unique = true, nullable = false)
+    @JoinColumn(name = "employee_id",referencedColumnName = "id", unique = true, nullable = false)
     private EmployeesEntity employee;
 
 
