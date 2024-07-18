@@ -32,7 +32,7 @@ public class SecurityConfig {
                 )
                 .formLogin(login -> login
                         .loginPage("/login") // 로그인 페이지 URL 설정
-                        .permitAll() // 로그인 페이지는 인증 없이 접근 가능
+                        .permitAll() // 로그인 페이지는 인증 없이 접근 가능한
                 );
 
         return http.build();
