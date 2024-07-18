@@ -112,7 +112,7 @@
 							<label for="department" class="cmlabel">부서</label> <br> 
 							<select class="cmselect" id="department" name="department" required>
 								<th:block th:each="department : ${T(com.green.greenGotell.domain.enums.Department).values()}">
-									<option th:value="${department.KoName}">[[${department.koName}]]</option>								
+									<option th:value="${department.name}">[[${department.koName}]]</option>								
 								</th:block>
 							</select> 
 							
@@ -123,7 +123,7 @@
 							<label for="position" class="cmlabel">직급</label> <br>
 							<select class="cmselect" id="position"name="role" required>
 								<th:block th:each="role : ${T(com.green.greenGotell.domain.enums.Role).values()}">
-									<option th:value="${role.roleName}">[[${role.roleName}]]</option>
+									<option th:value="${role.name}">[[${role.roleName}]]</option>
 							    </th:block>
 							</select> <br>
 						
@@ -141,13 +141,14 @@
 							<label for="status" class="cmlabel">상태</label><br> 
 							<select id="status" name="employeeStatus" class="cmselect" required>
 								<th:block th:each="employeeStatus : ${T(com.green.greenGotell.domain.enums.EmployeeStatus).values()}">
-									<option th:value="${employeeStatus.KoName}">[[${employeeStatus.KoName}]]</option>
+									<option th:value="${employeeStatus.name}">[[${employeeStatus.KoName}]]</option>
 							    </th:block>
 							</select> <br>
 						
 						</div>
 									
 						<div class="optionbtn-wrap">
+							<input type="hidden" th:name="${_csrf.parameterName}"th:value="${_csrf.token}" />
 							<button type="submit" class="cmbutton">추가</button>
 							<button type="reset" class="cmbutton2">초기화</button>
 						</div>

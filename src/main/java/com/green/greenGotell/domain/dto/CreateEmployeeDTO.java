@@ -13,10 +13,12 @@ import com.green.greenGotell.domain.enums.Role;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 
 @Getter
 @Setter
+@ToString
 public class CreateEmployeeDTO {
 	
 	private String name;
@@ -30,6 +32,7 @@ public class CreateEmployeeDTO {
 	
 	public EmployeesEntity toEntity(PasswordEncoder pe) {
 		// TODO Auto-generated method stub
+	
 		
 		EmployeesEntity entity = EmployeesEntity.builder().name(name).email(email).pass(pe.encode(pass)).department(department).hireDate(hireDate).employeeStatus(employeeStatus).build();
 		

@@ -23,7 +23,7 @@ public class PersonnelController {
 	
 	@PostMapping("/personnel/create")
 	public String create(CreateEmployeeDTO dto) {
-		System.out.println(dto.getPass());
+		System.out.println(dto.getHireDate());
 		personnelService.createEmployee(dto);
 		
 		return "redirect:/personnel";
