@@ -34,22 +34,29 @@ public class NoticeServiceProcess implements NoticeService{
 		
 		String division = (_division==1)? "전체":"2";
 		
-		//JPA 쿼리메서드 : findAll()
-		//사용자가 만들수 있는 쿼리메서드 문법-키워드
+		//JPA 쿼리메서드 : findAll() 사용자가 만들수 있는 쿼리메서드 문법-키워드
 		Page<NoticeEntity> result=repository.findAllByDivision(division,pageable);
 		System.out.println(">>>>"+result.getContent());
 		model.addAttribute("list", result.getContent().stream()
 										.map(NoticeEntity::toNoticeListDTO)//메서드 참조를 사용할 수 있다
 										.collect(Collectors.toList()));	
 		
-	}
-	
+	}	
 
 	@Override
-	public void saveProcess(NoticeSaveDTO dto) {
-		
+	public void saveProcess(NoticeSaveDTO dto) {		
 		repository.save(dto.toEntity());
-			
+	}
+
+
+	@Override
+	public void detailProcess(long no, Model model) { // 상세정보 조회해서 model에 담아라
+		//Null Pointer Exception 방지:
+		NoticeEntity result=repository.findById(no).orElseThrow();
+		model.addAttribute("detail", result.toNoticeDetailDTO());
+		repository.save(result);
+		//JPA를 사용시 SqlSession이유지되는 동안 Entity가 수정되면 -> update쿼리가 처리됨
+		
 	}
 
 }

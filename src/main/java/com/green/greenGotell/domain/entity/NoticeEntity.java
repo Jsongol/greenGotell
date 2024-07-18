@@ -2,6 +2,7 @@ package com.green.greenGotell.domain.entity;
 
 import org.hibernate.annotations.DynamicUpdate;
 
+import com.green.greenGotell.domain.dto.NoticeDetailDTO;
 import com.green.greenGotell.domain.dto.NoticeListDTO;
 
 import jakarta.persistence.Column;
@@ -54,6 +55,7 @@ public class NoticeEntity extends BaseEntity {
 				.updatedAt(getUpdatedAt())
 				.build();
 	}
+
 	
 	
 	//제목 or 내용 수정
@@ -64,17 +66,15 @@ public class NoticeEntity extends BaseEntity {
 //		
 //	}
 	
-//	
-//	public NoticeDetailDTO toNoticeDetailDTO() {
-//		return NoticeDetailDTO.builder()
-//				.no(no)
-//				.title(title)
-//				.content(content)
-//				.division(division)
-//				.readCount(readCount)
+	public NoticeDetailDTO toNoticeDetailDTO() {
+		return NoticeDetailDTO.builder()
+				.no(no)
+				.title(title)
+				.content(content)
+				.division(division)
 //				.createdAt(createdAt)
 //				.updatedAt(updatedAt)
-//				.build();
-//	}
+				.build();
+	}
 	
 }

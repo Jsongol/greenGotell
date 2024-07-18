@@ -23,7 +23,6 @@ public class NoticesController {
 	
 	@GetMapping
 	public String list() {
-		
 		return "redirect:/notices/1";
 	}
 	
@@ -36,21 +35,22 @@ public class NoticesController {
 	//공지사항 저장하기
 	@PostMapping
 	public String save(NoticeSaveDTO dto) {
-		
-		service.saveProcess(dto);
-		
+		service.saveProcess(dto);		
 		return "redirect:/notices";
 	}
 	
+	//공지사항 만들기
 	@GetMapping("/new")
 	public String write() {
 		return "views/notices/write";
 	}
 
-//	@GetMapping("/{no}")
-//	public String detail(@PathVariable("no") long no) {
-//		return "/views/notices/detail";
-//	}
+	//상세페이지 조회
+	@GetMapping("/{no}")
+	public String detail(@PathVariable("no") long no, Model model) {	
+		service.detailProcess(no, model);
+		return "views/cs/notice/detail";
+	}
 }	
 //	@PutMapping("/notices/{no}")
 //	public String update(@PathVariable("no") long no) {
