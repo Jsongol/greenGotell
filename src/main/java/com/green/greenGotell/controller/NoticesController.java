@@ -1,7 +1,9 @@
 package com.green.greenGotell.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 //import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 //import org.springframework.web.bind.annotation.PutMapping;
@@ -21,6 +23,13 @@ public class NoticesController {
 	
 	@GetMapping
 	public String list() {
+		
+		return "redirect:/notices/1";
+	}
+	
+	@GetMapping("/{division}")
+	public String list(@PathVariable("division") int division,Model model) {
+		service.listProcess(division, model);
 		return "views/notices/list";
 	}
 	
@@ -37,12 +46,12 @@ public class NoticesController {
 	public String write() {
 		return "views/notices/write";
 	}
-}
-//	@GetMapping("/notices/{no}")
+
+//	@GetMapping("/{no}")
 //	public String detail(@PathVariable("no") long no) {
 //		return "/views/notices/detail";
 //	}
-//	
+}	
 //	@PutMapping("/notices/{no}")
 //	public String update(@PathVariable("no") long no) {
 //		return "redirect:/notices";

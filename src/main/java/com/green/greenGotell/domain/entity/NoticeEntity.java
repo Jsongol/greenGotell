@@ -2,6 +2,8 @@ package com.green.greenGotell.domain.entity;
 
 import org.hibernate.annotations.DynamicUpdate;
 
+import com.green.greenGotell.domain.dto.NoticeListDTO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,7 +27,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "notice")
 @Getter
 @Entity
-public class NoticeEntity {// extends BaseEntity
+public class NoticeEntity extends BaseEntity { 
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gen_notice")
@@ -38,6 +40,21 @@ public class NoticeEntity {// extends BaseEntity
 	
 	private String division;	//구분-"전체","영화관"
 	private boolean fixed;		//고정여부
+	 
+//	@Column(nullable = false)
+//	private long id;     // 사원번호 필드 추가
+	
+	//편의메소드 매핑하기위한 메소드
+	public NoticeListDTO toNoticeListDTO() {
+		return NoticeListDTO.builder()
+				.no(no)
+				.title(title)
+				.division(division)
+				.fixed(fixed)
+				.updatedAt(getUpdatedAt())
+				.build();
+	}
+	
 	
 	//제목 or 내용 수정
 //	public NoticeEntity update(NoticeUpdateDTO dto) {
@@ -47,17 +64,6 @@ public class NoticeEntity {// extends BaseEntity
 //		
 //	}
 	
-	
-	//편의메소드 매핑하기위한 메소드
-//	public NoticeListDTO toNoticeListDTO() {
-//		return NoticeListDTO.builder()
-//				.no(no)
-//				.title(title)
-//				.division(division)
-//				.fixed(fixed)
-//				.updatedAt(updatedAt)
-//				.build();
-//	}
 //	
 //	public NoticeDetailDTO toNoticeDetailDTO() {
 //		return NoticeDetailDTO.builder()
