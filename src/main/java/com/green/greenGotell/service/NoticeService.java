@@ -10,4 +10,6 @@ public interface NoticeService {
 
 	void saveProcess(NoticeSaveDTO dto);
 
+	void detailProcess(long no, Model model);
+
 }
