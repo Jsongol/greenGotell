@@ -5,8 +5,9 @@ package com.green.greenGotell.controller;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import com.green.greenGotell.chatbot.KomoranService;
+
 import com.green.greenGotell.domain.entity.QuestionEntity;
+import com.green.greenGotell.service.KomoranService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,7 +21,7 @@ public class BotController {
 		
 		@GetMapping("/chatbot")
 		public String list() {
-			return "/views/chatbot/list";
+			return "views/chatbot/list";
 		}
 		
 		@MessageMapping("/question") 
