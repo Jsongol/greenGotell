@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{views/common/layout :: layout(~{::head} ,~{::main} ) }">
 <head>
-	<link rel="stylesheet" href="/css/samplel/sample.css">
 	<link rel="stylesheet" href="/css/notices/notice.css">
-	<script src="/js/sample/sample.js" defer></script>  
 </head>
 <body>
 	<!--  -->
@@ -17,8 +15,8 @@
             <!--메뉴의 대표 이름과, 작성 목록 양식입니다. 반드시 div 아이디에 cmcreate포함 -->
 			<div id="cmcreate">
 				<h1>공지사항</h1>
-				<form class="write" action="/new" method="get">
-					<a href="/new"><i class="fa-solid fa-plus"></i><span>만들기</span></a>
+				<form class="write" action="/notices/new" method="get">
+					<a href="/notices/new"><i class="fa-solid fa-plus"></i><span>만들기</span></a>
 				</form>
 			</div>
 			<!--메인 컨텐츠 중 게시판 서치 양식 입니다. 반드시 div 아이디에 cmsearch-form포함 -->
