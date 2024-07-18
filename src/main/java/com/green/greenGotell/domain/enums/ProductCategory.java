@@ -1,4 +1,4 @@
-package com.green.greenGotell.enums;
+package com.green.greenGotell.domain.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +17,4 @@ public enum ProductCategory {
 	 OTHERS("기타");
 	
 	private final String displayName;
-	
-	public String getDisplayName() {
-		return displayName;
-	}
 }

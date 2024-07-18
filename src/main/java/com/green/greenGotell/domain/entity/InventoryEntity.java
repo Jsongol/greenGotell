@@ -2,10 +2,10 @@ package com.green.greenGotell.domain.entity;
 
 import org.hibernate.annotations.DynamicUpdate;
 
-import com.green.greenGotell.enums.ProductCategory;
-import com.green.greenGotell.enums.ProductMiddleCategory;
-import com.green.greenGotell.enums.ProductSmallCategory;
-import com.green.greenGotell.enums.Standard;
+import com.green.greenGotell.domain.enums.ProductCategory;
+import com.green.greenGotell.domain.enums.ProductMiddleCategory;
+import com.green.greenGotell.domain.enums.ProductSmallCategory;
+import com.green.greenGotell.domain.enums.Standard;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,15 +19,17 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @DynamicUpdate
 @Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="item-wait") 
-public class ProductEntity { //품목리스트 추가 테이블
+public class InventoryEntity { //품목리스트 추가 테이블
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
