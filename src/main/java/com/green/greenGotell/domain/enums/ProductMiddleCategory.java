@@ -1,4 +1,4 @@
-package com.green.greenGotell.enums;
+package com.green.greenGotell.domain.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -47,10 +47,4 @@ public enum ProductMiddleCategory {
 	private final String displayName;
 	private final ProductCategory productCategory;
 	
-	public String getDisplayName() {
-        return displayName;
-    }
-	public ProductCategory getProductCategory() {
-		return productCategory;
-	}
 }

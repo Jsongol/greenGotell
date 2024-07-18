@@ -3,7 +3,7 @@
 
 <head>
 	<link rel="stylesheet" href="/css/inventory/inventory_write.css">
-	<script src="/js/inventory/inventory.js"></script>
+	<script src="/js/inventory/item.js"></script>
 </head>
 
 <body>
@@ -16,50 +16,56 @@
 		<div class="cmcontents">
 			<div id="cmcreate">
 				<h1>품목 추가</h1>
-				<a href="/inventory"> <i class="fa-solid fa-arrow-left"></i></i><span>이전</span></a>
+				<a href="/inventory">이전</a>
+				<form action="/inventory/inventory-add" method="post">
+					<div>
+						<label>대분류:</label>
+						<select name="productCategory">
+							<th:block th:each="d:${T(com.green.greenGotell.domain.enums.ProductCategory).values()}">
+								<option value="${d.displayName}">[[${d.displayName}]]</option>
+							</th:block>
+						</select>
+					</div>
+					<div>
+						<label>중분류:</label>
+						<select id="sub-category" name="productMiddleCategory" onchange="updateSubSubCategory()">
+							<option value="">선택해주세요</option>
+						</select>
+					</div>
+					<div>
+						<label>소분류:</label>
+						<select id="sub-sub-category" name="productSmallCategory">
+							<option value="">선택해주세요</option>
+						</select>
+					</div>
+					<div>
+						<label>코드:</label>
+						<input type="text" name="productCode" placeholder="제품코드 입력해주세요.">
+					</div>
+					<div>
+						<label>이름:</label>
+						<input type="text" name="name" placeholder="제품명 입력해주세요.">
+					</div>
+					<div>
+						<label>규격(kg):</label>
+						<select name="standard">
+							<th:block th:each="d:${T(com.green.greenGotell.domain.enums.Standard).values()}">
+								<option value="${d.displayName}">[[${d.displayName}]]</option>
+							</th:block>
+						</select>
+					</div>
+					<div>
+						<label>공급처:</label>
+						<input type="text" name="itemSource" placeholder="공급처">
+					</div>
+					<div>
+						<label>가격:</label>
+						<input type="text" name="itemMoney" placeholder="가격">
+					</div>
+					<button type="submit">등록</button>
+					<button type="button" onclick="window.location.href='/inventory'">취소</button>
+				</form>
 			</div>
-			<br>
-			<hr>
-
-			<br> <br>
-			<div class="charang">
-				<select>
-					<option>전체</option>
-					<option>프론트오피스부</option>
-					<option>식음료부</option>
-					<option>시설관리부</option>
-					<option>보안부</option>
-					<option>인사부</option>
-					<option>지원부</option>
-					<option>마케팅부</option>
-				</select>
-				<button type="submit">조회</button> <br> <br>
-				<div class="bom">
-					<p>코드 :</p>
-					<input type="text" placeholder="제품코드 입력해주세요.">
-				</div> <br>
-				<div class="bom">
-
-					<p>이름 :</p>
-					<input type="text" placeholder="제품명 입력해주세요.">
-				</div> <br>
-				<div class="bom">
-					<p>규격(kg) :</p>
-					<input type="text" placeholder="규격(kg)">
-
-				</div> <br>
-				<div class="bom">
-					<p>공급처 :</p>
-					<input type="text" placeholder="공급처">
-				</div> <br>
-				<div class="bom">
-					<p>가격 :</p>
-					<input type="text" placeholder="가격">
-				</div> <br>
-				<button type="submit">등록</button>
-				<button type="submit">취소</button> <br> <br>
-			</div>
-		</div>
 	</main>
 </body>
 
