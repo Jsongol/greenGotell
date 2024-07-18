@@ -3,6 +3,7 @@
 <head>
 	<link rel="stylesheet" href="/css/notices/notice.css">
 </head>
+
 <body>
 	<!--  -->
 	<main class="sample"><!--본인담당 기능대표명 클래스에 작성 -->
@@ -21,16 +22,16 @@
 			</div>
 			<!--메인 컨텐츠 중 게시판 서치 양식 입니다. 반드시 div 아이디에 cmsearch-form포함 -->
 			<div id="cmsearch-form">
-				<form action="#" method="get">
+				<form id="search-form">
 					<select>
-						<option>전체</option>
-						<option>프론트오피스부</option>
-						<option>식음료부</option>
-						<option>시설관리부</option>
-						<option>보안부</option>
-						<option>인사부</option>
-						<option>지원부</option>
-						<option>마케팅부</option>
+						<option value="./1">전체</option>
+						<option value="./2">프론트오피스부</option>
+						<option value="./3">식음료부</option>
+						<option value="./4">시설관리부</option>
+						<option value="./5">보안부</option>
+						<option value="./6">인사부</option>
+						<option value="./7">지원부</option>
+						<option value="./8">마케팅부</option>
 					</select> <select>
 						<option>제목</option>
 						<option>내용</option>
@@ -40,29 +41,22 @@
 				</form>
 			</div>
 			
-			
-		     <!--메인 컨텐츠 중 게시판목록 양식 입니다. 반드시 div 아이디에 posting-format포함 -->	
-		     <!--목차 스펜태그의 갯수는 원하시는대로 변경하시고, 비율은 각자의 css에서 변경-->
-		     <!--ex) #cmposting-format ul> li >span:nth-child(1){width: 5%} -->
 			<div id="cmposting-format">
 				<ul>
 					<li> <!--목차입니다.-->
 						<span>번호</span>
-						<span>카테고리</span>
+						<span>부서</span>
 						<span>제목</span>
 						<span>등록일</span>
 						<span>글쓴이</span>
 					</li>
-					
-					<li th:each="notice : ${notices}"><!--타임리프 적용하려야하는 곳 입니다.-->
-                        <span th:text="${notice.empId}">사번</span>
-                        <span th:text="${notice.department}">부서</span>
-                        <span th:text="${notice.position}">직급</span>
-                        <span th:text="${notice.name}">성명</span>
-                        <span th:text="${notice.contact}">연락처</span>
-                        <span th:text="${notice.address}">주소</span>
-                        <span th:text="${notice.hireDate}">입사일</span>
-                    </li>
+					<li th:each="notice:${list}" >
+						<span th:text="${notice.fixed} ? '❗' : ${notice.no} " class="no">번호</span>
+						<span th:text="${notice.division}">부서</span>
+						<span th:text="${notice.title}">제목</span>
+						<span th:text="${notice.updatedAt.toLocalDate}">등록일</span>
+						<span>글쓴이</span>
+					</li>
 				</ul>
 			</div>
 		</div>
