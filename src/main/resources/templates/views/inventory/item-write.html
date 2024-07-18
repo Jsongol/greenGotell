@@ -20,22 +20,22 @@
 				<form action="/inventory/inventory-add" method="post">
 					<div>
 						<label>대분류:</label>
-						<select name="productCategory">
+						<select name="productCategory" onchange="updateSubCategory()" id="main-category">
 							<th:block th:each="d:${T(com.green.greenGotell.domain.enums.ProductCategory).values()}">
-								<option value="${d.displayName}">[[${d.displayName}]]</option>
+								<option th:value="${d.name()}">[[${d.displayName}]]</option>
 							</th:block>
 						</select>
 					</div>
 					<div>
 						<label>중분류:</label>
 						<select id="sub-category" name="productMiddleCategory" onchange="updateSubSubCategory()">
-							<option value="">선택해주세요</option>
+							<option value="">중분류</option>
 						</select>
 					</div>
 					<div>
 						<label>소분류:</label>
 						<select id="sub-sub-category" name="productSmallCategory">
-							<option value="">선택해주세요</option>
+							<option value="">소분류</option>
 						</select>
 					</div>
 					<div>
@@ -50,7 +50,7 @@
 						<label>규격(kg):</label>
 						<select name="standard">
 							<th:block th:each="d:${T(com.green.greenGotell.domain.enums.Standard).values()}">
-								<option value="${d.displayName}">[[${d.displayName}]]</option>
+								<option th:value="${d.name()}">[[${d.displayName}]]</option>
 							</th:block>
 						</select>
 					</div>
