@@ -15,10 +15,10 @@ public class BaseEntity {
 	
 	@CreationTimestamp
 	@Column(columnDefinition = "timestamp")
-	private LocalDateTime createdAt;
+	protected LocalDateTime createdAt;
 	
 	@UpdateTimestamp
 	@Column(columnDefinition = "timestamp")
-	private LocalDateTime updatedAt;
+	protected LocalDateTime updatedAt;
 
 }
