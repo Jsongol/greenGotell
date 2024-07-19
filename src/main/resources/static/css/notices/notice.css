@@ -96,9 +96,9 @@ border-radius: 15px; background-color: var(--sub-color7); margin-bottom: 30px; m
 
 /*게시 양식*/
 #cmposting-format{width: 90%; min-width: 600px; text-align: center; margin: 0 auto;}
-/*
-#cmposting-format>ul>li{display: flex; justify-content:space-between;padding: 5px 0;border-bottom: 1px solid var(--sub-color6); }
 
+#cmposting-format>ul>li{display: flex; justify-content:space-between;padding: 20px 0;border-bottom: 1px solid var(--sub-color6); }
+/*
 #cmposting-format>ul>li:nth-child(1){padding: 15px 0; border-bottom: 2px solid var(--sub-color2);  font-size: 17px;background-color: var(--sub-color7)}
 */
 
@@ -159,3 +159,8 @@ textarea[name="content"] {
 }
 
 #notice-button button{background-color: var(--sub-color2); padding: 10px 10px; border-radius: 5px; border:none; font-size: 16px;color: #fff; line-height: 14px; margin-left: 40%}
+
+/*-------------------상세페이지--------------------------*/
+.notice-write>ul>li>b{
+	margin-right: 20px;
+}

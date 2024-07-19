@@ -56,6 +56,16 @@ public class NoticeEntity extends BaseEntity {
 				.build();
 	}
 
+	public NoticeDetailDTO toNoticeDetailDTO() {
+		return NoticeDetailDTO.builder()
+				.no(no)
+				.title(title)
+				.content(content)
+				.division(division)
+				.createdAt(createdAt)
+				.updatedAt(updatedAt)
+				.build();
+	}
 	
 	
 	//제목 or 내용 수정
@@ -66,15 +76,5 @@ public class NoticeEntity extends BaseEntity {
 //		
 //	}
 	
-	public NoticeDetailDTO toNoticeDetailDTO() {
-		return NoticeDetailDTO.builder()
-				.no(no)
-				.title(title)
-				.content(content)
-				.division(division)
-//				.createdAt(createdAt)
-//				.updatedAt(updatedAt)
-				.build();
-	}
 	
 }
