@@ -10,6 +10,7 @@ import kr.co.shineware.nlp.komoran.core.Komoran;
 public class KomoranConfig {
 
 
+
 	@Bean
 	Komoran komoran() {
 		Komoran komoran = new Komoran(DEFAULT_MODEL.FULL);
