@@ -1,22 +1,5 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-select {padding: 10px; border: 1px solid #cfd8e2; border-radius: 5px; margin-right: 5px}
 
-.charang{
-	border-radius: 5px;
-	padding-top:20px;
-	margin: 0 auto;
-	text-align:center;
-	width:400px;
-	background-color: #dddddd;
-}
-.charang .bom{
-	padding: 0 50px;
-}
-.charang P{
-	text-align: left;
-=======
 .form-container {
   background-color: var(--background-color1);
   padding: 20px;
@@ -24,7 +7,7 @@ select {padding: 10px; border: 1px solid #cfd8e2; border-radius: 5px; margin-rig
   box-shadow: 0 4px 8px var(--sub-color6);
   max-width: 600px;
   margin: auto;
->>>>>>> refs/heads/develop
+
 }
 
 .form-container form {
@@ -72,77 +55,4 @@ select {
 .form-container button[type="submit"]:hover,
 .form-container button[type="button"]:hover {
   background-color: var(--sub-color4);
-}
-
-<<<<<<< HEAD
-.filebox input[type="file"] {
-	position: absolute;
-	width: 0;
-	height: 0;
-	padding: 0;
-	overflow: hidden;
-	border: 0;
-}
-
-.input-container {
-	margin-top: 20px;
-}
-#textInput{width: 78%; height: 300px}
-
-.char-count {
-	font-size: 0.9em;
-	color: gray;
-=======
-.checkbox-container {
-	display: inline-block;
-	flex-direction: column;
-	gap: 10px;
-	margin: 20px auto;
-	padding: 10px;
-	background-color: #f9f9f9;
-}
-
-.checkbox-container input[type="checkbox"] {
-	display: none;
-}
-
-.checkbox-container label {
-	position: relative;
-	padding-left: 25px;
-	cursor: pointer;
-	user-select: none;
-}
-
-.checkbox-container label::before {
-	content: "";
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 18px;
-	height: 18px;
-	border: 2px solid #007BFF;
-	border-radius: 3px;
-	background-color: #fff;
-}
-
-.checkbox-container input[type="checkbox"]:checked+label::before {
-	background-color: #007BFF;
-	border-color: #007BFF;
-}
-
-.checkbox-container input[type="checkbox"]:checked+label::after {
-	content: "";
-	position: absolute;
-	left: 6px;
-	top: 2px;
-	width: 6px;
-	height: 12px;
-	border: solid white;
-	border-width: 0 2px 2px 0;
-	transform: rotate(45deg);
->>>>>>> f70f3f4dbed41890df806b6d33a86948c2f9f429
-=======
-.form-container button[type="button"]:hover {
-  background-color: var(--sub-color5);
->>>>>>> refs/heads/develop
 }
