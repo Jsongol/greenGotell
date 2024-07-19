@@ -17,41 +17,40 @@
 					<a href="/notices"><span>뒤로가기</span></a>
 				</form>
 			</div>
-			<div id="default-mode">
-				<ul >
-					<li th:text="${detail.no}">번호</li>
-					<li th:text="${detail.title}">제목</li>
-					<li class="flex around">
-						<dl class="flex">
-							<dt>영화관</dt>
-							<dd><b th:text="${detail.division}">???</b></dd>
-						</dl>
-						<dl class="flex">
-							<dt>등록일</dt>
-							<dd><b th:text="${detail.createdAt.toLocalDate}">???</b></dd>
-						</dl >
-						<dl class="flex">
-							<dt>최종수정일</dt>
-							<dd><b th:text="${detail.updatedAt.toLocalDate}">???</b></dd>
-						</dl >
-						<dl class="flex">
-							<dt>조회수</dt>
-							<dd><b th:text="${detail.readCount}">???</b></dd>
-						</dl>
-					</li>
-					<li th:text="${detail.content}">상세정보</li>
-					
-					<li>
+			<div id="notice-button">
+				<form action="/notices" method="post">
+					<div class="notice-write-division">
+						<b>제목 : </b> &nbsp;&nbsp;
+						<b th:text="${detail.title}">제목</b>
+					</div>
+					<div class="notice-write">
+						<ul>						
+							
+							<li>
+								<b>부서 </b> &nbsp;&nbsp;|&nbsp;&nbsp;
+								<span th:text="${detail.division}">부서</span>
+							
+								<b>등록일</b> &nbsp;&nbsp;|&nbsp;&nbsp;
+								<span th:text="${detail.createdAt.toLocalDate}">등록일</span>
+							</li>
+							<br><hr width =100% align= LEFT><br>
+							<li>
+								<b>내용</b>
+								<br>
+								<li th:text="${detail.content}">상세정보</li>
+								<br>
+							</li>
+						</ul>
+					</div>
+						<br>					
 						<button onclick="btnUpdateClicked()">수정</button>
-						<form  onsubmit="return btnDeleteClicked()"  th:action="|/cscenter/notices/${detail.no}|"   method="post" >
-							<input type="hidden" name="_method" value="delete">			
-							<button type="submit">삭제</button>
-						</form>
-						
-					</li>
-					
-				</ul>
+							<form  onsubmit="return btnDeleteClicked()"  th:action="|/cscenter/notices/${detail.no}|"   method="post" >
+								<input type="hidden" name="_method" value="delete">			
+								<button type="submit">삭제</button>
+							</form>
+				</form>
 			</div>
+			
 		</div>
 	</main>
 </body>
