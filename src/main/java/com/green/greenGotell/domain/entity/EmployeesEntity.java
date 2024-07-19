@@ -48,7 +48,7 @@ public class EmployeesEntity extends BaseEntity {
 	private String name;
 	
 	//이메일
-	@Column(nullable = false,columnDefinition = "varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")
+	@Column(unique = true, nullable = false,columnDefinition = "varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")
 	private String email;
 	
 	//비밀번호
