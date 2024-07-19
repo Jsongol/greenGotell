@@ -28,6 +28,7 @@ public class SecurityConfig {
 	            //토큰발행은 security가 해줍니다.
 	        	//logout 할때 get이 아닌 post로 보내줘야한다.(로그아웃 할때도 토큰을 발행받아야 한다.)
 	            //uri에 대한 보안
+	        	/*
 	            .authorizeHttpRequests(authorize -> authorize
 	            		.requestMatchers("/css/**","/js/**","/images/**").permitAll()//인증없이 접속가능
 	            		.requestMatchers("/","/signup","/boards","/login").permitAll()//인증없이 접속가능
@@ -39,6 +40,8 @@ public class SecurityConfig {
 	            		//나머지 url은 로그인만 성공하면 접근가능 
 	            		.anyRequest().authenticated() //위에 설정을 제외한 나머지는 인증이 필요합니다. anyRequest가 항상 마지막에 온다.
 	            )
+	            */
+	        	.authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll())
 	            //.httpBasic(Customizer.withDefaults())
 	            
 	            //Username And Password And 
