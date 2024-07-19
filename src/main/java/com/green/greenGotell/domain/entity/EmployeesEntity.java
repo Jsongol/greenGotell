@@ -104,4 +104,9 @@ public class EmployeesEntity extends BaseEntity {
 		return this;
 	}
 
+	public void setResetToken(String token) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
