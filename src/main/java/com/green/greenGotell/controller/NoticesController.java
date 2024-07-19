@@ -46,10 +46,10 @@ public class NoticesController {
 	}
 
 	//상세페이지 조회
-	@GetMapping("/{no}")
+	@GetMapping("/detail/{no}")
 	public String detail(@PathVariable("no") long no, Model model) {	
 		service.detailProcess(no, model);
-		return "views/cs/notice/detail";
+		return "views/notices/detail";
 	}
 }	
 //	@PutMapping("/notices/{no}")

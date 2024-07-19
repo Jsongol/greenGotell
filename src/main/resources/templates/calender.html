@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{views/common/layout :: layout(~{::head} ,~{::main} ) }">
+<head>
+    <link rel="stylesheet" href="/css/samplel/sample.css">
+    <script src="/js/sample/sample.js" defer></script>
+    <link rel="stylesheet" href="/css/calendar.css">
+    <script src="/js/calendar.js" defer></script>
+</head>
+<body>
+<main class="sample">
+    <th:block th:replace="~{/views/personnel/cmsubmenu}"/>
+
+    <div class="cmcontents">
+        <div id="cmcreate">
+            <h1>샘플이름</h1>
+            <a href="#"><i class="fa-solid fa-plus"></i><span>만들기</span></a>
+        </div>
+
+        <div id="cmsearch-form">
+            <form action="#" method="get">
+                <select>
+                    <option>전체</option>
+                    <option>프론트오피스부</option>
+                    <option>식음료부</option>
+                    <option>시설관리부</option>
+                    <option>보안부</option>
+                    <option>인사부</option>
+                    <option>지원부</option>
+                    <option>마케팅부</option>
+                </select>
+                <select>
+                    <option>제목</option>
+                    <option>내용</option>
+                    <option>제목+내용</option>
+                </select>
+                <input type="text" placeholder="검색어를 입력해주세요.">
+                <button type="submit">검색</button>
+            </form>
+        </div>
+
+        <div id="calendar-container">
+            <div class="calendar">
+                <div id="calendar-header">
+                    <button id="prev-month">◀</button>
+                    <h2 id="calendar-month-year"></h2>
+                    <button id="next-month">▶</button>
+                </div>
+                <div id="calendar-body"></div>
+            </div>
+            <div class="schedule-form" id="schedule-form" style="display: none;">
+                <h3>할일 추가</h3>
+                <form id="event-form">
+                    <input type="hidden" id="selected-date">
+                    <label for="event-description">할일 :</label>
+                    <input type="text" id="event-description" required>
+                    <button type="submit">추가</button>
+                    <button type="button" id="cancel-event">취소</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

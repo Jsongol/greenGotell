@@ -45,7 +45,7 @@
 					<button type="submit">검색</button>
 				</form>
 			</div>
-			<table>
+			<table id="cmposting-format">
 				<thead>
 					<tr>
 						<th>코드</th>
@@ -60,14 +60,14 @@
 				</thead>
 				<tbody>
 					<tr th:each="inventory : ${inventories}">
-						<td th:text="${inventory.productCode}"></td>
-						<td th:text="${inventory.name}"></td>
-						<td th:text="${inventory.itemSource}"></td>
-						<td th:text="${inventory.itemMoney}"></td>
-						<td th:text="${inventory.standard}"></td>
-						<td th:text="${inventory.productCategory}"></td>
-						<td th:text="${inventory.productMiddleCategory}"></td>
-						<td th:text="${inventory.productSmallCategory}"></td>
+						<td th:text="${inventory.productCode}">코드</td>
+						<td th:text="${inventory.name}">이름</td>
+						<td th:text="${inventory.itemSource}">공급자</td>
+						<td th:text="${inventory.itemMoney}">가격</td>
+						<td th:text="${inventory.standard}">수량단위</td>
+						<td th:text="${inventory.productCategory}">대분류</td>
+						<td th:text="${inventory.productMiddleCategory}">소분류</td>
+						<td th:text="${inventory.productSmallCategory}">중분류</td>
 					</tr>
 				</tbody>
 			</table>
