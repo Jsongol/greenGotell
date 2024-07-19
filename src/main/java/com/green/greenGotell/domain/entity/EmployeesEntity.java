@@ -103,7 +103,5 @@ public class EmployeesEntity extends BaseEntity {
 		}
 		return this;
 	}
-	
-	
 
 }
