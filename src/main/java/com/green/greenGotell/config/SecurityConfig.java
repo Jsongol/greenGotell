@@ -24,10 +24,10 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.csrfTokenRepository(csrfTokenRepository()))
                 .authorizeRequests(authorize -> authorize
-                        .requestMatchers("/public/**").permitAll() // 인증 없이 접근 가능한 URL 패턴 설정
+                        .requestMatchers("/images/**","/css/**","/js/**").permitAll() // 인증 없이 접근 가능한 URL 패턴 설정
+                        .requestMatchers("/login").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN") // ADMIN 역할을 가진 사용자만 접근 가능한 URL 패턴 설정
                         .requestMatchers("/password-reset/**").permitAll() // 비밀번호 재설정 페이지에 대해 모든 사용자에게 접근 허용
-                        .requestMatchers("/login").permitAll()
                         .anyRequest().authenticated() // 그 외 모든 요청은 인증이 필요함
                 )
                 .formLogin(login -> login
