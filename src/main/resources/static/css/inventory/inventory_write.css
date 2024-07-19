@@ -1,92 +1,59 @@
-
-select {padding: 10px; border: 1px solid #cfd8e2; border-radius: 5px; margin-right: 5px}
-
-.charang{
-	border-radius: 5px;
-	padding-top:20px;
-	margin: 0 auto;
-	text-align:center;
-	width:400px;
-	background-color: #dddddd;
-}
-.charang .bom{
-	padding: 0 50px;
-}
-.charang P{
-	text-align: left;
+.form-container {
+  background-color: var(--background-color1);
+  padding: 20px;
+  border-radius: var(--menu-border-radius);
+  box-shadow: 0 4px 8px var(--sub-color6);
+  max-width: 600px;
+  margin: auto;
 }
 
-.charang input {
-	padding: 10px;
-	width:100%;
-	border: 1px solid #cfd8e2;
-	border-radius: 5px;
-	margin-right: 5px
+.form-container form {
+  display: flex;
+  flex-direction: column;
 }
 
-.date {
-	padding: 10px;
-	border: 1px solid #cfd8e2;
-	border-radius: 5px;
-	margin-right: 5px
+.form-container form div {
+  margin-bottom: 15px;
 }
 
-.charang button {
-	background-color: var(--sub-color2);
-	padding: 10px 10px;
-	border-radius: 5px;
-	border: none;
-	font-size: 16px;
-	margin-right:10px;
-	color: #fff;
-	line-height: 14px
+.form-container label {
+  font-size: var(--sub-title);
+  color: var(--main-color);
+  margin-bottom: 5px;
 }
 
-.filebox {
-	margin-top: 20px;
+.form-container input[type="text"],
+.form-container 
+select {
+  width: 100%;
+  padding: 10px;
+  font-size: var(--body-text);
+  border: 1px solid var(--sub-color5);
+  border-radius: var(--menu-border-radius);
+  background-color: var(--sub-color7);
 }
 
-.filebox .upload-name {
-	display: inline-block;
-	height: 40px;
-	padding: 0 10px;
-	vertical-align: middle;
-	border: 1px solid #dddddd;
-	width: 30%;
-	color: #999999;
+.form-container button[type="submit"],
+.form-container button[type="button"] {
+  padding: 10px 20px;
+  font-size: var(--body-text);
+  color: var(--background-color1);
+  background-color: var(--sub-color3);
+  border: none;
+  border-radius: var(--menu-border-radius);
+  cursor: pointer;
+  margin-right: 10px;
 }
 
-.filebox input {
-	border-radius: 5px;
+.form-container button[type="button"] {
+  background-color: var(--sub-color2);
 }
 
-.filebox label {
-	display: inline-block;
-	padding: 10px 20px;
-	color: #fff;
-	vertical-align: middle;
-	border-radius: 5px;
-	background-color: var(--sub-color2);
-	cursor: pointer;
-	height: 40px;
-	margin-left: 10px;
+.form-container button[type="submit"]:hover,
+.form-container button[type="button"]:hover {
+  background-color: var(--sub-color4);
 }
 
-.filebox input[type="file"] {
-	position: absolute;
-	width: 0;
-	height: 0;
-	padding: 0;
-	overflow: hidden;
-	border: 0;
-}
-
-.input-container {
-	margin-top: 20px;
-}
-#textInput{width: 78%; height: 300px}
-
-.char-count {
-	font-size: 0.9em;
-	color: gray;
+.form-container button[type="button"]:hover {
+  background-color: var(--sub-color5);
 }
