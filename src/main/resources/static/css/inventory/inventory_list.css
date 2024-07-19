@@ -58,6 +58,7 @@ button {
 #cmsearch-form form{
 	display: inline-flex;
 }
+<<<<<<< HEAD
 =======
 button:hover {
     background-color: #0056b3;
@@ -114,3 +115,9 @@ button:hover {
     margin: 0;
 }
 >>>>>>> f70f3f4dbed41890df806b6d33a86948c2f9f429
+=======
+
+tr{display: flex; justify-content:space-between;padding: 5px 7px;border-bottom: 1px solid var(--sub-color6);}
+tr>th{font-size: var(--body-text)}
+tr:nth-child(1){padding: 15px 7px; border-bottom: 2px solid var(--sub-color2);  font-size: 17px;background-color: var(--sub-color7)}
+>>>>>>> refs/heads/develop

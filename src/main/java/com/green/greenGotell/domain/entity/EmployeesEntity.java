@@ -48,7 +48,7 @@ public class EmployeesEntity extends BaseEntity {
 	private String name;
 	
 	//이메일
-	@Column(nullable = false,columnDefinition = "varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")
+	@Column(unique = true, nullable = false,columnDefinition = "varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")
 	private String email;
 	
 	//비밀번호
@@ -91,13 +91,17 @@ public class EmployeesEntity extends BaseEntity {
 		roles.add(role);
 		
 		return this;
+	}	
+	
+		//0:EMP(사원), 1:DIR(부장), 2:CEO(총지배인)//엔티티에서 보낼때 반복문으로 돌려서 원하는 권한만큼 배열에 저장시켜서 보내는 메소드
+	public EmployeesEntity addRole(String role) {
+		
+		Role target=Role.valueOf(role);
+		
+		for(int i=0; i<=target.ordinal(); i++) {
+			addRole(Role.values()[i]);
+		}
+		return this;
 	}
-
-
-	
-	
-	
-	
-	
 
 }
