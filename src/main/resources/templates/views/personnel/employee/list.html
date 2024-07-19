@@ -22,25 +22,21 @@
 			<div id="cmsearch-form">
 				<form class="search-form " action="#" method="get">
 
-					<select>
-						<option>전체</option>
-						<option>프론트오피스부</option>
-						<option>식음료부</option>
-						<option>시설관리부</option>
-						<option>보안부</option>
-						<option>인사부</option>
-						<option>지원부</option>
-						<option>마케팅부</option>
+					<select class="cmselect" id="department" name="department" required>
+						<th:block th:each="department : ${T(com.green.greenGotell.domain.enums.Department).values()}">
+							<option th:value="${department.name}">[[${department.koName}]]</option>								
+						</th:block>
+					</select> 
+				
+					
+					<select id="status" name="employeeStatus" class="cmselect" required>
+						<th:block th:each="employeeStatus : ${T(com.green.greenGotell.domain.enums.EmployeeStatus).values()}">
+							<option th:value="${employeeStatus.name}">[[${employeeStatus.KoName}]]</option>
+					    </th:block>
 					</select>
+					
+					<input type="text" name="name" placeholder="이름을 입력해주세요.">
 
-
-					<select>
-						<option>재직</option>
-						<option>휴직</option>
-						<option>퇴사</option>
-					</select>
-
-					<input type="text" placeholder="이름을 입력해주세요.">
 					<button type="submit">검색</button>
 				</form>
 			</div>
