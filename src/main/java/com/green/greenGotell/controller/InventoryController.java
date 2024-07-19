@@ -24,6 +24,18 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/inventory")
 @RequiredArgsConstructor
 public class InventoryController {
+<<<<<<< HEAD
+=======
+	
+	@GetMapping("/inventory")
+	public String list() {
+		return "/views/inventory/list";
+	}
+	@GetMapping("/inventory-add")
+	public String add() {
+		return "/views/inventory/write";
+	}
+>>>>>>> f70f3f4dbed41890df806b6d33a86948c2f9f429
 
     private final InventoryService inventoryService;
     
