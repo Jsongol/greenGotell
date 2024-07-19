@@ -47,13 +47,21 @@ grid-template-areas:
 
 
 /*공통 메인 설정*/
-main{width: 100%; height: auto; grid-area: c;
-background-image: url(https://products.ls.graphics/mesh-gradients/images/61.-Lavender.jpg); background-repeat: no-repeat; background-position: center; background-size: cover; border-radius: 15px 0 0 0;
-<<<<<<< HEAD
-display: grid; grid-template-columns: 190px auto; grid-template-areas:'d e'; padding: 10px  10px 0px 10px}
-=======
-display: grid; grid-template-columns: 200px auto; grid-template-areas:'d e'; padding: 10px  10px 0px 10px}
->>>>>>> f70f3f4dbed41890df806b6d33a86948c2f9f429
+main {
+	width: 100%;
+	height: auto;
+	grid-area: c;
+	background-image:
+		url(https://products.ls.graphics/mesh-gradients/images/61.-Lavender.jpg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	border-radius: 15px 0 0 0;
+	display: grid;
+	grid-template-columns: 190px auto;
+	grid-template-areas: 'd e';
+	padding: 10px 10px 0px 10px
+}
 
 /*공통 서브메뉴설정*/
 .cmsubnav{grid-area: d; background-color: var(--subnav-background); border-radius: 15px 15px 0px 0px; padding: 15px 12.5px 0px 12.5px}
