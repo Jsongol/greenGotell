@@ -3,52 +3,51 @@
 
 <head>
 	<link rel="stylesheet" href="/css/inventory/inventory_write.css">
-	<script src="/js/inventory/item2.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
-	<!--  -->
-	<main class="sample"><!--본인담당 기능대표명 클래스에 작성 -->
-		<!--여기에 서브메뉴가 필요하신 경우 작성해주세요. 클래스 명은 반드시 cmsubnav 포함시켜주세요 -->
+	<main class="sample">
 		<th:block th:replace="~{/views/inventory/cmsubmenu}" />
 
-		<!--메인 컨텐츠는 여기에 작성해주세요. 반드시 클래스명에 cmcontents  포함시켜주세요 -->
 		<div class="cmcontents">
 			<div id="cmcreate">
 				<h1>품목 추가</h1>
 				<a href="/inventory"> <i class="fa-solid fa-plus"></i>이전</a>
 			</div>
 			<div class="form-container">
-				<form action="/inventory/inventory-add" method="post">
-					<!-- CSRF 토큰 추가 -->
-					    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+				<form action="/inventory/create" method="post" th:object="${newCategory}">
+					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
 					<div>
-						<label>대분류:</label>
-						<select name="productCategory" onchange="updateSubCategory()" id="main-category">
-							<th:block th:each="d:${T(com.green.greenGotell.domain.enums.ProductCategory).values()}">
-								<option th:value="${d.name}">[[${d.displayName}]]</option>
-							</th:block>
-						</select>
+						<label for="name">카테고리 이름:</label>
+						<input type="text" name="name" placeholder="제품명 입력해주세요.">
 					</div>
 					<div>
-						<label>중분류:</label>
-						<select id="sub-category" name="productMiddleCategory" onchange="updateSubSubCategory()">
-							<option value="">중분류</option>
+						<label for="parentCategory">대분류:</label>
+						<select id="parentCategory" name="parentId">
+							<option value="">선택하세요</option>
+							<option th:each="category : ${categories}" th:if="${category.level == 0}"
+								th:value="${category.id}" th:text="${category.name}"></option>
 						</select>
 					</div>
+
 					<div>
-						<label>소분류:</label>
-						<select id="sub-sub-category" name="productSmallCategory">
-							<option value="">소분류</option>
+						<label for="middleCategory">중분류:</label>
+						<select id="middleCategory" name="middleCategory">
+							<option value="">선택하세요</option>
+						</select>
+					</div>
+
+					<div>
+						<label for="subCategory">소분류:</label>
+						<select id="subCategory" name="subCategory">
+							<option value="">선택하세요</option>
 						</select>
 					</div>
 					<div>
 						<label>코드:</label>
-						<input type="text" name="productCode" placeholder="제품코드 입력해주세요.">
-					</div>
-					<div>
-						<label>이름:</label>
-						<input type="text" name="name" placeholder="제품명 입력해주세요.">
+						<input type="text" name="codename" placeholder="제품코드 입력해주세요.">
 					</div>
 					<div>
 						<label>규격(kg):</label>
@@ -60,19 +59,58 @@
 					</div>
 					<div>
 						<label>공급처:</label>
-						<input type="text" name="itemSource" placeholder="공급처">
+						<input type="text" name="source" placeholder="공급처">
 					</div>
 					<div>
 						<label>가격:</label>
-						<input type="text" name="itemMoney" placeholder="가격">
-					</div><br>
-					<button type="submit">등록</button><br>
+						<input type="text" name="money" placeholder="가격">
+					</div>
+					<br>
+					<button type="submit">등록</button>
+					<br>
 					<button type="button" onclick="window.location.href='/inventory'">취소</button>
 				</form>
-
 			</div>
 		</div>
 	</main>
+	<script th:inline="javascript">
+		$(document).ready(function () {
+			$('#parentCategory').change(function () {
+				var parentId = $(this).val();
+				console.log("parentId: ",parentId);
+				var middleCategorySelect = $('#middleCategory');
+				var subCategorySelect = $('#subCategory');
+				if (parentId) {
+					$.get('/inventory/categories', {parentId: parentId}, function (data) {
+						var middleCategorySelect = $('#middleCategory');
+						middleCategorySelect.empty();
+						middleCategorySelect.append('<option value="">선택하세요</option>');
+						data.forEach(function (category) {
+							middleCategorySelect.append('<option value="' + $(this).id + '">' + $(this).name + '</option>');
+						});
+					});
+				} else {
+					$('#middleCategory').empty().append('<option value="">선택하세요</option>');
+					$('#subCategory').empty().append('<option value="">선택하세요</option>');
+				}
+			});
+			$('#middleCategory').change(function () {
+				var parentId = $(this).val();
+				if (parentId) {
+					$.get('/inventory/subcategories', {parentId: parentId}, function (data) {
+						var subCategorySelect = $('#subCategory');
+						subCategorySelect.empty();
+						subCategorySelect.append('<option value="">선택하세요</option>');
+						data.forEach(function (category) {
+							subCategorySelect.append('<option value="' + $(this).id + '">' + $(this).name + '</option>');
+						});
+					});
+				} else {
+					$('#subCategory').empty().append('<option value="">선택하세요</option>');
+				}
+			});
+		});
+	</script>
 </body>
 
 </html>
