@@ -19,6 +19,7 @@
 			</div>
 				<div id="notice-button">
 					<form action="/notices" method="post">
+					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 					<div class="notice-write-division">
 						<ul>
 							<li>
