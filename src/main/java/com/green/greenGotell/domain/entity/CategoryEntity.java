@@ -38,7 +38,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="categories")
-public class Category {
+public class CategoryEntity {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -48,19 +48,13 @@ public class Category {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
-    private Category parent;
+    private CategoryEntity parent;
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Category> children = new ArrayList<>();
+    @OneToMany(mappedBy = "parent",cascade = CascadeType.ALL)
+    private List<CategoryEntity> children;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Item> items = new ArrayList<>();
-
-    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private CategoryLevel level;
+    private int level;
 
-    public enum CategoryLevel {
-        LARGE, MEDIUM, SMALL
-    }
+    
 }
