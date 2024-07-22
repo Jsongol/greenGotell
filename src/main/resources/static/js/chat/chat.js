@@ -1,7 +1,6 @@
 let peer = null;
 let lastPeerId = null;
 let conn = null;
-let id = peer.id;
 
 function init() {
 	peer = new Peer();
