@@ -2,14 +2,17 @@ package com.green.greenGotell.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 //import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 //import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.green.greenGotell.domain.dto.NoticeSaveDTO;
+import com.green.greenGotell.domain.dto.NoticeUpdateDTO;
 import com.green.greenGotell.service.NoticeService;
 
 import lombok.RequiredArgsConstructor;
@@ -23,7 +26,7 @@ public class NoticesController {
 	
 	@GetMapping
 	public String list() {
-		return "redirect:/notices/1";
+		return "redirect:/notices/0";
 	}
 	
 	@GetMapping("/{division}")
@@ -51,10 +54,24 @@ public class NoticesController {
 		service.detailProcess(no, model);
 		return "views/notices/detail";
 	}
-}	
-//	@PutMapping("/notices/{no}")
-//	public String update(@PathVariable("no") long no) {
-//		return "redirect:/notices";
-//	}
+	
+	//상세페이지 수정
+	@PutMapping("/{no}")
+	public String update(@PathVariable("no")long no, NoticeUpdateDTO dto) {
+		
+		service.updateProcess(no, dto);
+		
+		return "redirect:/notices/detail/{no}";
+	}
 
+//	@DeleteMapping("/{no}")
+//	public String delete(@PathVariable("no") long no) {
+//		
+//		service.deleteProcess(no);
+//		
+//		return "redirect:/cscenter/notices";
+//	}
+	
+	
+}
 

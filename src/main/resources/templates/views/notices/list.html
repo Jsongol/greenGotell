@@ -2,6 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{views/common/layout :: layout(~{::head} ,~{::main} ) }">
 <head>
 	<link rel="stylesheet" href="/css/notices/notice.css">
+	<script>
+	    function redirectToDivision() {
+	        var selectElement = document.getElementById("division-select");
+	        var selectedValue = selectElement.value;
+	        if (selectedValue) {
+	            window.location.href = "/notices/" + selectedValue;
+	        }
+	    }
+	</script>
 </head>
 
 <body>
@@ -23,16 +32,17 @@
 			<!--메인 컨텐츠 중 게시판 서치 양식 입니다. 반드시 div 아이디에 cmsearch-form포함 -->
 			<div id="cmsearch-form">
 				<form id="search-form">
+					<select id="division-select" onchange="redirectToDivision()">
+                        <option value="1">전체</option>
+                        <option value="2">프론트오피스부</option>
+                        <option value="3">식음료부</option>
+                        <option value="4">시설관리부</option>
+                        <option value="5">보안부</option>
+                        <option value="6">인사부</option>
+                        <option value="7">지원부</option>
+                        <option value="8">마케팅부</option>
+                    </select> 
 					<select>
-						<option value="./1">전체</option>
-						<option value="./2">프론트오피스부</option>
-						<option value="./3">식음료부</option>
-						<option value="./4">시설관리부</option>
-						<option value="./5">보안부</option>
-						<option value="./6">인사부</option>
-						<option value="./7">지원부</option>
-						<option value="./8">마케팅부</option>
-					</select> <select>
 						<option>제목</option>
 						<option>내용</option>
 						<option>제목+내용</option>
@@ -52,7 +62,7 @@
 					</li>
 					<li th:each="notice:${list}" >
 						<span th:text="${notice.fixed} ? '❗' : ${notice.no} " class="no">번호</span>
-						<span th:text="${notice.division}">부서</span>
+						<span th:text="${notice.division}" style="width: 8%;">부서</span>
 						<span>
 							<a th:href="|/notices/detail/${notice.no}|" th:text="${notice.title}">제목</a>
 						</span>
