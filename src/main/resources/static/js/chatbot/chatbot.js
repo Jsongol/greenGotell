@@ -70,7 +70,12 @@ function connect() {
 								<div class="time">${time}</div>
 							</div>
 						</div>
-						`;
+						<div id="categories">
+						                            <button class="btn" onclick="toggleCategoryMessage(this, '사람 찾기')">사람 찾기</button>
+						                            <button class="btn" onclick="toggleCategoryMessage(this, '스케줄 확인')">스케줄 확인</button>
+						                            <button class="btn" onclick="toggleCategoryMessage(this, '내 정보 변경')">내 정보 변경</button>
+													<button class="btn" onclick="toggleCategoryMessage(this, '공지사항 확인')">공지사항 확인</button>
+						                        </div>`;
 			
 			showMessage(tag);
 		});
@@ -134,6 +139,17 @@ function btnMsgSendClicked(){
 		//접속하자마자 연결시도
 		client.send("/bot/question",{},JSON.stringify(data));
 		clearQuestion()
+}
+
+// 카테고리 메시지 전송 (토글 기능 포함)
+function toggleCategoryMessage(btn, content) {
+    $(btn).toggleClass('active');
+    var data = {
+        key: key,
+        content: content,
+        name: "guest"
+    };
+    client.send("/bot/question", {}, JSON.stringify(data));
 }
 
 $(function() {
