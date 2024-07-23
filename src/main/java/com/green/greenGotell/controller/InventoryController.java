@@ -6,15 +6,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.green.greenGotell.domain.dto.CategoryDTO;
-import com.green.greenGotell.domain.dto.ProductSaveDTO;
-import com.green.greenGotell.domain.entity.InventoryEntity;
+import com.green.greenGotell.domain.dto.ItemDTO;
+import com.green.greenGotell.domain.entity.ItemEntity;
 import com.green.greenGotell.service.CategoryService;
 import com.green.greenGotell.service.InventoryService;
 
@@ -32,17 +34,19 @@ public class InventoryController {
         model.addAttribute("categories", categoryService.getAll());
         return "views/inventory/item-list";
     }
-
+	// 중분류
     @GetMapping("/categories")
     @ResponseBody
-    public List<CategoryDTO> getCategoriesByParentId(@RequestParam Long parentId) {
-        return categoryService.findByParentIdAndLevel(parentId, 1); // 중분류
+    public List<CategoryDTO> getCategoriesByParentId(@RequestParam(name = "parentId") Long parentId) {
+    	
+    	System.out.println(">>>"+parentId);
+        return categoryService.findByParentId(parentId); 
     }
-
+    // 소분류
     @GetMapping("/subcategories")
     @ResponseBody
-    public List<CategoryDTO> getSubCategoriesByParentId(@RequestParam Long parentId) {
-        return categoryService.findByParentIdAndLevel(parentId, 2); // 소분류
+    public List<CategoryDTO> getSubCategoriesByParentId(@RequestParam(name = "parentId") Long parentId) {
+        return categoryService.findByParentId(parentId); 
     }
 
     @GetMapping("/create")
@@ -51,12 +55,15 @@ public class InventoryController {
         model.addAttribute("newCategory", new CategoryDTO());
         return "views/inventory/item-write";
     }
-
+    
     @PostMapping("/create")
-    public String createCategory(@RequestParam String name, @RequestParam(required = false) Long parentId) {
+    public String createCategory(@RequestParam(name="name") String name
+    		, @RequestParam(required = false) Long parentId, @ModelAttribute ItemDTO itemDTO) {
         categoryService.save(name, parentId);
+        categoryService.createProduct(itemDTO);
         return "redirect:/inventory";
     }
+    
 
     @GetMapping("/delete/{id}")
     public String deleteCategory(@PathVariable Long id) {

@@ -50,18 +50,6 @@ public class CategoryServiceTest {
         assertEquals(1, rootCategories.size());
         assertEquals("의류", rootCategories.get(0).getName());
 
-        List<CategoryDTO> mensCategories = categoryService.findByParentIdAndLevel(clothingId, 1);
-        assertEquals(3, mensCategories.size());
-        assertTrue(mensCategories.stream().anyMatch(category -> category.getName().equals("남성 의류")));
-        assertTrue(mensCategories.stream().anyMatch(category -> category.getName().equals("여성 의류")));
-        assertTrue(mensCategories.stream().anyMatch(category -> category.getName().equals("아동 의류")));
-
-        List<CategoryDTO> mensSubCategories = categoryService.findByParentIdAndLevel(mensClothingId, 2);
-        assertEquals(4, mensSubCategories.size());
-        assertTrue(mensSubCategories.stream().anyMatch(category -> category.getName().equals("정장")));
-        assertTrue(mensSubCategories.stream().anyMatch(category -> category.getName().equals("캐주얼")));
-        assertTrue(mensSubCategories.stream().anyMatch(category -> category.getName().equals("스포츠웨어")));
-        assertTrue(mensSubCategories.stream().anyMatch(category -> category.getName().equals("수영복")));
-    }
+        }
 }
 

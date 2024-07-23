@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.green.greenGotell.domain.dto.CategoryDTO;
 import com.green.greenGotell.domain.entity.CategoryEntity;
+import com.green.greenGotell.domain.entity.ItemEntity;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<CategoryEntity, Long>{
@@ -16,4 +17,10 @@ public interface CategoryRepository extends JpaRepository<CategoryEntity, Long>{
 	
 	@Query("SELECT c FROM CategoryEntity c WHERE c.parent.id = :parentId AND c.level = :level")
 	List<CategoryEntity> findByParentIdAndLevel(@Param("parentId") Long parentId, @Param("level") int level);
+
+	List<CategoryEntity> findByParent_id(Long parentId);
+
+	void save(ItemEntity entity);
+	
+	
 }

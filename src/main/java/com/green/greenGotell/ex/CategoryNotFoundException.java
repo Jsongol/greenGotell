@@ -1,4 +1,4 @@
-package com.green.greenGotell.security;
+package com.green.greenGotell.ex;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
