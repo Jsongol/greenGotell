@@ -3,8 +3,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const createEmployeeDiv = document.querySelector('#create-employee');
     const createbtn = document.querySelector('.createbtn');
     const employeeForm = createEmployeeDiv.querySelector('form');
-
-    /* 직원 추가 버튼 이벤트 */
+    
+    /*직원추가 버튼 이벤트*/
     cancelbtn.addEventListener('click', function () {
         createEmployeeDiv.classList.remove('create');
         createEmployeeDiv.classList.add('cancel');
@@ -13,39 +13,48 @@ document.addEventListener('DOMContentLoaded', function () {
             message.classList.add('hide');
         });
     });
-
+    
     createbtn.addEventListener('click', function () {
         createEmployeeDiv.classList.add('create');
     });
-
-    /* 신규 직원 추가 유효성 검사 */
+    arguments
+    
+    /*신규직원추가 유효성검사*/
+    
     let name = document.querySelector('#name');
     let nameFailureMessage = document.querySelector('.name-failure');
-
+    
     let email = document.querySelector('#email');
     let emailFailureMessage = document.querySelector('.email-failure');
-
+    
     let pass = document.querySelector('#pass');
     let passFailureMessage = document.querySelector('.pass-failure');
-
+    
     let department = document.querySelector('#department');
     let position = document.querySelector('#position');
     let hireDate = document.querySelector('#hireDate');
     let status = document.querySelector('#status');
-
-    /* 유효성 검사 함수 */
+    
+    
+    
+    /*유효성검사 함수*/
+    
+    /*이름 검사*/
     function nameVerification(value) {
         return value.length >= 2 && /^[가-힣a-zA-Z]+$/.test(value);
     }
-
+    
+     /*이메일 검사*/
     function emailVerification(value) {
         return /^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value);
     }
-
+    
+     /*비밀번호 검사*/
     function passVerification(value) {
         return value.length >= 6 && /[a-zA-Z\d!@$%*]/.test(value);
     }
-
+    
+     /*제출시 모든 유효성 검사처리*/
     function isFormValid() {
         return (
             nameVerification(name.value) &&
@@ -57,8 +66,10 @@ document.addEventListener('DOMContentLoaded', function () {
             status.value
         );
     }
-
-    /* 실시간 피드백 함수 */
+    
+    /*실시간 피드백 함수*/
+    
+    /*이름*/
     name.onkeyup = function() {
         if (name.value.length === 0 || nameVerification(name.value)) {
             nameFailureMessage.classList.add('hide');
@@ -66,7 +77,8 @@ document.addEventListener('DOMContentLoaded', function () {
             nameFailureMessage.classList.remove('hide');
         }
     };
-
+    
+    /*이메일*/
     email.onkeyup = function() {
         if (email.value.length === 0 || emailVerification(email.value)) {
             emailFailureMessage.classList.add('hide');
@@ -74,7 +86,8 @@ document.addEventListener('DOMContentLoaded', function () {
             emailFailureMessage.classList.remove('hide');
         }
     };
-
+    
+    /*비밀번호*/
     pass.onkeyup = function() {
         if (pass.value.length === 0 || passVerification(pass.value)) {
             passFailureMessage.classList.add('hide');
@@ -82,72 +95,13 @@ document.addEventListener('DOMContentLoaded', function () {
             passFailureMessage.classList.remove('hide');
         }
     };
-
-    /* 직원 목록을 로드하는 함수 */
-    function loadEmployeeList() {
-        $.ajax({
-            url: '/api/employees',
-            method: 'GET',
-            success: function(response) {
-                var employeeList = $('#cmposting-format ul');
-                employeeList.find('li:gt(0)').remove();
-                response.forEach(function(employee) {
-                    employeeList.append(
-                        '<li>' +
-                        '<span>' + employee.id + '</span>' +
-                        '<span>' + employee.department + '</span>' +
-                        '<span>' + employee.position + '</span>' +
-                        '<span>' + employee.name + '</span>' +
-                        '<span>' + employee.contact + '</span>' +
-                        '<span>' + employee.address + '</span>' +
-                        '<span>' + employee.email + '</span>' +
-                        '<span>' + employee.hireDate + '</span>' +
-                        '<span><button class="cmbutton2">수정</button></span>' +
-                        '</li>'
-                    );
-                });
-            }
-        });
-    }
-
-    /* 신규 직원 추가 함수 */
-    function addEmployee() {
-        var newEmployee = {
-            name: name.value,
-            email: email.value,
-            password: pass.value,
-            department: department.value,
-            position: position.value,
-            hireDate: hireDate.value,
-            employeeStatus: status.value
-        };
-
-        $.ajax({
-            url: '/api/employees',
-            method: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(newEmployee),
-            success: function(response) {
-                loadEmployeeList();
-                createEmployeeDiv.classList.remove('create');
-                employeeForm.reset();
-                document.querySelectorAll('.error').forEach(function(message) {
-                    message.classList.add('hide');
-                });
-            }
-        });
-    }
-
-    // 페이지 로드 시 직원 목록 로드
-    loadEmployeeList();
-
+    
     // 제출 이벤트
     employeeForm.onsubmit = function(event) {
-        event.preventDefault();
-        if (isFormValid()) {
-            addEmployee();
-        } else {
+        if (!isFormValid()) {
+            event.preventDefault();
             alert('모든 입력란을 올바르게 작성해주세요.');
         }
     };
 });
+

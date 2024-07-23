@@ -1,4 +1,4 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <header class="cmheader">
 	<div class="cmheader-wrap">
 		<div class="cmnav-search">
@@ -17,8 +17,8 @@
 			<ul>
 				<li><i class="fa fa-bell" aria-hidden="true"></i></li>
 				<li>프로필 이미지</li>
-				<li>부서명</li>
-				<li><a href="/mypage">닉네임</a></li>
+				<li th:text="${#authentication.principal.department.getKoName()}">부서명</li>
+				<li ><a href="/mypage" sec:authentication="principal.name">닉네임</a></li>
 				<li>
 					<div id="darkMode">
 						<i id="sun-icon" class="fas fa-sun"></i>
