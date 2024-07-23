@@ -10,16 +10,22 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 
 @Builder
 @Getter
+@Setter
 public class CategoryDTO {
 
 	private Long id;
     private String name;
     private int level;
+    
+    private Long parentId;
+    private String middleCategory;
+    private String subCategory;
     //private List<CategoryDTO> children;
     
     /*

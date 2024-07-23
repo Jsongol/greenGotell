@@ -18,6 +18,7 @@ import com.green.greenGotell.domain.dto.ItemDTO;
 import com.green.greenGotell.domain.entity.ItemEntity;
 import com.green.greenGotell.service.CategoryService;
 import com.green.greenGotell.service.InventoryService;
+import com.green.greenGotell.service.ItemService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -27,6 +28,7 @@ import lombok.RequiredArgsConstructor;
 public class InventoryController {
 	
 	private final CategoryService categoryService;
+	private final ItemService itemservice; 
 	
 	@GetMapping
     public String listCategories(Model model) {
@@ -58,7 +60,7 @@ public class InventoryController {
     public String createCategory(@RequestParam(name="name") String name
     		, @RequestParam(required = false) Long parentId,ItemDTO dto) {
         categoryService.save(name, parentId);
-        categoryService.createProduct(dto);
+        itemservice.createItem(dto);
         return "redirect:/inventory";
     }
     

@@ -9,10 +9,12 @@ import com.green.greenGotell.domain.enums.ProductMiddleCategory;
 import com.green.greenGotell.domain.enums.ProductSmallCategory;
 import com.green.greenGotell.domain.enums.Standard;
 
+import lombok.Builder;
 import lombok.Setter;
 import lombok.ToString;
 
 @ToString
+@Builder
 @Setter
 public class ItemDTO {
 	 private Long id;
@@ -40,5 +42,6 @@ public class ItemDTO {
 				.itemMoney(itemMoney)
 				.build();
 	}
+	
 
 }

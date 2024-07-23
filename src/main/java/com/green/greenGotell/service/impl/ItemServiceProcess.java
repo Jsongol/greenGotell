@@ -17,4 +17,10 @@ public class ItemServiceProcess implements ItemService{
 	private final ItemRepository itemrepository;
 	private final CategoryRepository categoryRepository;
 	
+	@Override
+	public void createItem(ItemDTO dto) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }
