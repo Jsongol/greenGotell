@@ -1,5 +1,6 @@
 package com.green.greenGotell.domain.dto;
 
+import com.green.greenGotell.domain.entity.EmployeesEntity;
 import com.green.greenGotell.domain.entity.NoticeEntity;
 
 import lombok.Setter;
@@ -13,11 +14,16 @@ public class NoticeSaveDTO{
 	private boolean fixed;		//고정여부
 	private String title;		//제목
 	private String content;		//내용
+	private EmployeesEntity employeeId;    // 작성자 ID
 	
 	//formdata->dto->entity
 	public NoticeEntity toEntity() {
 		return NoticeEntity.builder()
-				.division(division).fixed(fixed).title(title).content(content)
+				.division(division)
+				.fixed(fixed)
+				.title(title)
+				.content(content)
+				.employee(employeeId)
 				.build();
 	}
 

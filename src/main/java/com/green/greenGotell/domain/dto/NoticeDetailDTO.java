@@ -13,7 +13,7 @@ public class NoticeDetailDTO {
 		private String title;
 		private String content;
 		private String division;	//구분-"전체","영화관"
-		private int readCount;	//고정여부
+		private boolean fixed;	//고정여부
 		private LocalDateTime createdAt;	//최초생성일
 		private LocalDateTime updatedAt;	//최종수정일
 

@@ -157,7 +157,14 @@ textarea[name="content"] {
     box-sizing: border-box; /* padding과 border를 포함한 너비 계산 */
 }
 
-#notice-button button{background-color: var(--sub-color2); padding: 10px 10px; border-radius: 5px; border:none; font-size: 16px;color: #fff; line-height: 14px; margin-left: 40%}
+.button-container {
+    display: flex;
+    gap: 20px; /* 버튼 사이의 간격을 조절합니다 */
+    align-items: center; /* 버튼의 세로 정렬을 맞춥니다 */
+    justify-content: center; /* 버튼의 수평 정렬을 가운데로 맞춥니다 */
+}
+
+#notice-button button{background-color: var(--sub-color2); padding: 10px 10px; border-radius: 5px; border:none; font-size: 16px;color: #fff; line-height: 14px; }*
 
 /*-------------------상세페이지--------------------------*/
 .notice-detail{
@@ -203,4 +210,3 @@ textarea[name="content"] {
   display: block;
   margin-bottom: 15px;
 }
-

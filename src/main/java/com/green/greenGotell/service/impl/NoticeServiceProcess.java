@@ -29,11 +29,13 @@ public class NoticeServiceProcess implements NoticeService{
 	private final NoticeEntityRepository repository;
 
 	@Override
-	public void listProcess(int _division, Model model) {
-		int pageNumber=1;//1페이지
-		int pageSize=10; //최대 10개까지
+	public void listProcess(int _division, Model model) {//부서번호(int _division), 정보를 저장할 모델객체(Model model)
+		
+		int page=1;
+		int pageSize = 10;
+		
 		Sort sort=Sort.by(Direction.DESC, "fixed","no");
-		Pageable pageable=PageRequest.of(pageNumber-1, pageSize, sort);
+		Pageable pageable=PageRequest.of(page-1, pageSize, sort);
 		
 		String division;
 	    switch (_division) {
@@ -68,9 +70,10 @@ public class NoticeServiceProcess implements NoticeService{
 		//JPA 쿼리메서드 : findAll() 사용자가 만들수 있는 쿼리메서드 문법-키워드
 		Page<NoticeEntity> result=repository.findAllByDivision(division, pageable);
 		
+		//_division가 0이면 모든 항목 페이지에 출력
 		if (_division==0) {
             result = repository.findAll(pageable);
-        } else {
+        } else {//_division가 0이 아니면 해당 부서별 페이지 출력
             result = repository.findAllByDivision(division, pageable);
         }
 		
@@ -80,12 +83,13 @@ public class NoticeServiceProcess implements NoticeService{
 		
 	}	
 
+	//공지사항 저장 처리
 	@Override
 	public void saveProcess(NoticeSaveDTO dto) {		
 		repository.save(dto.toEntity());
 	}
 
-
+	//공지사항 상세 페이지 출력
 	@Override
 	public void detailProcess(long no, Model model) { // 상세정보 조회해서 model에 담아라
 		//Null Pointer Exception 방지:
@@ -96,15 +100,21 @@ public class NoticeServiceProcess implements NoticeService{
 		
 	}
 
+	//no(pk)해당하는 공지사항 상세페이지에서 수정 기능
 	@Override
 	@Transactional
 	public void updateProcess(long no, NoticeUpdateDTO dto) {
 		// 1. 수정할 대상을 조회 2. 변경사항을 적용 -> 변경된entity 저장
-		//repository.save(repository.findById(no).orElseThrow().update(dto)); //수정처리
-		
-		// 수정됨(@Transactional 인경우)
 		repository.findById(no).orElseThrow().update(dto);
 				
+	}
+
+
+	//no(pk)해당하는 공지사항 DB에서 삭제
+	@Override
+	public void deleteProcess(long no) {
+		repository.delete(repository.findById(no).orElseThrow());
+		
 	}
 
 }

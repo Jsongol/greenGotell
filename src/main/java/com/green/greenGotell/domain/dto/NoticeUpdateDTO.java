@@ -10,4 +10,5 @@ public class NoticeUpdateDTO {
 	private String division;
 	private String title;
 	private String content;
+	private boolean fixed;
 }
