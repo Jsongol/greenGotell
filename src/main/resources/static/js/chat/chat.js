@@ -12,7 +12,7 @@ function init() {
 			lastPeerId = peer.id;
 		}
 
-		$('#receiver-id').html("ID: " + peer.id);
+		$('#my-id').html("My ID: " + peer.id);
 		$('#status').html('Awaiting connection..');
 	});
 
@@ -40,7 +40,7 @@ function init() {
 
 	peer.on('close', function() {
 		conn = null;
-		$('#status').html('connection destroyed');
+		$('#status').html('Connection destroyed');
 	});
 
 	peer.on('error', function(err) {
@@ -69,27 +69,25 @@ function addMessage(msg, side) {
 	if (m < 10) m = "0" + m;
 	if (s < 10) s = "0" + s;
 
-
 	var msgHtml = [];
 	if (side == 'left') {
-		msgHtml.push('<li class="chat-left">');
+		msgHtml.push('<li class="chat-right">');
 		msgHtml.push(' <div class="chat-avatar">');
-		msgHtml.push('  <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png" alt="Retail Admin">');
+		msgHtml.push('  <img src="https://www.bootdey.com/img/Content/avatar/avatar4.png" alt="Retail Admin">');
 		msgHtml.push('   <div class="chat-name">Jin</div>');
 		msgHtml.push('  </div>');
 		msgHtml.push(' <div class="chat-text">' + msg + '</div>');
 		msgHtml.push(' <div class="chat-hour">' + h + ':' + m + ':' + s + '<span class="fa fa-check-circle"></span></div>');
 		msgHtml.push('</li>');
 	} else {
-		msgHtml.push('<li class="chat-right">');
+		msgHtml.push('<li class="chat-left">');
 		msgHtml.push(' <div class="chat-hour">' + h + ':' + m + ':' + s + '<span class="fa fa-check-circle"></span></div>');
 		msgHtml.push('  <div class="chat-text">' + msg + '</div>');
 		msgHtml.push('  <div class="chat-avatar">');
-		msgHtml.push('   <img src="https://www.bootdey.com/img/Content/avatar/avatar4.png" alt="Retail Admin">');
+		msgHtml.push('   <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png" alt="Retail Admin">');
 		msgHtml.push('   <div class="chat-name">Russell</div>');
 		msgHtml.push(' </div>');
 		msgHtml.push('</li>');
-
 	}
 
 	$('#chat_box').append(msgHtml.join(""));
@@ -97,6 +95,24 @@ function addMessage(msg, side) {
 
 $(document).ready(function() {
 	init();
+
+	$('#connect-button').click(function() {
+		const receiverId = $('#receiver-id').val();
+		if (receiverId) {
+			conn = peer.connect(receiverId);
+
+			conn.on('open', function() {
+				$('#status').html("Connected to: " + conn.peer);
+				ready();
+			});
+
+			conn.on('error', function(err) {
+				$('#status').html("Connection error: " + err);
+			});
+		} else {
+			alert('Please enter a receiver ID');
+		}
+	});
 
 	$('#sendMessageBox').keydown(function(key) {
 		if (key.keyCode == 13) {
