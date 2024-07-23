@@ -2,9 +2,11 @@ package com.green.greenGotell.domain.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.hibernate.annotations.DynamicUpdate;
 
+import com.green.greenGotell.domain.dto.CategoryDTO;
 import com.green.greenGotell.domain.enums.ProductCategory;
 import com.green.greenGotell.domain.enums.ProductMiddleCategory;
 import com.green.greenGotell.domain.enums.ProductSmallCategory;
@@ -45,7 +47,7 @@ public class CategoryEntity {
 
     @Column(nullable = false)
     private String name;
-
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
     private CategoryEntity parent;
@@ -56,5 +58,9 @@ public class CategoryEntity {
     @Column(nullable = false)
     private int level;
 
-    
+    public CategoryDTO toCategoryDTO() {
+    	return CategoryDTO.builder()
+    			.id(id).name(name)
+    			.build();
+    }
 }

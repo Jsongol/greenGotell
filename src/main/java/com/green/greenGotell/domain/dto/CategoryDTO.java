@@ -22,8 +22,9 @@ public class CategoryDTO {
 	private Long id;
     private String name;
     private int level;
-    private List<CategoryDTO> children;
-
+    //private List<CategoryDTO> children;
+    
+    /*
     public static CategoryDTO fromEntity(CategoryEntity category) {
         return CategoryDTO.builder()
                 .id(category.getId())
@@ -31,5 +32,6 @@ public class CategoryDTO {
                 .level(category.getLevel())
                 .build();
     }
+    */
 
 }

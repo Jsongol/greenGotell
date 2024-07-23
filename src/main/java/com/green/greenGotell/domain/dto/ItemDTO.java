@@ -1,6 +1,6 @@
 package com.green.greenGotell.domain.dto;
 
-import com.green.greenGotell.domain.entity.InventoryEntity;
+import com.green.greenGotell.domain.entity.ItemEntity;
 import com.green.greenGotell.domain.enums.ProductCategory;
 import com.green.greenGotell.domain.enums.ProductMiddleCategory;
 import com.green.greenGotell.domain.enums.ProductSmallCategory;
@@ -11,15 +11,10 @@ import lombok.ToString;
 
 @ToString
 @Setter
-public class ProductSaveDTO {
-	//대분류
-	private ProductCategory productCategory;
-	//중분류
-	private ProductMiddleCategory productMiddleCategory;
-	//소분류
-	private ProductSmallCategory productSmallCategory;
+public class ItemDTO {
+	 private Long id;
 	//상품코드
-	private String productCode;
+	private String itemCode;
 	//상품명
 	private String name;
 	//규격
@@ -28,21 +23,18 @@ public class ProductSaveDTO {
 	private String itemSource;
 	//가격
 	private long itemMoney;
+	//카테고리
+	private Long categoryId;
 	
-	public InventoryEntity toEntity() {
-		
-		return InventoryEntity.builder()
-				.productCategory(productCategory)
-				.productMiddleCategory(productMiddleCategory)
-				.productSmallCategory(productSmallCategory)
-				.productCode(productCode)
+	
+	public ItemEntity toEntity() {
+		return ItemEntity.builder()
+				.itemCode(itemCode)
 				.name(name)
-				.standard(standard)
 				.itemSource(itemSource)
+				.standard(standard)
 				.itemMoney(itemMoney)
 				.build();
 	}
-	
-	
 
 }
