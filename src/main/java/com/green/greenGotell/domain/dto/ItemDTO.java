@@ -1,5 +1,8 @@
 package com.green.greenGotell.domain.dto;
 
+import java.math.BigDecimal;
+
+import com.green.greenGotell.domain.entity.CategoryEntity;
 import com.green.greenGotell.domain.entity.ItemEntity;
 import com.green.greenGotell.domain.enums.ProductCategory;
 import com.green.greenGotell.domain.enums.ProductMiddleCategory;
@@ -14,7 +17,7 @@ import lombok.ToString;
 public class ItemDTO {
 	 private Long id;
 	//상품코드
-	private String itemCode;
+	private String itemCode;	
 	//상품명
 	private String name;
 	//규격
@@ -22,9 +25,10 @@ public class ItemDTO {
 	//공급자
 	private String itemSource;
 	//가격
-	private long itemMoney;
-	//카테고리
-	private Long categoryId;
+	private BigDecimal  itemMoney;
+    private Long parentCategory;
+    private String middleCategory;
+    private String subCategory;
 	
 	
 	public ItemEntity toEntity() {

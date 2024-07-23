@@ -28,8 +28,7 @@
 						<label for="parentCategory">대분류:</label>
 						<select id="parentCategory" name="parentId">
 							<option value="">선택하세요</option>
-							<option th:each="category : ${categories}" th:if="${category.level == 0}"
-								th:value="${category.id}" th:text="${category.name}"></option>
+							<option th:each="category : ${categories}"th:value="${category.id}" th:text="${category.name}"></option>
 						</select>
 					</div>
 
@@ -48,7 +47,7 @@
 					</div>
 					<div>
 						<label>코드:</label>
-						<input type="text" name="codename" placeholder="제품코드 입력해주세요.">
+						<input type="text" name="itemCode" placeholder="제품코드 입력해주세요.">
 					</div>
 					<div>
 						<label>규격(kg):</label>
