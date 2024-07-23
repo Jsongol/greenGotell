@@ -1,5 +1,7 @@
 package com.green.greenGotell.domain.entity;
 
+import java.math.BigDecimal;
+
 import org.hibernate.annotations.DynamicUpdate;
 
 import com.green.greenGotell.domain.dto.ItemDTO;
@@ -39,17 +41,17 @@ public class ItemEntity { //품목리스트 추가 테이블
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	//상품코드
-	@Column(nullable = false, columnDefinition = "varchar(50)")
+	@Column(nullable = true, columnDefinition = "varchar(50)")
 	private String itemCode;
 	//상품명
-	@Column(nullable = false, columnDefinition = "varchar(50)")
+	@Column(nullable = true, columnDefinition = "varchar(50)")
 	private String name;
 	//공급자
-	@Column(nullable = false, columnDefinition = "varchar(50)")
+	@Column(nullable = true, columnDefinition = "varchar(50)")
 	private String itemSource;
 	//가격
-	@Column(nullable = false, columnDefinition = "bigint")
-	private long itemMoney;
+	@Column(nullable = true, columnDefinition = "bigint")
+	private BigDecimal itemMoney;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")

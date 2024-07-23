@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -52,15 +51,14 @@ public class InventoryController {
     @GetMapping("/create")
     public String showAddForm(Model model) {
         model.addAttribute("categories", categoryService.getAll());
-        model.addAttribute("newCategory", new CategoryDTO());
         return "views/inventory/item-write";
     }
     
     @PostMapping("/create")
     public String createCategory(@RequestParam(name="name") String name
-    		, @RequestParam(required = false) Long parentId, @ModelAttribute ItemDTO itemDTO) {
+    		, @RequestParam(required = false) Long parentId,ItemDTO dto) {
         categoryService.save(name, parentId);
-        categoryService.createProduct(itemDTO);
+        categoryService.createProduct(dto);
         return "redirect:/inventory";
     }
     
