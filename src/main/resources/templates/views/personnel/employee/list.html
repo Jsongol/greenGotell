@@ -55,15 +55,15 @@
 						<span></span>
 					</li>
 
-					<li><!--타임리프 적용하려야하는 곳 입니다.-->
-						<span>사번</span>
-						<span>부서</span>
-						<span>직급</span>
-						<span>성명</span>
-						<span>연락처</span>
-						<span>주소</span>
-						<span>이메일</span>
-						<span>입사일</span>
+					<li th:each="employees:${employees}"><!--타임리프 적용하려야하는 곳 입니다.-->
+						<span th:text="${employees.id}">사번</span>
+						<span th:text="${employees.department.getKoName()}">부서</span>
+						<span th:text="${employees.HighRole.roleName()}">직급</span>
+						<span th:text="${employees.name}">성명</span>
+						<span th:text="${employees.phone !=null ? employees.phone : '등록되지않았습니다' }">연락처</span>
+						<span th:text="${employees.address !=null ? employees.address : '등록되지않았습니다' }">주소</span>
+						<span th:text="${employees.email}">이메일</span>
+						<span th:text="${employees.hireDate}">입사일</span>
 						<span><button class="cmbutton2">수정</button></span>
 					</li>
 

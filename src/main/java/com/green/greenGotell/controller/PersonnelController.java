@@ -19,12 +19,19 @@ public class PersonnelController {
 	
 	private final PersonnelService personnelService;
 	
+	@GetMapping("/login")
+	public String getMethodName() {
+		
+		return "/login";
+	}
+	
+	
 
 
 	@GetMapping("/personnel")
 	public String list(Model model) {
 		
-		//personnelService.showEmployeeList(model);
+		personnelService.showEmployeeList(model);
 		
 		return "/views/personnel/employee/list";
 	}
