@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import org.hibernate.annotations.DynamicUpdate;
 
+import com.green.greenGotell.domain.dto.CategoryDTO;
 import com.green.greenGotell.domain.dto.ItemDTO;
 import com.green.greenGotell.domain.enums.ProductCategory;
 import com.green.greenGotell.domain.enums.ProductMiddleCategory;
