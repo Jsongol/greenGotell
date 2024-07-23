@@ -8,6 +8,8 @@ import com.green.greenGotell.security.CustomUserDetails;
 public interface PersonnelService{
 
 	void createEmployee(CreateEmployeeDTO dto);
+
+	void showEmployeeList(Model model);
 	
 	
 
