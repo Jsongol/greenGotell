@@ -1,7 +1,5 @@
 package com.green.greenGotell.controller;
 
-
-
 import java.text.MessageFormat;
 
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -13,35 +11,46 @@ import com.green.greenGotell.service.KomoranService;
 
 import lombok.RequiredArgsConstructor;
 
-
-
 @Controller
 @RequiredArgsConstructor
 public class ChatBotController {
 
-	//내부적으로 STOMP의 프로토콜을 사용하여 메세지를 전송
-			//@SendTo 어노테이션을 처리하는 구현 객체
-			private final SimpMessagingTemplate messagingTemplate;
-			//private final RabbitTemplate rabbitTemplate;
-			private final KomoranService komoranService;
-			
-			@MessageMapping("/question") // '/bot/question'
-			public void bot(QuestionDTO dto) {
-				System.out.println(">>>:"+dto);
-				//들어온 메세지가 어떤 의도인지 파악 ---> 머신러닝(형태소 분석기를 통해 분석)
-				komoranService.nlpProcess(dto.getContent());
-			}
-			
-			@MessageMapping("/hello") // '/bot/question'
-			//@SendTo("/topic/bot/"+key)//이렇게 SendTo에 바로 변수가 들어갈 수는 없음 -> ResponseBody와 같은 역할
-			public void hello(QuestionDTO dto) {
-				System.out.println(">>>:"+dto);
-				long key = dto.getKey();
-				String pattern = "{0}님 안녕하세요!";
-				
-				
-				messagingTemplate.convertAndSend("/topic/bot/"+key, 
-						MessageFormat.format(pattern, dto.getName())
-						);
-			}
-		}
+	private final SimpMessagingTemplate messagingTemplate;
+	private final KomoranService komoranService;
+
+	@MessageMapping("/question") // '/bot/question'
+	public void bot(QuestionDTO dto) {
+		if (dto.getContent().startsWith("category:")) {
+            String category = dto.getContent().substring(9); // 카테고리 키워드 추출
+            String response = handleCategory(category);
+            messagingTemplate.convertAndSend("/topic/bot/" + dto.getKey(), response);
+        } else {
+            // 형태소 분석기 또는 다른 처리를 위한 코드
+		komoranService.nlpProcess(dto.getContent());
+        }
+	}
+
+	@MessageMapping("/hello") // '/bot/question'
+	public void hello(QuestionDTO dto) {
+		long key = dto.getKey();
+		String pattern = "{0}님 안녕하세요!";
+		messagingTemplate.convertAndSend("/topic/bot/" + key, 
+				MessageFormat.format(pattern, dto.getName()));
+	}
+	
+	private String handleCategory(String category) {
+        // 카테고리에 따라 다른 응답 생성
+        switch (category) {
+            case "findPerson":
+                return "찾는 사람에 대해 질문하세요.";
+            case "schedule":
+                return "스케줄 관련 정보를 확인하세요.";
+            case "changeInfo":
+                return "정보 변경을 위한 방법을 안내합니다.";
+            case "notice":
+                return "공지사항을 확인하세요.";
+            default:
+                return "유효하지 않은 카테고리입니다.";
+        }
+    }
+}
