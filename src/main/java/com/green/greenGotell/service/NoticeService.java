@@ -15,4 +15,6 @@ public interface NoticeService {
 
 	void updateProcess(long no, NoticeUpdateDTO dto);
 
+	void deleteProcess(long no);
+
 }
