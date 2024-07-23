@@ -30,7 +30,9 @@ grid-template-areas:
 .cmnav-bttom span{margin-left: 15px}
 .menu>li>a,.administrator-menu>li>a{position: relative;}
 
-.logout{width: 33px;position: absolute; bottom: 21px; left: 21px;}
+
+.logout{width: 33px;position: absolute; bottom: 21px; left: 21px;color: var(--background-color1);}
+.logout button{padding:5px; border: none; font-size:18px;border-radius:5px; background-color: inherit; }
 
 
 	/*로고*/

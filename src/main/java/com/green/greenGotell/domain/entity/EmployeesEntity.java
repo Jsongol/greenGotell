@@ -5,7 +5,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.green.greenGotell.domain.dto.EmployeeListDTO;
+import com.green.greenGotell.domain.dto.ProfileUpdateDTO;
 import com.green.greenGotell.domain.enums.Department;
 import com.green.greenGotell.domain.enums.EmployeeStatus;
 import com.green.greenGotell.domain.enums.Role;
@@ -91,22 +94,40 @@ public class EmployeesEntity extends BaseEntity {
 		roles.add(role);
 		
 		return this;
-	}	
+	}
 	
-		//0:EMP(사원), 1:DIR(부장), 2:CEO(총지배인)//엔티티에서 보낼때 반복문으로 돌려서 원하는 권한만큼 배열에 저장시켜서 보내는 메소드
-	public EmployeesEntity addRole(String role) {
+	//toEmployeeDTO
+	
+	public EmployeeListDTO toEmployeeDTO() {
 		
-		Role target=Role.valueOf(role);
 		
-		for(int i=0; i<=target.ordinal(); i++) {
-			addRole(Role.values()[i]);
-		}
+		
+		return EmployeeListDTO.builder().id(id).name(name).email(email).pass(pass).phone(phone).address(address).hireDate(hireDate).department(department).employeeStatus(employeeStatus).roles(roles).build();
+	}
+    
+	
+	//마이페이지 수정 업데이트
+	public EmployeesEntity update(ProfileUpdateDTO dto) {
+		
+		this.email=dto.getEmail();
+		this.phone=dto.getPhone();
+		this.address=dto.getAddress();
+		
 		return this;
+		
 	}
 
-	public void setResetToken(String token) {
-		// TODO Auto-generated method stub
+	// 새비밀번호 업데이트
+	public EmployeesEntity update(String newpass, PasswordEncoder pe) {
+		
+		this.pass=pe.encode(newpass);
+		
+		return this;
+		
 		
 	}
+
+
+
 
 }

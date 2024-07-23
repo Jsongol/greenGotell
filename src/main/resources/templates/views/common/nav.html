@@ -37,8 +37,13 @@
 				<li><a href="#"><i class="fa-solid fa-user-tie"></i><span>관리자</span></a></li>
 			</ul>
 			
-			<ul class="logout">
-				<li><a href="#"><i class="fa-solid fa-right-from-bracket"></i></a></li>
+		    <ul class="logout">
+				<li>
+					<form action="/logout" method="post">
+						<input type="hidden" th:name="${_csrf.parameterName}"th:value="${_csrf.token}" />
+						<button type="submit"><i class="fa-solid fa-right-from-bracket"></i></button>
+					</form>
+				</li>
 			</ul>
 
 		</div>

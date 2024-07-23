@@ -6,6 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
 import com.green.greenGotell.domain.entity.EmployeesEntity;
+import com.green.greenGotell.domain.enums.Department;
 
 import lombok.Getter;
 
@@ -14,8 +15,11 @@ public class CustomUserDetails extends User{
 	
 	private static final long serialVersionUID = 1L; // 2L 버전정보를 교체
 	//principal에서 확인하기 위해 추가로 등록할 수 있다.
+	private Long id;
 	private String email;	//=username
 	private String name;	//한글이름
+	private Department department;
+	
 	
 	public CustomUserDetails(EmployeesEntity entity) {
 		super(entity.getEmail(),entity.getPass(),
@@ -25,6 +29,8 @@ public class CustomUserDetails extends User{
 		
 		email=entity.getEmail();
 		name=entity.getName();
+		department=entity.getDepartment();
+		id=entity.getId();
 	}
 	
 }

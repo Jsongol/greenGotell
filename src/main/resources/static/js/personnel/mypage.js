@@ -10,6 +10,16 @@ document.addEventListener('DOMContentLoaded', function () {
     const passCancelBtn = document.querySelector('.pass-cancel-btn');
     const passForm = document.querySelector('#edit-pass-form');
     
+    /*토큰*/
+ 	 const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+     const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+   	
+   	  console.log('CSRF Header:', csrfHeader); // CSRF 헤더 이름 확인
+            console.log('CSRF Token:', csrfToken);  // CSRF 토큰 값 확인
+    
+    
+
+    
     /*프로필 수정버튼 이벤트*/
     cancelbtn.addEventListener('click', function () {
         createEmployeeDiv.classList.remove('create');
@@ -38,6 +48,9 @@ document.addEventListener('DOMContentLoaded', function () {
     editPassBtn.addEventListener('click', function () {
         editPassDiv.classList.add('create');
     });
+    
+    
+
    
     
     
@@ -48,6 +61,11 @@ document.addEventListener('DOMContentLoaded', function () {
     
     let email = document.querySelector('#email');
     let emailFailureMessage = document.querySelector('.email-failure');
+    
+    const currentPass = document.querySelector('#current-password');
+    const currentPassFailureMessage = document.querySelector('.current-pass-failure');
+    let debounceTimer;
+    const debounceDelay = 20; 
     
     let newPass = document.querySelector('#new-password');
     let newPassFailureMessage = document.querySelector('.new-pass-failure');
@@ -67,6 +85,10 @@ document.addEventListener('DOMContentLoaded', function () {
     function emailVerification(value) {
         return /^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value);
     }
+    
+    
+
+    
     
      /*새비밀번호 검사*/
     function newPassVerification(value) {
@@ -107,14 +129,12 @@ document.addEventListener('DOMContentLoaded', function () {
     
     /*비밀번호 제출시 유효성 검사처리 */
     
-    function newpassIsFormValid() {
-        return (
-            newPassVerification(newPass.value)&&
-            confirmNewPassVerification(newPass.value,confirmPass.Value)
-              
-        );
-    }
-    
+	function newpassIsFormValid() {
+	    return (
+	        newPassVerification(newPass.value) &&
+	        confirmNewPassVerification(newPass.value, confirmPass.value)
+	    );
+	}
     /*실시간 피드백 함수*/
     
     
@@ -129,6 +149,39 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     };
     
+	/*현재 비밀번호 검사*/
+
+
+	currentPass.onkeyup = function() {
+		console.log('Keyup event triggered');
+		clearTimeout(debounceTimer);
+
+		debounceTimer = setTimeout(function() {
+			console.log('Making AJAX request');
+			if (currentPass.value.length > 0) {
+				$.ajax({
+					beforeSend: function(xhr) { xhr.setRequestHeader(csrfHeader, csrfToken); },
+					url: '/personnel/check-password',
+					type: 'POST',
+					data: { pass: currentPass.value },
+					success: function(response) {
+						console.log('AJAX request successful:', response);
+						if (response.valid) {
+							currentPassFailureMessage.classList.add('hide');
+						} else {
+							currentPassFailureMessage.classList.remove('hide');
+						}
+					},
+					error: function(xhr, status, error) {
+						console.error('Error:', error);
+					}
+				});
+			} else {
+				currentPassFailureMessage.classList.add('hide');
+			}
+		}, debounceDelay);
+	};
+
     /*새비밀번호*/
     newPass.onkeyup = function() {
         if (newPass.value.length === 0 || newPassVerification(newPass.value)) {
