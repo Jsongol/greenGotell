@@ -23,6 +23,11 @@ public class SecurityConfig {
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 	        http
+	        
+	        .headers(headers -> headers
+	                .frameOptions(frameOptions -> frameOptions.sameOrigin())
+	            )
+	        
 	        	//.csrf(csrf->csrf.disable())
 	            //.csrf(Customizer.withDefaults())//명시하지않아도 기본으로 csrf 보안 적용-get요청 제외한
 	            //토큰발행은 security가 해줍니다.
