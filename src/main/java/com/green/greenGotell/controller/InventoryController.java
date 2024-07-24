@@ -20,6 +20,7 @@ import com.green.greenGotell.service.CategoryService;
 import com.green.greenGotell.service.InventoryService;
 import com.green.greenGotell.service.ItemService;
 
+import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -32,7 +33,8 @@ public class InventoryController {
 	
 	@GetMapping
     public String listCategories(Model model) {
-        model.addAttribute("categories", categoryService.getAll());
+		itemservice.list(model);
+		model.addAttribute("categories", categoryService.getAll());
         return "views/inventory/item-list";
     }
 	// 중분류
@@ -57,16 +59,14 @@ public class InventoryController {
     }
     
     @PostMapping("/create")
-    public String createCategory(@RequestParam(name="name") String name
-    		, @RequestParam(required = false) Long parentId,ItemDTO dto) {
-        categoryService.save(name, parentId);
+    public String createCategory(ItemDTO dto) {
         itemservice.createItem(dto);
         return "redirect:/inventory";
     }
     
 
     @GetMapping("/delete/{id}")
-    public String deleteCategory(@PathVariable Long id) {
+    public String deleteCategory(@PathVariable("id") Long id) {
         categoryService.delete(id);
         return "redirect:/inventory";
     }

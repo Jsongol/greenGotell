@@ -19,4 +19,5 @@ public interface CategoryService {
 	void createProduct(ItemDTO dto);
 
 	void list(Model model, Long id);
+
 }

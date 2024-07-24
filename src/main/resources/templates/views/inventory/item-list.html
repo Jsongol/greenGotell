@@ -3,7 +3,8 @@
 
 <head>
 	<link rel="stylesheet" href="/css/inventory/inventory_list.css">
-	<script src="/js/inventory/item.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="/js/inventory/category.js"></script>
 </head>
 
 <body>
@@ -21,26 +22,28 @@
 			<!--메인 컨텐츠 중 게시판 서치 양식 입니다. 반드시 div 아이디에 cmsearch-form포함 -->
 			<div id="cmsearch-form">
 				<form action="#" method="get">
-					<select id="main-category" onchange="updateSubCategory()">
-						<option value=""> 대분류</option>
-						<option value="의류">의류</option>
-						<option value="식품">식품</option>
-						<option value="주방용품">주방용품</option>
-						<option value="생활용품">생활용품</option>
-						<option value="인테리어">인테리어</option>
-						<option value="가전 디지털">가전 디지털</option>
-						<option value="문구/오피스">문구/오피스</option>
-						<option value="스포츠">스포츠</option>
-						<option value="기타">기타</option>
-					</select>
+					<div>
+						<label for="parentCategory">대분류:</label>
+						<select id="parentCategory">
+							<option value="">선택하세요</option>
+							<option th:each="category : ${categories}" th:value="${category.id}"
+								th:text="${category.name}"></option>
+						</select>
+					</div>
 
-					<select id="sub-category" onchange="updateSubSubCategory()">
-						<option value=""> 중분류</option>
-					</select>
+					<div>
+						<label for="middleCategory">중분류:</label>
+						<select id="middleCategory">
+							<option value="">선택하세요</option>
+						</select>
+					</div>
 
-					<select id="sub-sub-category">
-						<option value=""> 소분류</option>
-					</select>
+					<div>
+						<label for="subCategory">소분류:</label>
+						<select id="subCategory" name="categoryId">
+							<option value="">선택하세요</option>
+						</select>
+					</div>
 					<input type="text" placeholder="검색어를 입력해주세요.">
 					<button type="submit">검색</button>
 				</form>
@@ -53,21 +56,17 @@
 						<th>공급자</th>
 						<th>가격</th>
 						<th>수량단위</th>
-						<th>대분류</th>
-						<th>중분류</th>
 						<th>소분류</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="inventory : ${inventories}">
-						<td th:text="${inventory.productCode}">코드</td>
+					<tr th:each="inventory : ${item}">
+						<td th:text="${inventory.itemCode}">코드</td>
 						<td th:text="${inventory.name}">이름</td>
 						<td th:text="${inventory.itemSource}">공급자</td>
 						<td th:text="${inventory.itemMoney}">가격</td>
 						<td th:text="${inventory.standard}">수량단위</td>
-						<td th:text="${inventory.productCategory}">대분류</td>
-						<td th:text="${inventory.productMiddleCategory}">소분류</td>
-						<td th:text="${inventory.productSmallCategory}">중분류</td>
+						<td th:text="${inventory.categoryId}">소분류</td>
 					</tr>
 				</tbody>
 			</table>
