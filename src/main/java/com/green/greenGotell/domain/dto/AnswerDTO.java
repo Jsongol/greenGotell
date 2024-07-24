@@ -1,9 +1,17 @@
 package com.green.greenGotell.domain.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class AnswerDTO {
 
-	private long no;
-	private String content;
-	private String key;
-	private String name;
+	private long answerNo;
+	private String answerText;
+	private String question;
 }

@@ -37,7 +37,7 @@ function showMessage(tag) {
 
 //웹소켓 연결 후 인사말 출력
 function connect() {
-	client = Stomp.over(new SockJS('/ws-green-bot'));
+	client = Stomp.over(new SockJS('/ws'));
 	client.connect({}, (frame) => {
 		key = new Date().getTime();
 		//console.log(frame)
