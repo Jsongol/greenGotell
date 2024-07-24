@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class QuestionDTO {
 
-	private long questionNo;
+	private int questionNo;
 	private String category;
 	private String questionText;
 }
