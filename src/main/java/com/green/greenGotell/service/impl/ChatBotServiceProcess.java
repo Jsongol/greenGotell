@@ -3,10 +3,6 @@ package com.green.greenGotell.service.impl;
 import org.springframework.stereotype.Service;
 
 import com.green.greenGotell.domain.dto.QuestionDTO;
-import com.green.greenGotell.domain.entity.AnswerEntity;
-import com.green.greenGotell.domain.entity.QuestionEntity;
-import com.green.greenGotell.domain.repository.AnswerRepository;
-import com.green.greenGotell.domain.repository.QuestionRepository;
 import com.green.greenGotell.service.ChatBotService;
 
 import lombok.RequiredArgsConstructor;

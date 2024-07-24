@@ -41,7 +41,4 @@ public class QuestionEntity {
     private QuestionEntity parent;
     
 
-    @OneToMany(mappedBy = "question")
-    @Column(columnDefinition = "varchar(255)")
-    private List<AnswerEntity> answers;
 }
