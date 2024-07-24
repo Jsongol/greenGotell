@@ -1,6 +1,6 @@
 
 @charset "UTF-8";
-.index{display: grid; grid-template-columns: 0.5fr 1fr 1.5fr; grid-template-rows:40% 58%;
+.index{display: grid; grid-template-columns: 0.6fr 0.9fr 1.5fr; grid-template-rows:40% 58%;
 grid-template-areas:
 'ia ib ib'
 'ic id ie';
@@ -43,3 +43,7 @@ gap:15px;
 
 
 .dashboard{background-color: var(--subnav-background); border-radius: 10px;}
+
+.todayAttendance>ul{}
+
+.todayAttendance>ul>li:nth-child(1){}

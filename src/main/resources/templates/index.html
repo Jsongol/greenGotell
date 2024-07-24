@@ -9,15 +9,44 @@
 	<main>
 		<div class="index cmcontents">
 
-			<!--출퇴근 대시보드-->
-			<div class="dashboard"></div>
+			<!--프로필 대시보드-->
+			<div class="dashboard">
+				<ul>
+					<li></li>
+					<li><span th:text="${#authentication.principal.department.getKoName()}"></span><span sec:authentication="principal.name"></span></li>
+				</ul>
+			
+			</div>
 
 
 			<!--이벤트-->
 			<div class="dashboard"></div>
 
-			<!--기능1-->
-			<div class="dashboard"></div>
+			<!--출퇴근 대시보드-->
+			<div class="dashboard todayAttendance" >
+				<ul class="today-commute-schedule">
+					<li>오늘의 출퇴근 스케쥴</li>
+				    <li><span>출근:</span><span>09:00</span></li>
+				    <li><span>퇴근:</span><span>18:00</span></li>
+				</ul>
+				
+				
+				<ul class="today-commute-status">
+					<li>오늘의 출되근 현황</li>
+				    <li><span>나의 출근:</span><span>09:00</span></li>
+				    <li><span>나의 퇴근:</span><span>18:00</span></li>
+				    <li><span>현재 근무시간:</span><span>02:00</span></li>
+				    <li><span>초과 근무시간:</span><span>00:00</span></li>
+				    <li><span>출근 상태:</span><span>지각</span></li>
+				</ul>
+				
+				
+				<div class="commute-button">
+					<button class="clock-in-button">출근</button>
+					<button class="clock-out-button">퇴근</button>
+				</div>
+			
+			</div>
 
 
 			<!--기능2-->

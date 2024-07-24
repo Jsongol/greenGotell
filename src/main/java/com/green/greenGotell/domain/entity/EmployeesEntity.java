@@ -7,6 +7,7 @@ import java.util.Set;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.green.greenGotell.domain.dto.CreateEmployeeDTO;
 import com.green.greenGotell.domain.dto.EmployeeListDTO;
 import com.green.greenGotell.domain.dto.ProfileUpdateDTO;
 import com.green.greenGotell.domain.enums.Department;
@@ -125,6 +126,29 @@ public class EmployeesEntity extends BaseEntity {
 		return this;
 		
 		
+	}
+	
+   //직원 수정 업데이트 
+	public EmployeesEntity update(CreateEmployeeDTO employeeUpdateDTO) {
+		
+		this.name=employeeUpdateDTO.getName();
+		this.hireDate=employeeUpdateDTO.getHireDate();
+		this.department=employeeUpdateDTO.getDepartment();
+		this.employeeStatus=employeeUpdateDTO.getEmployeeStatus();
+		
+		this.roles.clear();
+		
+		 String roleString = employeeUpdateDTO.getRole();
+		
+		switch (roleString) {
+		case "CEO": this.addRole(Role.CEO);
+		case "DIR":	this.addRole(Role.DIR);
+		case "EMP":	this.addRole(Role.EMP);
+		}
+		
+		
+		
+		return this;
 	}
 
 
