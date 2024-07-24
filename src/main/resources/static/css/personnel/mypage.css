@@ -10,7 +10,7 @@
 
 /*프로필 설정*/
 .Profile{width: 30%; height: 100%; padding-bottom: 10px}
-.Profile img{display:block; width: auto; height: auto; max-width: 50%;
+.Profile img{display:block; width: 250px; height: 250px; max-width: 50%;
     max-height: 30%; margin: 0 auto;border-radius: 50%; margin-bottom: 10px}
 .subfont{margin-bottom: 20px}
 .Profile > div{margin: 0 auto;width: 70%}

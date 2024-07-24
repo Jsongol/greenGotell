@@ -1,8 +1,20 @@
+
 document.addEventListener('DOMContentLoaded', function () {
+	/*직원추가 변수*/
     const cancelbtn = document.querySelector('.cancelbtn');
     const createEmployeeDiv = document.querySelector('#create-employee');
     const createbtn = document.querySelector('.createbtn');
     const employeeForm = createEmployeeDiv.querySelector('form');
+    
+    
+    /*직원수정 변수*/
+    
+    const updatecancelbtn = document.querySelector('.update-cancelbtn');
+    const updateEmployeeDiv = document.querySelector('#update-employee');
+    const updatebtn = document.querySelectorAll('.updatebtn');
+    const updateForm = updateEmployeeDiv.querySelector('form');
+    
+    /*직원수정 변수*/
     
     /*직원추가 버튼 이벤트*/
     cancelbtn.addEventListener('click', function () {
@@ -17,7 +29,47 @@ document.addEventListener('DOMContentLoaded', function () {
     createbtn.addEventListener('click', function () {
         createEmployeeDiv.classList.add('create');
     });
-    arguments
+    
+    /*직원 수정 버튼 이벤트*/
+    
+	updatecancelbtn.addEventListener('click', function() {
+		updateEmployeeDiv.classList.remove('create');
+		updateEmployeeDiv.classList.add('cancel');
+		updateForm.reset();
+		document.querySelectorAll('.error').forEach(function(message) {
+			message.classList.add('hide');
+		});
+	});
+	
+	updatebtn.forEach(function(btn){
+		btn.addEventListener('click',function(){
+			const employeeId = this.getAttribute('data-employee-id');
+			updateEmployeeDiv.classList.add('create')
+			fetchEmployeeData(employeeId);
+		})
+	});
+	
+	/*수정 버튼 눌렀을때 기존 직원데이터 가져오기*/
+	function fetchEmployeeData(employeeId) {
+    fetch(`/personnel/employee/${employeeId}`)
+        .then(response => response.json())
+        .then(data => {
+            // 폼 필드에 데이터 채우기
+            document.querySelector('#update-employee #name').value = data.name;
+            document.querySelector('#update-employee #department').value = data.department;
+            document.querySelector('#update-employee #position').value = data.highestRole;;
+            document.querySelector('#update-employee #hireDate').value = data.hireDate;
+            document.querySelector('#update-employee #status').value = data.employeeStatus;
+            
+            // 폼의 action URL 업데이트
+            document.querySelector('#update-employee form').action = `/personnel/update/${employeeId}`;
+         
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+	
+
     
     /*신규직원추가 유효성검사*/
     
@@ -54,19 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return value.length >= 6 && /[a-zA-Z\d!@$%*]/.test(value);
     }
     
-     /*제출시 모든 유효성 검사처리*/
-    function isFormValid() {
-        return (
-            nameVerification(name.value) &&
-            emailVerification(email.value) &&
-            passVerification(pass.value) &&
-            department.value &&
-            position.value &&
-            hireDate.value &&
-            status.value
-        );
-    }
-    
+
     /*실시간 피드백 함수*/
     
     /*이름*/
@@ -96,12 +136,22 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     };
     
+         /*제출시 모든 유효성 검사처리*/
+    function isCreatFormValid() {
+        return (
+            nameVerification(name.value) &&
+            emailVerification(email.value) &&
+            passVerification(pass.value) 
+            
+        );
+    }
+    
+    
     // 제출 이벤트
     employeeForm.onsubmit = function(event) {
-        if (!isFormValid()) {
+        if (!isCreatFormValid()) {
             event.preventDefault();
             alert('모든 입력란을 올바르게 작성해주세요.');
         }
     };
 });
-

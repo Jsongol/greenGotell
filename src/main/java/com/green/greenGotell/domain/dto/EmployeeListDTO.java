@@ -42,11 +42,16 @@ public class EmployeeListDTO {
 	//프로필사진
 	 private byte[] fileContent;
 	 private String profileImage;
-	
+	 
+	 @Setter
+	 private Role highestRole;
 	
    //주소
 	private String roadAddress;
 	private String detailAddress;
+	
+	
+	
 	
 	
 	// 표시될 부서 
@@ -57,6 +62,8 @@ public class EmployeeListDTO {
                     .findFirst() // 가장 높은 우선순위의 역할을 반환
                     .orElse(null); // 역할이 없으면 null 반환
     }
+    
+   
     
     
     

@@ -16,33 +16,22 @@ import lombok.Setter;
 import lombok.ToString;
 
 
-@Getter
+
 @Setter
-public class CreateEmployeeDTO {
+@Getter
+public class EmployeeSearchDTO {
 	
 	private String name;
-	private String email;
-	private String pass;
 	private Department department ;
-	private String role;
-	private LocalDate hireDate;
 	private EmployeeStatus employeeStatus ;
 	
 	
-	public EmployeesEntity toEntity(PasswordEncoder pe) {
-		// TODO Auto-generated method stub
+	 public boolean isEmpty() {
+	        return department == null && employeeStatus == null && (name == null || name.trim().isEmpty());
+	    }
 	
-		
-		EmployeesEntity entity = EmployeesEntity.builder().name(name).email(email).pass(pe.encode(pass)).department(department).hireDate(hireDate).employeeStatus(employeeStatus).build();
-		
-		switch (role) {
-		case "CEO": entity.addRole(Role.CEO);
-		case "DIR":	entity.addRole(Role.DIR);
-		case "EMP":	entity.addRole(Role.EMP);
-		}
-		
-		return entity;
-	}
+	
+
 	
 
 }
