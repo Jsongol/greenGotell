@@ -49,7 +49,7 @@ body {
 
 #calendar-header h2 {
     margin: 0;
-    font-size: 1.2em;
+    font-size: 1.5em;
 }
 
 #calendar-header button {
@@ -60,11 +60,24 @@ body {
     cursor: pointer;
 }
 
+/* 달력 요일 스타일 */
+#calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background-color: #f7f7f7;
+}
+
+#calendar-weekdays div {
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+}
+
 /* 달력 본문 스타일 */
 #calendar-body {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-auto-rows: minmax(60px, auto);
+    grid-auto-rows: minmax(100px, auto);
     background-color: #f7f7f7;
 }
 
@@ -73,17 +86,39 @@ body {
     text-align: center;
     padding: 10px;
     border: 1px solid #ddd;
+    position: relative;
 }
 
 #calendar-body .day {
     cursor: pointer;
     background-color: #ffffff;
     border-radius: 4px;
+    height: 100%;
 }
 
 #calendar-body .day:hover {
     background-color: #e0e0e0;
 }
+
+/* 일정 스타일 */
+.event {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    background-color: #e0e0e0;
+    color: #333;
+    padding: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8em;
+}
+
+.event.red { background-color: #f44336; }
+.event.blue { background-color: #2196F3; }
+.event.green { background-color: #4CAF50; }
+.event.yellow { background-color: #FFEB3B; }
+.event.purple { background-color: #9C27B0; }
 
 /* 일정 추가 폼 스타일 */
 .schedule-form {
