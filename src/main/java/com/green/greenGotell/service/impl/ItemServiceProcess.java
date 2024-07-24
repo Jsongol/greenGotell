@@ -1,6 +1,9 @@
 package com.green.greenGotell.service.impl;
 
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.green.greenGotell.domain.dto.ItemDTO;
 import com.green.greenGotell.domain.entity.CategoryEntity;
@@ -19,8 +22,20 @@ public class ItemServiceProcess implements ItemService{
 	
 	@Override
 	public void createItem(ItemDTO dto) {
-		// TODO Auto-generated method stub
+		
+        // 저장된 ItemEntity를 ItemDTO로 변환하여 반환
+        itemrepository.save(dto.toEntity());
 		
 	}
+
+	@Override
+	public void list(Model model) {
+		
+		Sort sort = Sort.by(Direction.DESC,"id");
+		
+		//model.addAllAttributes("inventorys", )
+		
+	}
+	
 	
 }

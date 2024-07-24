@@ -1,47 +1,41 @@
 package com.green.greenGotell.domain.dto;
 
-import java.math.BigDecimal;
-
 import com.green.greenGotell.domain.entity.CategoryEntity;
 import com.green.greenGotell.domain.entity.ItemEntity;
-import com.green.greenGotell.domain.enums.ProductCategory;
-import com.green.greenGotell.domain.enums.ProductMiddleCategory;
-import com.green.greenGotell.domain.enums.ProductSmallCategory;
 import com.green.greenGotell.domain.enums.Standard;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
-@ToString
-@Builder
+@Getter
 @Setter
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class ItemDTO {
-	 private Long id;
-	//상품코드
-	private String itemCode;	
-	//상품명
+	private Long id;
+	// 상품코드
+	private String itemCode;
+	// 상품명
 	private String name;
-	//규격
+	// 규격
 	private Standard standard;
-	//공급자
+	// 공급자
 	private String itemSource;
-	//가격
-	private BigDecimal  itemMoney;
-    private Long parentCategory;
-    private String middleCategory;
-    private String subCategory;
-	
-	
+	// 가격
+	private Long itemMoney;
+	private Long categoryId;
+
+
 	public ItemEntity toEntity() {
-		return ItemEntity.builder()
-				.itemCode(itemCode)
-				.name(name)
-				.itemSource(itemSource)
-				.standard(standard)
-				.itemMoney(itemMoney)
+		return ItemEntity.builder().itemCode(itemCode).name(name).itemSource(itemSource).itemMoney(itemMoney)
+				.standard(standard).category(CategoryEntity.builder().id(categoryId).build())
 				.build();
 	}
-	
 
 }

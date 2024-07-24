@@ -71,11 +71,6 @@ public class CategoryServiceProcess implements CategoryService {
 
 	}
 
-	@Override
-	public void createProduct(ItemDTO dto) {
-		repository.save(dto.toEntity());
-
-	}
 
 	@Override
 	public void list(Model model, Long id) {
@@ -96,5 +91,11 @@ public class CategoryServiceProcess implements CategoryService {
 
 			categoryLevelCache.computeIfAbsent(dto.getLevel(), k -> new ArrayList<>()).add(dto);
 		}
+	}
+
+	@Override
+	public void createProduct(ItemDTO dto) {
+		// TODO Auto-generated method stub
+		
 	}
 }

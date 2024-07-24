@@ -7,9 +7,6 @@ import java.util.stream.Collectors;
 import org.hibernate.annotations.DynamicUpdate;
 
 import com.green.greenGotell.domain.dto.CategoryDTO;
-import com.green.greenGotell.domain.enums.ProductCategory;
-import com.green.greenGotell.domain.enums.ProductMiddleCategory;
-import com.green.greenGotell.domain.enums.ProductSmallCategory;
 import com.green.greenGotell.domain.enums.Standard;
 
 
@@ -57,6 +54,9 @@ public class CategoryEntity {
 
     @Column(nullable = false)
     private int level;
+    
+    private String middleCategory;
+    private String subCategory;
 
     public CategoryDTO toCategoryDTO() {
     	return CategoryDTO.builder()

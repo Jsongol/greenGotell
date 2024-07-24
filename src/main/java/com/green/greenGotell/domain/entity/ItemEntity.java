@@ -6,9 +6,6 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import com.green.greenGotell.domain.dto.CategoryDTO;
 import com.green.greenGotell.domain.dto.ItemDTO;
-import com.green.greenGotell.domain.enums.ProductCategory;
-import com.green.greenGotell.domain.enums.ProductMiddleCategory;
-import com.green.greenGotell.domain.enums.ProductSmallCategory;
 import com.green.greenGotell.domain.enums.Standard;
 
 import jakarta.persistence.Column;
@@ -52,11 +49,12 @@ public class ItemEntity { //품목리스트 추가 테이블
 	private String itemSource;
 	//가격
 	@Column(nullable = true, columnDefinition = "bigint")
-	private BigDecimal itemMoney;
+	private Long itemMoney;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id")////물리DB FK는 다테이블에 적용됨
     private CategoryEntity category;
+	
 	
 	//수량단위
 	@Enumerated(EnumType.STRING)
