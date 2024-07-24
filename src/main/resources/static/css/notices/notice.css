@@ -97,7 +97,7 @@ border-radius: 15px; background-color: var(--sub-color7); margin-bottom: 30px; m
 /*게시 양식*/
 #cmposting-format{width: 90%; min-width: 600px; text-align: center; margin: 0 auto;}
 
-#cmposting-format>ul>li{display: flex; justify-content:space-between;padding: 20px 0;border-bottom: 1px solid var(--sub-color6); }
+#cmposting-format>ul>li{display: flex; justify-content:space-between;padding: 16px 0;border-bottom: 1px solid var(--sub-color6); }
 
 #cmposting-format>ul>li:nth-child(1){padding: 15px 0; border-bottom: 2px solid var(--sub-color2);  font-size: 17px;background-color: var(--sub-color7)}
 
@@ -210,3 +210,20 @@ textarea[name="content"] {
   display: block;
   margin-bottom: 15px;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 5%;  /* 왼쪽 여백 추가 */
+}
+
+.pagination span {
+  margin: 0 5px;  /* 좌우 여백 */
+}
+
+.pagination a {
+  padding: 15px 10px;  /* 내부 여백 */
+  text-decoration: none;  /* 밑줄 제거 */
+}
+

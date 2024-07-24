@@ -7,7 +7,7 @@ import com.green.greenGotell.domain.dto.NoticeUpdateDTO;
 
 public interface NoticeService {
 
-	void listProcess(int division, Model model);
+	void listProcess(int division, int page, Model model);
 
 	void saveProcess(NoticeSaveDTO dto);
 

@@ -29,9 +29,8 @@ public class NoticeServiceProcess implements NoticeService{
 	private final NoticeEntityRepository repository;
 
 	@Override
-	public void listProcess(int _division, Model model) {//부서번호(int _division), 정보를 저장할 모델객체(Model model)
+	public void listProcess(int _division, int page, Model model) {//부서번호(int _division), 정보를 저장할 모델객체(Model model)
 		
-		int page=1;
 		int pageSize = 10;
 		
 		Sort sort=Sort.by(Direction.DESC, "fixed","no");
@@ -68,7 +67,8 @@ public class NoticeServiceProcess implements NoticeService{
 	    }
 		
 		//JPA 쿼리메서드 : findAll() 사용자가 만들수 있는 쿼리메서드 문법-키워드
-		Page<NoticeEntity> result=repository.findAllByDivision(division, pageable);
+		Page<NoticeEntity> result;
+		//repository.findAllByDivision(division, pageable);
 		
 		//_division가 0이면 모든 항목 페이지에 출력
 		if (_division==0) {
@@ -80,6 +80,7 @@ public class NoticeServiceProcess implements NoticeService{
 		model.addAttribute("list", result.getContent().stream()
 										.map(NoticeEntity::toNoticeListDTO)//메서드 참조를 사용할 수 있다
 										.collect(Collectors.toList()));	
+		model.addAttribute("page", result);
 		
 	}	
 
@@ -96,7 +97,6 @@ public class NoticeServiceProcess implements NoticeService{
 		NoticeEntity result=repository.findById(no).orElseThrow();
 		model.addAttribute("detail", result.toNoticeDetailDTO());
 		repository.save(result);
-		//JPA를 사용시 SqlSession이유지되는 동안 Entity가 수정되면 -> update쿼리가 처리됨
 		
 	}
 
@@ -116,5 +116,6 @@ public class NoticeServiceProcess implements NoticeService{
 		repository.delete(repository.findById(no).orElseThrow());
 		
 	}
+
 
 }

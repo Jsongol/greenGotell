@@ -7,7 +7,7 @@
 	        var selectElement = document.getElementById("division-select");
 	        var selectedValue = selectElement.value;
 	        if (selectedValue) {
-	            window.location.href = "/notices/" + selectedValue;
+	            window.location.href = "/notices/" + selectedValue + "/1";
 	        }
 	    }
 	</script>
@@ -68,12 +68,19 @@
 							<a th:href="|/notices/detail/${notice.no}|" th:text="${notice.title}">제목</a>
 						</span>
 						<span th:text="${notice.updatedAt.toLocalDate}">등록일</span>
-						<span th:text="${notice.name}">작성자</span>
-						
+						<span th:text="${notice.name}">작성자</span>						
 					</li>
-					
 				</ul>
 			</div>
+			
+			<div class="pagination">
+			    <span th:each="i : ${#numbers.sequence(1, page.totalPages)}">
+			        <a th:href="@{/notices/{division}/{page}(division=${division}, page=${i})}" 
+						th:text="${i}" 
+						th:class="${page.number == i} ? 'active' : ''"></a>
+			    </span>
+			</div>
+			
 		</div>
 	</main>
 
