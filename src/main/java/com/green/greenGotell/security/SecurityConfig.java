@@ -28,8 +28,7 @@ public class SecurityConfig {
 	            //토큰발행은 security가 해줍니다.
 	        	//logout 할때 get이 아닌 post로 보내줘야한다.(로그아웃 할때도 토큰을 발행받아야 한다.)
 	            //uri에 대한 보안
-	        	/*
-	            .authorizeHttpRequests(authorize -> authorize
+	            /*.authorizeHttpRequests(authorize -> authorize
 	            		.requestMatchers("/css/**","/js/**","/images/**").permitAll()//인증없이 접속가능
 	            		.requestMatchers("/","/signup","/boards","/login").permitAll()//인증없이 접속가능
 	            		.requestMatchers("/emp/*","/boards/new").hasRole("EMP")	
