@@ -24,11 +24,12 @@ public class EventController {
         return ResponseEntity.ok(savedEvent);
     }
 
-    @GetMapping
-    public ResponseEntity<List<Event>> getEvents(@RequestParam int year, @RequestParam int month) {
-        LocalDate startDate = LocalDate.of(year, month, 1);
-        LocalDate endDate = startDate.withDayOfMonth(startDate.lengthOfMonth());
-        List<Event> events = eventService.findEventsByYearAndMonth(startDate, endDate);
-        return ResponseEntity.ok(events);
-    }
+//    @GetMapping
+//    public ResponseEntity<List<Event>> getEvents(@RequestParam int year, @RequestParam int month) {
+//        LocalDate startDate = LocalDate.of(year, month, 1);
+//        LocalDate endDate = startDate.withDayOfMonth(startDate.lengthOfMonth());
+////        List<Event> events = eventService.findEventsByYearAndMonth(startDate, endDate);
+////        return ResponseEntity.ok(events);
+//        return"events";
+//    }
 }

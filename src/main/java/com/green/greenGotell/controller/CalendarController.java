@@ -10,6 +10,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.green.greenGotell.service.CalendarService;
 
+import java.time.LocalDate;
+
 @Controller
 @RequestMapping("/calendar")
 public class CalendarController {
@@ -24,7 +26,7 @@ public class CalendarController {
 
     @PostMapping("/addEvent")
     public String addEvent(@RequestParam String date, @RequestParam String description, RedirectAttributes redirectAttributes) {
-        calendarService.addEvent(date, description);
+        calendarService.addEvent(LocalDate.parse(date), description);
         redirectAttributes.addFlashAttribute("message", "할일이 추가되었습니다.");
         return "redirect:/calendar";
     }
