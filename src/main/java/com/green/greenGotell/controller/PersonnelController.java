@@ -65,13 +65,13 @@ public class PersonnelController {
 	    return employee;
 	}
 	
-	
-	  @PutMapping("/personnel/update/{id}")
-	    public String updateEmployee(@PathVariable(name = "id")  Long id,CreateEmployeeDTO employeeUpdateDTO) {
-	        personnelService.updateEmployee(id, employeeUpdateDTO);
-	        return "redirect:/personnel"; // 수정 후 직원 목록 페이지로 리다이렉트
-	    }
-	
+	//직원 수정
+	 @PutMapping("/personnel/update/{id}")
+	   public String updateEmployee(@PathVariable(name = "id")  Long id,CreateEmployeeDTO employeeUpdateDTO) {
+	       personnelService.updateEmployee(id, employeeUpdateDTO);
+	       return "redirect:/personnel"; // 수정 후 직원 목록 페이지로 리다이렉트
+     }
+
 	
 	
 

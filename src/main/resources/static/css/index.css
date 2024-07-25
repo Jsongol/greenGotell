@@ -43,7 +43,7 @@ gap:15px;
 
 
 .dashboard{background-color: var(--subnav-background); border-radius: 10px;}
-
+/*근태*/
 .todayAttendance{padding: 20px}
 
 .todayAttendance>ul{margin-bottom: 40px}
@@ -56,24 +56,29 @@ gap:15px;
 .todayAttendance>.commute-button>li:nth-child(2){margin-bottom:0px }
 .todayAttendance>.commute-button>li>button{width: 100%;border-radius: 5px;}
 
-
+/*본인 프로필*/
 .subfont{margin-bottom: 10px; font-weight: 600}
-
-
 .profilePhoto{width: 80%; height: 290px; margin: 0 auto; padding-top: 30px}
-
 .profilePhoto img{width: 100%; height:100%; border-radius:50% }
+.profile > ul > li:nth-child(2),.profile > ul > li:nth-child(3){width: 60%;margin: 0 auto; padding-top: 10px; text-align: center; }
+.profile > ul > li:nth-child(3){font-size: 25px;}
+
 
 
 /*공지사항*/
 
 /*급여내역 현황 */
-.lately-notice{padding: 0px 10px}
-.lately-notice p{text-align: left; padding: 10px 0; font-size: 20px}
-.lately-notice ul> li >span{text-align:center;}
-.lately-notice ul> li >span:nth-child(1){width: 20%}
-.lately-notice ul> li >span:nth-child(2){width: 20%}
-.lately-notice ul> li >span:nth-child(3){width: 20%}
-.lately-notice ul> li >span:nth-child(4){width: 20%}
-.lately-notice ul> li >span:nth-child(5){width: 20%}
+.lately-notice,.lately-item{padding: 10px 20px 0px;  min-width: 0;}
+.lately-notice p,.lately-item p{text-align: left; padding: 10px 0; font-size: 20px}
+.lately-notice ul> li >span:nth-child(1){width: 5%}
+.lately-notice ul> li >span:nth-child(2){width: 10%}
+.lately-notice ul> li >span:nth-child(3){width: 40%}
+.lately-notice ul> li >span:nth-child(4){width: 10%}
+.lately-notice ul> li >span:nth-child(5){width: 10%}
+
+.lately-item ul{width: 100%}
+.lately-item ul> li >span:nth-child(1){width: 10%}
+.lately-item ul> li >span:nth-child(2){width: 40%}
+.lately-item ul> li >span:nth-child(3){width: 30%}
+.lately-item ul> li >span:nth-child(4){width: 15%}
 
