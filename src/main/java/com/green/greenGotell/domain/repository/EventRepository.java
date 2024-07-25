@@ -2,14 +2,9 @@ package com.green.greenGotell.domain.repository;
 
 import com.green.greenGotell.domain.entity.Event;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
-import java.util.List;
-
+@Repository
 public interface EventRepository extends JpaRepository<Event, Long> {
-
-    List<Event> findByDateBetween(LocalDate startDate, LocalDate endDate);
-
-    // 정렬된 결과를 반환하는 메서드
-    List<Event> findByDateBetweenOrderByDateAsc(LocalDate startDate, LocalDate endDate);
+    // 기본적인 CRUD 메서드는 JpaRepository에서 제공하므로 추가적인 메서드가 필요하면 여기에 작성
 }

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{views/common/layout :: layout(~{::head} ,~{::main} ) }">
 
 <head>
-	<link rel="stylesheet" href="/css/inventory/inventory_list.css">
+	<link rel="stylesheet" href="/css/inventory/item_list.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<script src="/js/inventory/category.js"></script>
 </head>
@@ -44,32 +44,31 @@
 							<option value="">선택하세요</option>
 						</select>
 					</div>
-					<input type="text" placeholder="검색어를 입력해주세요.">
+					<input type="text" name="name" placeholder="검색어를 입력해주세요.">
 					<button type="submit">검색</button>
 				</form>
 			</div>
-			<table id="cmposting-format">
-				<thead>
-					<tr>
-						<th>코드</th>
-						<th>이름</th>
-						<th>공급자</th>
-						<th>가격</th>
-						<th>수량단위</th>
-						<th>소분류</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="inventory : ${item}">
-						<td th:text="${inventory.itemCode}">코드</td>
-						<td th:text="${inventory.name}">이름</td>
-						<td th:text="${inventory.itemSource}">공급자</td>
-						<td th:text="${inventory.itemMoney}">가격</td>
-						<td th:text="${inventory.standard}">수량단위</td>
-						<td th:text="${inventory.categoryId}">소분류</td>
-					</tr>
-				</tbody>
-			</table>
+			<div id="cmposting-format" class="personnel-list">
+				<ul>
+					<li>
+						<span>코드</span>
+						<span>이름</span>
+						<span>공급자</span>
+						<span>가격</span>
+						<span>수량단위</span>
+						<span>소분류</span>
+					</li>
+
+					<li th:each="inventory : ${inventorys}">
+						<span th:text="${inventory.itemCode}">코드</span>
+						<span th:text="${inventory.name}">이름</span>
+						<span th:text="${inventory.itemSource}">공급자</span>
+						<span th:text="${inventory.itemMoney}">가격</span>
+						<span th:text="${inventory.standard}">수량단위</span>
+						<span th:text="${inventory.categoryId}">소분류</span>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</main>
 </body>

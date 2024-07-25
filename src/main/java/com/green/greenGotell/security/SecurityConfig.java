@@ -19,62 +19,40 @@ public class SecurityConfig {
 	private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
 	//사용자 인증이 성공했을 때 실행되는 핸들러입니다.
 	//사용자가 로그인에 성공하면 특정 로직을 수행하고, 사용자를 적절한 페이지로 리다이렉트합니다.
-	
+
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-	        http
-	        
-	        .headers(headers -> headers
-	                .frameOptions(frameOptions -> frameOptions.sameOrigin())
-	            )
-	        
-	        	//.csrf(csrf->csrf.disable())
-	            //.csrf(Customizer.withDefaults())//명시하지않아도 기본으로 csrf 보안 적용-get요청 제외한
-	            //토큰발행은 security가 해줍니다.
-	        	//logout 할때 get이 아닌 post로 보내줘야한다.(로그아웃 할때도 토큰을 발행받아야 한다.)
-	            //uri에 대한 보안
-	            /*.authorizeHttpRequests(authorize -> authorize
-	            		.requestMatchers("/css/**","/js/**","/images/**").permitAll()//인증없이 접속가능
-	            		.requestMatchers("/","/signup","/boards","/login").permitAll()//인증없이 접속가능
-	            		.requestMatchers("/emp/*","/boards/new").hasRole("EMP")	
-	            		//.requestMatchers("/hr/*").hasRole("HR")	//Authorities=Role 권한을 확인한다.
-	            		//.requestMatchers("/admin/*").hasRole("ADMIN")//admin은 admin권한 부여
-	            		.requestMatchers("/","/signup").permitAll()
-	            		
-	            		//나머지 url은 로그인만 성공하면 접근가능 
-	            		.anyRequest().authenticated() //위에 설정을 제외한 나머지는 인증이 필요합니다. anyRequest가 항상 마지막에 온다.
-	            )
-	            */
-	        	.authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll())
-	            //.httpBasic(Customizer.withDefaults())
-	            
-	            //Username And Password And 
-	            .formLogin(login->login
-	            		.loginPage("/login")//로그인페이지로 이동하는 url
-	            		//.loginProcessingUrl("/login") //따로 요청을 설정할수 있다. form태그의 action과 일치하도록 post로 설계 해야한다
-	            		.permitAll()//설정하지 않으면 에러가 뜰수 있습니다.
-	            		
-	            		.usernameParameter("email")//defalut=username
-	            		.passwordParameter("pass")//defalut=password
-	            		.successHandler(customAuthenticationSuccessHandler)//로그인 성공 이후 처리할 내용을 정의
-	            		
-	            )
-	            .logout(logout->logout
-	            		.logoutSuccessUrl("/")
-	            		.invalidateHttpSession(true)
-	            )
-	            .userDetailsService(customUserDetailService)
-	            ;
-	        
-	        return http.build();
-	    }
+		http
+				//.csrf(csrf -> csrf.disable()) // CSRF 보호 비활성화 (개발 환경에서만 사용 권장)
+				//.csrf(Customizer.withDefaults()) // 기본적으로 CSRF 보호 활성화 (추천)
+				.authorizeHttpRequests(
+						authorize -> authorize
+						.requestMatchers("/css/**", "/js/**", "/images/**","/webjars/**","/favicon.ico*").permitAll() // 인증 없이
+						.requestMatchers("/login").permitAll() // 인증 없이 접속 가능
+						//.requestMatchers("/").permitAll() // 인증 없이 접속 가능
+						//.requestMatchers("/emp/*").hasRole("EMP") // 특정 권한을 요구하는 URL
+						// .requestMatchers("/hr/*").hasRole("HR") // 특정 권한을 요구하는 URL (주석 해제 시 사용)
+						// .requestMatchers("/admin/*").hasRole("ADMIN") // 특정 권한을 요구하는 URL (주석 해제 시 사용)
+						.anyRequest().authenticated() // 위 설정을 제외한 나머지는 인증 필요 (항상 마지막에 위치)
+				).formLogin(login -> login
+						.loginPage("/login") // 로그인 페이지 URL
+						//.loginProcessingUrl("/login") // 로그인 처리 URL (form action과 일치하도록 설계 필요)
+						.permitAll() // 로그인 페이지 접근 허용
+						.usernameParameter("email") // 사용자 이름 파라미터 이름 설정 (기본값: username)
+						.passwordParameter("pass") // 비밀번호 파라미터 이름 설정 (기본값: password)
+						.successHandler(customAuthenticationSuccessHandler) // 로그인 성공 이후 처리할 내용을 정의
+				).logout(logout -> logout.logoutSuccessUrl("/") // 로그아웃 성공 후 이동할 URL
+						.logoutUrl("/logout") // 로그아웃 URL 명시적으로 설정
+						.logoutSuccessUrl("/") // 로그아웃 성공 후 이동할 URL
+						.invalidateHttpSession(true) // 세션 무효화
+						.permitAll() // 로그아웃 URL 접근 허용
+				).userDetailsService(customUserDetailService); // 사용자 세부 정보를 로드하는 서비스 설정
 
+		return http.build();
+	}
 
-		@Bean
-		PasswordEncoder passwordEncoder() {
-			
-			return new BCryptPasswordEncoder(14);
-			
-		}
-
+	@Bean
+	PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder(14);
+	}
 }

@@ -16,9 +16,9 @@
 
 			<ul>
 				<li><i class="fa fa-bell" aria-hidden="true"></i></li>
-				<li>프로필 이미지</li>
-				<li th:text="${#authentication.principal.department.getKoName()}">부서명</li>
-				<li ><a href="/mypage" sec:authentication="principal.name">닉네임</a></li>
+				<li sec:authorize="isAuthenticated()">프로필 이미지</li>
+				<li sec:authorize="isAuthenticated()" th:text="${#authentication.principal.department.getKoName()}">부서명</li>
+				<li sec:authorize="isAuthenticated()"><a href="/mypage" sec:authentication="principal.name">닉네임</a></li>
 				<li>
 					<div id="darkMode">
 						<i id="sun-icon" class="fas fa-sun"></i>

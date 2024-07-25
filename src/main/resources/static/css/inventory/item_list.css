@@ -17,4 +17,9 @@ button {
 	display: inline-flex;
 }
 
-
+#cmposting-format ul li span{
+	width: 30%;
+}
+#cmsearch-form input{
+	height: 37px;
+}

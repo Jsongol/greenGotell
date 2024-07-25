@@ -30,6 +30,7 @@ public class ItemDTO {
 	// 가격
 	private Long itemMoney;
 	private Long categoryId;
+	private String cateogoryName;
 
 
 	public ItemEntity toEntity() {

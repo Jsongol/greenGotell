@@ -6,13 +6,12 @@
 <script src="/webjars/jquery/jquery.min.js"></script>
 <script src="/webjars/sockjs-client/sockjs.min.js"></script>
 <script src="/webjars/stomp-websocket/stomp.min.js"></script>
-<script src="/js/chatbot/chatbot.js"></script>
+<script src="/js/chatbot/chatbot.js" defer></script>
 <link rel="stylesheet" href="/css/chatbot/chatbot.css">
 </head>
 
 <body>
 	<div class="chatbot">
-
 		<article id="chat-bot">
 			<div class="wrap">
 				<section id="conversation">
@@ -37,7 +36,8 @@
 							</div>
 							
 							<div class="c-question flex col-center">
-								<span class="q-wrap"> <input type="hidden" id="question" placeholder="질문을 입력하세요"/>
+								<span class="q-wrap"> 
+									<input type="text" class="question" id="question" placeholder="질문을 입력하세요"/>
 									<button class="btn-send" onclick="btnMsgSendClicked()"></button>
 								</span>
 							</div>
