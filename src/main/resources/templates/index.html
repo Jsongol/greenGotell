@@ -10,42 +10,69 @@
 		<div class="index cmcontents">
 
 			<!--프로필 대시보드-->
-			<div class="dashboard">
+			<div class="dashboard profile">
 				<ul>
-					<li></li>
-					<li sec:authorize="isAuthenticated()"><span th:text="${#authentication.principal.department.getKoName()}"></span><span sec:authentication="principal.name"></span></li>
+					 <li class="profilePhoto"><img th:if="${#authorization.expression('isAuthenticated()')}"th:src="'data:image/jpeg;base64,' + ${ProfilePhoto.profileImage}"alt="프로필 사진" ></li>   
+					<li><span th:text="${#authentication.principal.department.getKoName()}"></span><span sec:authentication="principal.name"></span></li>
 				</ul>
 			
 			</div>
 
 
-			<!--이벤트-->
-			<div class="dashboard"></div>
+			<!--최근 공지사항-->
+			<div class="dashboard lately-notice-wrap" id="cmposting-format">
+				<div class="lately-notice cmposting-format">
+				
+					<p class="subfont">최근 공지사항</p>
+					<ul>
+						<li> <!--목차입니다.-->
+							<span>번호</span>
+							<span>부서</span>
+							<span>제목</span>
+							<span>등록일</span>
+							<span>글쓴이</span>
+						</li>
+						<li>
+							<span>번호</span>
+							<span>부서</span>
+							<span><a href="#">제목</a></span>
+							<span>등록일</span>
+							<span>작성자</span>						
+						</li>
+					</ul>	
+				</div>
+			</div>
+
 
 			<!--출퇴근 대시보드-->
-			<div class="dashboard todayAttendance" >
-				<ul class="today-commute-schedule">
-					<li>오늘의 출퇴근 스케쥴</li>
-				    <li><span>출근:</span><span>09:00</span></li>
-				    <li><span>퇴근:</span><span>18:00</span></li>
-				</ul>
-				
-				
-				<ul class="today-commute-status">
-					<li>오늘의 출되근 현황</li>
-				    <li><span>나의 출근:</span><span>09:00</span></li>
-				    <li><span>나의 퇴근:</span><span>18:00</span></li>
-				    <li><span>현재 근무시간:</span><span>02:00</span></li>
-				    <li><span>초과 근무시간:</span><span>00:00</span></li>
-				    <li><span>출근 상태:</span><span>지각</span></li>
-				</ul>
-				
-				
-				<div class="commute-button">
-					<button class="clock-in-button">출근</button>
-					<button class="clock-out-button">퇴근</button>
+			<div class="dashboard todayAttendance-wrap">
+
+				<div class="todayAttendance">
+
+					<ul class="today-commute-schedule">
+						<li class="subfont">오늘의 출퇴근 스케줄</li>
+						<li><span>출근 시간 : </span><span>09:00</span></li>
+						<li><span>퇴근 시간 : </span><span>18:00</span></li>
+					</ul>
+
+
+					<ul class="today-commute-status">
+						<li class="subfont">오늘의 출퇴근 현황</li>
+						<li><span>출근시간 : </span><span>09:00</span></li>
+						<li><span>퇴근시간 : </span><span>18:00</span></li>
+						<li><span>근무시간 : </span><span>02:00</span></li>
+						<li><span>초과 근무시간 : </span><span>00:00</span></li>
+						<li><span>상태 : </span><span>지각</span></li>
+					</ul>
+					
+					<ul class="commute-button">
+						<li><button class="clock-in-button cmbutton">출근</button></li>
+						<li><button class="clock-out-button cmbutton">퇴근</button></li>
+					</ul>
+
 				</div>
-			
+
+
 			</div>
 
 
