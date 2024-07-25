@@ -20,25 +20,86 @@
             padding: 20px;
             border: 1px solid #ddd;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            width: 300px;
         }
         .event-form input, .event-form textarea {
             display: block;
             margin-bottom: 10px;
+            width: calc(100% - 22px);
+            padding: 8px;
+            box-sizing: border-box;
         }
         .event-form button {
             margin-top: 10px;
+            width: 100%;
+            padding: 10px;
+        }
+        .event-form .close {
+            display: block;
+            text-align: right;
+            cursor: pointer;
+            color: #aaa;
+            font-size: 20px;
+        }
+        .event-form .close:hover {
+            color: #000;
         }
     </style>
-    <script>
+    <script th:inline="javascript">
+
+        // 서버에서 전달된 JSON 문자열을 JavaScript 변수에 저장
+        var events = /*[(${eventStr})]*/null;
+
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
+            var eventForm = document.getElementById('event-form');
+            var formDateInput = document.getElementById('event-date');
+
+            // 서버에서 전달된 이벤트 데이터
+
+
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
-                height: '100%',  // Adjust this if necessary
-                events: [
-                ]
+                height: '100%',
+                dateClick: function(info) {
+                    // 날짜 클릭 시 폼을 표시하고 날짜를 설정합니다.
+                    formDateInput.value = info.dateStr;
+                    eventForm.style.display = 'block';
+                },
+                events: events.map(event => ({
+                    title: event.title,
+                    start: event.start,
+                    //description: event.description
+                }))
             });
             calendar.render();
+
+            // 폼 제출 핸들러
+            document.getElementById('event-submit').addEventListener('click', function() {
+                var formData = new FormData(document.getElementById('event-form-element'));
+                fetch('/calendar/add', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('input[name="_csrf"]').value
+                    }
+                })
+                    .then(response => response.text())
+                    .then(result => {
+                        alert(result);  // 서버에서 전달된 메시지 표시
+                        eventForm.style.display = 'none'; // 폼 숨기기
+                        calendar.refetchEvents(); // 달력 새로고침
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            });
+
+            // 폼 닫기 핸들러
+            document.getElementById('event-close').addEventListener('click', function() {
+                eventForm.style.display = 'none';
+            });
         });
     </script>
 </head>
@@ -51,6 +112,17 @@
             <a href="#"><i class="fa-solid fa-plus"></i><span>만들기</span></a>
         </div>
         <div id='calendar'></div>
+    </div>
+    <!-- 이벤트 추가 폼 -->
+    <div id="event-form" class="event-form">
+        <span id="event-close" class="close">&times;</span>
+        <form id="event-form-element" th:action="@{/calendar/add}" method="post">
+            <input type="hidden" id="event-date" name="start" />
+            <input type="text" name="title" placeholder="제목" required />
+            <textarea name="description" placeholder="설명"></textarea>
+            <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+            <button type="button" id="event-submit">추가</button>
+        </form>
     </div>
 </main>
 </body>

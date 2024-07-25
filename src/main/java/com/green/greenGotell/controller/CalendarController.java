@@ -1,16 +1,22 @@
 package com.green.greenGotell.controller;
 
-
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.green.greenGotell.domain.dto.EventDTO;
 import com.green.greenGotell.domain.entity.Event;
 import com.green.greenGotell.service.EventService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/calendar")
@@ -19,29 +25,33 @@ public class CalendarController {
 
     private final EventService eventService;
 
+
     @GetMapping
-    public String showCalendar() {
+    public String showCalendar(Model model) throws Exception {
+        List<EventDTO> events = eventService.getAllEvents(); // 모든 이벤트를 가져오는 서비스 메서드
+        ObjectMapper mapper=new ObjectMapper();
+        String eventStr=mapper.writeValueAsString(events);
+        System.out.println(">>>"+eventStr);
+        model.addAttribute("eventStr", eventStr); // Thymeleaf에 이벤트 데이터 전달
         return "views/calendar/calendar"; // Thymeleaf 템플릿 파일명 (calendar.html)
     }
 
     @PostMapping("/add")
-    public String addEvent(
-            @RequestParam(name = "date") String date,
+    @ResponseBody
+    public ResponseEntity<Map<String, String>> addEvent(
+            @RequestParam(name = "start") String start,
             @RequestParam(name = "title") String title,
-            @RequestParam(name = "description") String description,
-            RedirectAttributes redirectAttributes
+            @RequestParam(name = "description") String description
     ) {
-        // 새로운 Event 객체를 생성하고 값을 설정합니다.
-        Event event = new Event();
-        event.setDate(date);
-        event.setTitle(title);
-        event.setDescription(description);
+        Event event = Event.builder()
+                .start(start).title(title).description(description)
+                .build();
 
-        // 이벤트를 데이터베이스에 저장합니다.
         eventService.saveEvent(event);
 
-        // 성공 메시지를 설정하고 리디렉션
-        redirectAttributes.addFlashAttribute("message", "일정이 성공적으로 추가되었습니다.");
-        return "redirect:/calendar";
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "일정이 성공적으로 추가되었습니다.");
+
+        return ResponseEntity.ok(response);
     }
 }
