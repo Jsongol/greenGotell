@@ -16,12 +16,12 @@
 		<!--메인 컨텐츠는 여기에 작성해주세요. 반드시 클래스명에 cmcontents  포함시켜주세요 -->
 		<div class="cmcontents">
 			<div id="cmcreate">
-				<h1>품목 리스트</h1>
+				<h1><a href="/inventory">품목 리스트</a></h1>
 				<a href="/inventory/create"><i class="fa-solid fa-plus"></i><span>만들기</span></a>
 			</div>
 			<!--메인 컨텐츠 중 게시판 서치 양식 입니다. 반드시 div 아이디에 cmsearch-form포함 -->
 			<div id="cmsearch-form">
-				<form action="#" method="get">
+				<form th:action="@{/inventory/search}" method="get">
 					<div>
 						<label for="parentCategory">대분류:</label>
 						<select id="parentCategory">
@@ -68,6 +68,15 @@
 						<span th:text="${inventory.categoryId}">소분류</span>
 					</li>
 				</ul>
+			</div>
+			<div class="pagination" th:if="${totalPages > 1}">
+				<span th:if="${currentPage > 0}"> <a th:href="@{/inventory(page=${currentPage - 1})}">&laquo; 이전</a>
+				</span> <span th:each="pageNum : ${#numbers.sequence(0, totalPages - 1)}">
+					<a th:href="@{/inventory(page=${pageNum})}" th:text="${pageNum + 1}"
+						th:class="${pageNum == currentPage} ? 'active' : ''"></a>
+				</span> <span th:if="${currentPage < totalPages - 1}"> <a
+						th:href="@{/inventory(page=${currentPage + 1})}">다음 &raquo;</a>
+				</span>
 			</div>
 		</div>
 	</main>
