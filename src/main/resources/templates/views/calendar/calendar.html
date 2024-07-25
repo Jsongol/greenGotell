@@ -89,7 +89,8 @@
                     .then(result => {
                         alert(result);  // 서버에서 전달된 메시지 표시
                         eventForm.style.display = 'none'; // 폼 숨기기
-                        calendar.refetchEvents(); // 달력 새로고침
+                        //calendar.refetchEvents(); // 달력 새로고침
+                        location.href="/calendar"; //
                     })
                     .catch(error => {
                         console.error('Error:', error);
@@ -101,15 +102,25 @@
                 eventForm.style.display = 'none';
             });
         });
+        var todoList = document.getElementById('todo-list');
+        if (todos) {
+            todos.sort((a, b) => new Date(a.start) - new Date(b.start));
+            todos.forEach(todo => {
+                var todoItem = document.createElement('div');
+                todoItem.className = 'todo-item';
+                todoItem.innerHTML = `<h3>${todo.title}</h3><p>시간: ${todo.start}</p>`;
+                todoList.appendChild(todoItem);
+            });
+        }
     </script>
 </head>
 <body>
 <main class="sample">
-    <th:block th:replace="~{/views/personnel/cmsubmenu}"/>
+    <th:block th:replace="~{/views/calendar/submenu}"/>
     <div class="cmcontents">
         <div id="cmcreate">
-            <h1>샘플이름</h1>
-            <a href="#"><i class="fa-solid fa-plus"></i><span>만들기</span></a>
+            <h1>할일</h1>
+
         </div>
         <div id='calendar'></div>
     </div>
