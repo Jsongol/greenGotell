@@ -17,6 +17,7 @@ public class SecurityConfig {
 	
 	private final CustomUserDetailService customUserDetailService; //사용자 세부 정보를 로드하는 서비스 객체생성
 	private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+	private final CustomAccessDeniedHandler customAccessDeniedHandler;
 	//사용자 인증이 성공했을 때 실행되는 핸들러입니다.
 	//사용자가 로그인에 성공하면 특정 로직을 수행하고, 사용자를 적절한 페이지로 리다이렉트합니다.
 
@@ -29,8 +30,8 @@ public class SecurityConfig {
 						authorize -> authorize
 						.requestMatchers("/css/**", "/js/**", "/images/**","/webjars/**","/favicon.ico*").permitAll() // 인증 없이
 						.requestMatchers("/login").permitAll() // 인증 없이 접속 가능
+						.requestMatchers("/personnel/**").hasAuthority("DEPT_HUMAN_RESOURCES") // 특정 권한을 요구하는 URL
 						//.requestMatchers("/").permitAll() // 인증 없이 접속 가능
-						//.requestMatchers("/emp/*").hasRole("EMP") // 특정 권한을 요구하는 URL
 						// .requestMatchers("/hr/*").hasRole("HR") // 특정 권한을 요구하는 URL (주석 해제 시 사용)
 						// .requestMatchers("/admin/*").hasRole("ADMIN") // 특정 권한을 요구하는 URL (주석 해제 시 사용)
 						.anyRequest().authenticated() // 위 설정을 제외한 나머지는 인증 필요 (항상 마지막에 위치)
@@ -46,7 +47,11 @@ public class SecurityConfig {
 						.logoutSuccessUrl("/") // 로그아웃 성공 후 이동할 URL
 						.invalidateHttpSession(true) // 세션 무효화
 						.permitAll() // 로그아웃 URL 접근 허용
-				).userDetailsService(customUserDetailService); // 사용자 세부 정보를 로드하는 서비스 설정
+				)
+				.exceptionHandling(exceptions -> exceptions
+			            .accessDeniedHandler(customAccessDeniedHandler) // 커스텀 핸들러 등록
+			    )
+		        .userDetailsService(customUserDetailService); // 사용자 세부 정보를 로드하는 서비스 설정
 
 		return http.build();
 	}

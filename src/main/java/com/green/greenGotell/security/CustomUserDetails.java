@@ -1,7 +1,9 @@
 package com.green.greenGotell.security;
 
+import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
@@ -22,15 +24,25 @@ public class CustomUserDetails extends User{
 	
 	
 	public CustomUserDetails(EmployeesEntity entity) {
-		super(entity.getEmail(),entity.getPass(),
-				entity.getRoles().stream()
-				.map(role -> new SimpleGrantedAuthority("ROLE_" + role))
-			    .collect(Collectors.toSet()));
+		super(entity.getEmail(), entity.getPass(), getAuthorities(entity));
+//		super(entity.getEmail(),entity.getPass(),
+//				entity.getRoles().stream()
+//				.map(role -> new SimpleGrantedAuthority("ROLE_" + role))
+//			    .collect(Collectors.toSet()));
 		
 		email=entity.getEmail();
 		name=entity.getName();
 		department=entity.getDepartment();
 		id=entity.getId();
+	}
+	private static Set<GrantedAuthority> getAuthorities(EmployeesEntity entity) {
+		Set<GrantedAuthority> authorities = entity.getRoles().stream()
+				.map(role -> new SimpleGrantedAuthority("ROLE_" + role))
+				.collect(Collectors.toSet());
+
+		// 부서 정보를 권한에 추가
+		authorities.add(new SimpleGrantedAuthority("DEPT_" + entity.getDepartment().name()));
+		return authorities;
 	}
 	
 }

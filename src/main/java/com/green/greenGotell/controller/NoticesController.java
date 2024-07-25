@@ -1,5 +1,6 @@
 package com.green.greenGotell.controller;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -8,9 +9,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.green.greenGotell.domain.dto.NoticeSaveDTO;
 import com.green.greenGotell.domain.dto.NoticeUpdateDTO;
+import com.green.greenGotell.domain.entity.EmployeesEntity;
+import com.green.greenGotell.security.CustomUserDetails;
 import com.green.greenGotell.service.NoticeService;
 
 import lombok.RequiredArgsConstructor;
@@ -37,8 +41,10 @@ public class NoticesController {
 	
 	//공지사항 저장하기
 	@PostMapping
-	public String save(NoticeSaveDTO dto) {
-		service.saveProcess(dto);		
+	public String save(@AuthenticationPrincipal CustomUserDetails userDetails, NoticeSaveDTO dto) {
+	    // DTO를 엔티티로 변환하고 저장합니다.
+		//service.saveProcess(userDetails, dto);		
+		service.saveProcess(userDetails.getId() , dto);
 		return "redirect:/notices";
 	}
 	
@@ -50,8 +56,8 @@ public class NoticesController {
 
 	//상세페이지 조회
 	@GetMapping("/detail/{no}")
-	public String detail(@PathVariable("no") long no, Model model) {	
-		service.detailProcess(no, model);
+	public String detail(@AuthenticationPrincipal CustomUserDetails userDetails, @PathVariable("no") long no, Model model) {	
+		service.detailProcess(userDetails, no, model);
 		return "views/notices/detail";
 	}
 	

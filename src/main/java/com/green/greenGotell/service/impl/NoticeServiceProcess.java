@@ -7,14 +7,19 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import com.green.greenGotell.domain.dto.NoticeSaveDTO;
 import com.green.greenGotell.domain.dto.NoticeUpdateDTO;
+import com.green.greenGotell.domain.entity.EmployeesEntity;
 import com.green.greenGotell.domain.entity.NoticeEntity;
+import com.green.greenGotell.domain.repository.EmployeesEntityRepository;
 import com.green.greenGotell.domain.repository.NoticeEntityRepository;
+import com.green.greenGotell.security.CustomUserDetails;
 import com.green.greenGotell.service.NoticeService;
 
 
@@ -26,6 +31,7 @@ import lombok.ToString;
 @Service
 public class NoticeServiceProcess implements NoticeService{
 	
+	private final EmployeesEntityRepository  employeesEntityRep;
 	private final NoticeEntityRepository repository;
 
 	@Override
@@ -68,12 +74,11 @@ public class NoticeServiceProcess implements NoticeService{
 		
 		//JPA 쿼리메서드 : findAll() 사용자가 만들수 있는 쿼리메서드 문법-키워드
 		Page<NoticeEntity> result;
-		//repository.findAllByDivision(division, pageable);
 		
 		//_division가 0이면 모든 항목 페이지에 출력
 		if (_division==0) {
             result = repository.findAll(pageable);
-        } else {//_division가 0이 아니면 해당 부서별 페이지 출력
+        } else {
             result = repository.findAllByDivision(division, pageable);
         }
 		
@@ -86,17 +91,35 @@ public class NoticeServiceProcess implements NoticeService{
 
 	//공지사항 저장 처리
 	@Override
-	public void saveProcess(NoticeSaveDTO dto) {		
-		repository.save(dto.toEntity());
+	public void saveProcess(CustomUserDetails userDetails,NoticeSaveDTO dto) {
+		repository.save(dto.toEntity(employeesEntityRep.findById(userDetails.getId()).orElseThrow()));
+	}
+	
+	@Override
+	public void saveProcess(Long id, NoticeSaveDTO dto) {
+		repository.save(dto.toEntity(id));
 	}
 
 	//공지사항 상세 페이지 출력
 	@Override
-	public void detailProcess(long no, Model model) { // 상세정보 조회해서 model에 담아라
+	public void detailProcess(CustomUserDetails userDetails,long no, Model model) { // 상세정보 조회해서 model에 담아라
 		//Null Pointer Exception 방지:
-		NoticeEntity result=repository.findById(no).orElseThrow();
-		model.addAttribute("detail", result.toNoticeDetailDTO());
-		repository.save(result);
+//		NoticeEntity result=repository.findById(no).orElseThrow();
+//		model.addAttribute("detail", result.toNoticeDetailDTO());
+//		repository.save(result);
+		
+		String currentUserName = userDetails.getName();
+
+        // 공지사항 조회
+        NoticeEntity notice = repository.findById(no).orElseThrow(() -> new RuntimeException("Notice not found with id: " + no));
+
+        // 작성자인지 여부 확인
+        EmployeesEntity noticeCreator = notice.getEmployee();
+        boolean isCreator = noticeCreator != null && noticeCreator.getName().equals(currentUserName);
+
+        // 모델에 데이터 추가
+        model.addAttribute("detail", notice.toNoticeDetailDTO());
+        model.addAttribute("isCreator", isCreator);
 		
 	}
 
@@ -105,7 +128,7 @@ public class NoticeServiceProcess implements NoticeService{
 	@Transactional
 	public void updateProcess(long no, NoticeUpdateDTO dto) {
 		// 1. 수정할 대상을 조회 2. 변경사항을 적용 -> 변경된entity 저장
-		repository.findById(no).orElseThrow().update(dto);
+		repository.findById(no).orElseThrow().update(dto);	
 				
 	}
 
@@ -116,6 +139,8 @@ public class NoticeServiceProcess implements NoticeService{
 		repository.delete(repository.findById(no).orElseThrow());
 		
 	}
+
+	
 
 
 }

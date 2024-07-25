@@ -14,16 +14,26 @@ public class NoticeSaveDTO{
 	private boolean fixed;		//고정여부
 	private String title;		//제목
 	private String content;		//내용
-	private EmployeesEntity employeeId;    // 작성자 ID
 	
 	//formdata->dto->entity
-	public NoticeEntity toEntity() {
+	public NoticeEntity toEntity(EmployeesEntity employeesEntity) {
 		return NoticeEntity.builder()
 				.division(division)
 				.fixed(fixed)
 				.title(title)
 				.content(content)
-				.employee(employeeId)
+				.employee(employeesEntity)
+				.build();
+	}
+
+	public NoticeEntity toEntity(Long id) {
+		
+		return NoticeEntity.builder()
+				.division(division)
+				.fixed(fixed)
+				.title(title)
+				.content(content)
+				.employee(EmployeesEntity.builder().id(id).build())
 				.build();
 	}
 
