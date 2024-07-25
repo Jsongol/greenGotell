@@ -33,8 +33,22 @@ public class CalendarController {
         String eventStr=mapper.writeValueAsString(events);
         System.out.println(">>>"+eventStr);
         model.addAttribute("eventStr", eventStr); // Thymeleaf에 이벤트 데이터 전달
+        model.addAttribute("events", events);
         return "views/calendar/calendar"; // Thymeleaf 템플릿 파일명 (calendar.html)
     }
+
+    @GetMapping("/events")
+    @ResponseBody
+    public List<EventDTO> getEvents() {
+        return eventService.getAllEvents();
+    }
+
+
+
+
+
+
+
 
     @PostMapping("/add")
     @ResponseBody
