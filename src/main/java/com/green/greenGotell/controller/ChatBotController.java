@@ -22,10 +22,6 @@ public class ChatBotController {
 	private final SimpMessagingTemplate messagingTemplate;
     private final ChatBotService chatBotService;
 
-    @GetMapping("/chatbot")
-    public List<QuestionDTO> getCategory(@RequestParam("parent")int parent){
-        return chatBotService.getCategoryByType(parent);
-    }
     
     
     @MessageMapping("/hello")
@@ -36,9 +32,11 @@ public class ChatBotController {
         messagingTemplate.convertAndSend("/topic/bot/" + key, MessageFormat.format(pattern, dto.getName())
 				);
 	}
-
-    @MessageMapping("/question")
-    public void question(QuestionDTO dto) {   
-    	
+    
+ // 질문 데이터를 가져오는 REST API 엔드포인트 추가
+    @GetMapping("/api/questions")
+    public List<QuestionDTO> getQuestions(@RequestParam int parent) {
+        return chatBotService.getCategoryByType(parent);
     }
+    
 }
