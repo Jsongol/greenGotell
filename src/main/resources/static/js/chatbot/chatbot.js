@@ -44,6 +44,25 @@ function showMessage(tag){
 	$("#chat-content").scrollTop($("#chat-content").prop("scrollHeight"));
 }
 
+function loadQuestions() {
+    $.ajax({
+        url: '/api/questions',
+        method: 'GET',
+        data: { parent: null },  // 예제: 부모 ID가 0인 질문을 가져옴
+        success: function(questions) {
+            var categories = $("#categories");
+            categories.empty(); // 기존 버튼 삭제
+            questions.forEach(question => {
+                var button = `<button class="btn" onclick="toggleCategoryMessage(this, '${question.category}')">${question.category}</button>`;
+                categories.append(button);
+            });
+        },
+        error: function(error) {
+            console.error("Error fetching questions:", error);
+        }
+    });
+}
+
 //웹소켓 연결 후 인사말 출력
 function connect() {
 	client = Stomp.over(new SockJS('/ws'));
@@ -56,7 +75,7 @@ function connect() {
 			console.log("msg:", msgObj);
 			console.log("answer:", answer);
 			var now = new Date();
-			/*var time = formatTime(now);*/
+			var time = formatTime(now);
 			var date = formatDate(now);
 			var tag = `<div class="flex center date">${date}</div>
 						<div class="msg bot flex">
@@ -67,6 +86,7 @@ function connect() {
 								<div class="part">
 									<p>${msgObj}</p>
 								</div>
+								<div class="time">${time}</div>
 							</div>
 						</div>
 						<div id="categories">
@@ -107,6 +127,8 @@ function btnCloseClicked() {
 	flag=false;
 
 }
+
+
 
 //챗봇 시작 시 버튼 이벤트
 function btnBotClicked() {

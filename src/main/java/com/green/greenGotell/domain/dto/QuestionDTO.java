@@ -16,5 +16,5 @@ public class QuestionDTO {
 
 	private int questionNo;
 	private String category;
-	private int parent;
+	private Integer parent; // 변경: 부모가 없는 경우를 위해 Integer로 변경
 }
