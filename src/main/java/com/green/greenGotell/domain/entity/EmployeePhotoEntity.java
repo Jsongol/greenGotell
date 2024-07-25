@@ -9,6 +9,7 @@ import java.util.Set;
 import org.hibernate.annotations.DynamicUpdate;
 
 import com.green.greenGotell.domain.dto.EmployeeListDTO;
+import com.green.greenGotell.domain.dto.ProfileImageDTO;
 import com.green.greenGotell.domain.dto.ProfileUpdateDTO;
 import com.green.greenGotell.domain.enums.Department;
 import com.green.greenGotell.domain.enums.EmployeeStatus;
@@ -77,11 +78,20 @@ public class EmployeePhotoEntity {
         return this; // 업데이트 후 현재 객체를 반환
     }
 
-
+    //직원 정보 얻어올때 dto
 	public EmployeeListDTO toEmployeeDTO() {
 		
 		String base64Image = (fileContent != null) ? Base64.getEncoder().encodeToString(fileContent) : null;
 		return EmployeeListDTO.builder().profileImage(base64Image).build();
+		
+	}
+
+   //직원 이미지 파일 얻어올때 dto
+	public ProfileImageDTO toProfileImageDTO() {
+		
+		String base64Image = (fileContent != null) ? Base64.getEncoder().encodeToString(fileContent) : null;
+		return ProfileImageDTO.builder().profileImage(base64Image).build();
+	
 		
 	}
 
