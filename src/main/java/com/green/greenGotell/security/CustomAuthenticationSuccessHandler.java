@@ -8,7 +8,6 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
-import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Component;
 
 import jakarta.servlet.ServletException;
@@ -18,6 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 //config내부에서 메소드빈으로 생성
 @Component
 public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler{
+	
 	
 	//RequestCache(리퍼럴 역할): 사용자가 인증되지 않았던 페이지에 대한 정보를 저장하는 객체//인증성공 후, 저장된 요청을 복원하여 해당페이지로 전환
 	private final RequestCache requestCache=new HttpSessionRequestCache();

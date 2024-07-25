@@ -65,8 +65,8 @@
 					</div>
 					<br>					
 					<div class="button-container">
-				        <button onclick="btnUpdateClicked()">수정</button>
-				        <form onsubmit="return btnDeleteClicked()" th:action="|/notices/${detail.no}|" method="post">
+				        <button th:if="${isCreator}" onclick="btnUpdateClicked()">수정</button>
+				        <form th:if="${isCreator}" onsubmit="return btnDeleteClicked()" th:action="|/notices/${detail.no}|" method="post">
 				            <input type="hidden" name="_method" value="delete">			
 				            <button type="submit">삭제</button>
 				        </form>

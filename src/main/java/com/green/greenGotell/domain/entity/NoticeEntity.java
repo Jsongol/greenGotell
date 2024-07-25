@@ -11,7 +11,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -49,6 +48,7 @@ public class NoticeEntity extends BaseEntity {
 	@ManyToOne
 	//@JoinColumn(name = "empId")//employee(객체변수이름)_id(pk)
 	private EmployeesEntity employee; //작성자위한 객체
+	
 	
 	//편의메소드 매핑하기위한 메소드
 	public NoticeListDTO toNoticeListDTO() {
