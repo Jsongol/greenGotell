@@ -16,21 +16,23 @@ import com.green.greenGotell.domain.entity.CategoryEntity;
 import com.green.greenGotell.domain.entity.ItemEntity;
 import com.green.greenGotell.domain.repository.CategoryRepository;
 import com.green.greenGotell.domain.repository.ItemRepository;
+import com.green.greenGotell.domain.repository.LiveRepository;
 import com.green.greenGotell.service.ItemService;
+import com.green.greenGotell.service.LiveService;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class ItemServiceProcess implements ItemService {
-	private final ItemRepository itemrepository;	
+public class LiveServiceProcess implements LiveService {
+	private final LiveRepository liveRepository;	
 	private final CategoryRepository categoryRepository;
 
 	@Override
 	public void createItem(ItemDTO dto) {
 
 		// 저장된 ItemEntity를 ItemDTO로 변환하여 반환
-		itemrepository.save(dto.toEntity());
+		liveRepository.save(dto.toEntity());
 
 	}
 
@@ -42,7 +44,7 @@ public class ItemServiceProcess implements ItemService {
 		
 		Pageable pageable = PageRequest.of(page,10, sort);
 		
-		Page<ItemEntity> item = itemrepository.findAll(pageable);
+		Page<ItemEntity> item = liveRepository.findAll(pageable);
 		
 		model.addAttribute("inventorys", item.getContent().stream().map(ItemEntity :: toItemDTO).collect(Collectors.toList()));
 		model.addAttribute("currentPage", item.getNumber());
@@ -58,9 +60,9 @@ public class ItemServiceProcess implements ItemService {
 		
 		Page<ItemEntity> itemEntity;
 		if (dto.isEmpty()) {
-			itemEntity = itemrepository.findAll(pageable);
+			itemEntity = liveRepository.findAll(pageable);
 		}else {
-			itemEntity = itemrepository.findBySearchItem(
+			itemEntity = liveRepository.findBySearchItem(
 					dto.getName(),
 					dto.getCategory(),
 					pageable);
