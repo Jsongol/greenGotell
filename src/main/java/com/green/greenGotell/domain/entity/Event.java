@@ -1,15 +1,14 @@
 package com.green.greenGotell.domain.entity;
 
+import com.green.greenGotell.domain.dto.EventDTO;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
+@Builder
 @AllArgsConstructor
 public class Event {
 
@@ -18,10 +17,18 @@ public class Event {
     private Long id;
 
     @Column(nullable = false)
-    private String date;
+    private String start;
 
     @Column(nullable = false)
     private String title;
 
     private String description;
+
+    public EventDTO toEventDTO(){
+        return EventDTO.builder()
+                .id(id)
+                .start(start)
+                .title(title)
+                .build();
+    }
 }
