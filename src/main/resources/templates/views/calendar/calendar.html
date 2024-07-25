@@ -1,73 +1,56 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{views/common/layout :: layout(~{::head} ,~{::main} ) }">
 <head>
-    <link rel="stylesheet" href="/css/sample/sample.css">
-    <script src="/js/sample/sample.js" defer></script>
-    <link rel="stylesheet" href="/css/calendar/calendar.css">
-    <script src="/js/calender/calendar.js" defer></script>
+    <meta charset='utf-8' />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+    <style>
+        #calendar {
+            max-width: 100%;
+            margin: 0 auto;
+            height: 500px;
+        }
+        /* 일정 추가 폼 스타일 */
+        .event-form {
+            display: none;
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -20%);
+            background: white;
+            padding: 20px;
+            border: 1px solid #ddd;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .event-form input, .event-form textarea {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .event-form button {
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                height: '100%',  // Adjust this if necessary
+                events: [
+                ]
+            });
+            calendar.render();
+        });
+    </script>
 </head>
 <body>
 <main class="sample">
-    <th:block th:replace="~{/views/calendar/submenu}"/>
-
+    <th:block th:replace="~{/views/personnel/cmsubmenu}"/>
     <div class="cmcontents">
         <div id="cmcreate">
-            <h1>캘린더</h1>
+            <h1>샘플이름</h1>
+            <a href="#"><i class="fa-solid fa-plus"></i><span>만들기</span></a>
         </div>
-
-        <div id="cmsearch-form">
-            <form action="#" method="get">
-                <label>
-                    <select>
-                        <option>전체</option>
-                        <option>프론트오피스부</option>
-                        <option>식음료부</option>
-                        <option>시설관리부</option>
-                        <option>보안부</option>
-                        <option>인사부</option>
-                        <option>지원부</option>
-                        <option>마케팅부</option>
-                    </select>
-                </label>
-                <select>
-                    <option>제목</option>
-                    <option>내용</option>
-                    <option>제목+내용</option>
-                </select>
-                <input type="text" placeholder="검색어를 입력해주세요.">
-                <button type="submit">검색</button>
-            </form>
-        </div>
-
-        <div id="calendar-container">
-            <div class="calendar">
-                <div id="calendar-header">
-                    <button id="prev-month">◀</button>
-                    <h2 id="calendar-month-year"></h2>
-                    <button id="next-month">▶</button>
-                </div>
-                <div id="calendar-weekdays">
-                    <div>일</div>
-                    <div>월</div>
-                    <div>화</div>
-                    <div>수</div>
-                    <div>목</div>
-                    <div>금</div>
-                    <div>토</div>
-                </div>
-                <div id="calendar-body"></div>
-            </div>
-            <div class="schedule-form" id="schedule-form" style="display: none;">
-                <h3>할일 추가</h3>
-                <form id="event-form" action="/calendar/addEvent" method="post">
-                    <input type="hidden" id="selected-date" name="date">
-                    <label for="event-description">할일 :</label>
-                    <input type="text" id="event-description" name="description" required>
-                    <button type="submit">추가</button>
-                    <button type="button" id="cancel-event">취소</button>
-                </form>
-            </div>
-        </div>
+        <div id='calendar'></div>
     </div>
 </main>
 </body>
