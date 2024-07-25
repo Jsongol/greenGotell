@@ -60,6 +60,18 @@ public class ItemEntity { //품목리스트 추가 테이블
 	@Enumerated(EnumType.STRING)
 	private Standard standard;
 	
+	public ItemDTO toItemDTO() {
+		return ItemDTO.builder()
+				.name(name)
+				.itemCode(itemCode)
+				.itemSource(itemSource)
+				.itemMoney(itemMoney)
+				.standard(standard)
+				.categoryId(category.getId())
+				.build();
+	}
+	
+	
 	
 	
 }

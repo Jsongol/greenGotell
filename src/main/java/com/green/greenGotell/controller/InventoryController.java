@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.green.greenGotell.domain.dto.CategoryDTO;
 import com.green.greenGotell.domain.dto.ItemDTO;
+import com.green.greenGotell.domain.dto.ItemSearchDTO;
 import com.green.greenGotell.domain.entity.ItemEntity;
 import com.green.greenGotell.service.CategoryService;
 import com.green.greenGotell.service.InventoryService;
@@ -31,12 +32,21 @@ public class InventoryController {
 	private final CategoryService categoryService;
 	private final ItemService itemservice; 
 	
+	//초기 카테고리 조회
 	@GetMapping
-    public String listCategories(Model model) {
-		itemservice.list(model);
+    public String listCategories(@RequestParam(name="page",defaultValue = "0") int page, Model model) {
+		itemservice.list(page,model);
 		model.addAttribute("categories", categoryService.getAll());
         return "views/inventory/item-list";
     }
+	//선택 카테고리 조회
+	@GetMapping("/search")
+	public String list(@RequestParam(name="page",defaultValue = "0") int page,ItemSearchDTO dto, Model model) {
+		
+		itemservice.showSearchItemList(page,dto,model);
+		return "views/inventory/item-list";
+	}
+	
 	// 중분류
     @GetMapping("/categories")
     @ResponseBody
