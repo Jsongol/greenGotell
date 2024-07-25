@@ -26,6 +26,7 @@ public class IndexServiceProcess implements IndexService {
 		
 		
 		model.addAttribute("ProfilePhoto",employeePhotoEntityRepository.findByEmployeeId(userDetails.getId()).orElseThrow().toProfileImageDTO() );
+	
 		
 	}
 
