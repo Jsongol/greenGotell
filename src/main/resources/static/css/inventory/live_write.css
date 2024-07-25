@@ -56,3 +56,7 @@ select {
 .form-container button[type="button"]:hover {
   background-color: var(--sub-color4);
 }
+
+.form-container form div:nth-child(1) {
+	width: 80%;
+}
