@@ -12,15 +12,16 @@
 			<!--프로필 대시보드-->
 			<div class="dashboard profile">
 				<ul>
-					 <li class="profilePhoto"><img th:if="${#authorization.expression('isAuthenticated()')}"th:src="'data:image/jpeg;base64,' + ${ProfilePhoto.profileImage}"alt="프로필 사진" ></li>   
-					<li><span th:text="${#authentication.principal.department.getKoName()}"></span><span sec:authentication="principal.name"></span></li>
+					 <li class="profilePhoto"><img th:if="${#authorization.expression('isAuthenticated()')}"th:src="${ProfilePhoto.profileImage != null ? 'data:image/jpeg;base64,' + ProfilePhoto.profileImage : 'https://i.pinimg.com/564x/a5/e8/4d/a5e84dd8104ba6287b72e16401d173d7.jpg'}"alt="프로필 사진" ></li>   
+					<li class="subfont" th:text="${#authentication.principal.department.getKoName()}"></li>
+					<li sec:authentication="principal.name"></li>
 				</ul>
 			
 			</div>
 
 
 			<!--최근 공지사항-->
-			<div class="dashboard lately-notice-wrap" id="cmposting-format">
+			<div class="dashboard lately-notice-wrap">
 				<div class="lately-notice cmposting-format">
 				
 					<p class="subfont">최근 공지사항</p>
@@ -35,7 +36,49 @@
 						<li>
 							<span>번호</span>
 							<span>부서</span>
-							<span><a href="#">제목</a></span>
+							<span><a href="#">무야호</a></span>
+							<span>등록일</span>
+							<span>작성자</span>						
+						</li>
+								<li>
+							<span>번호</span>
+							<span>부서</span>
+							<span><a href="#">우리회사에 물소텐트가 있다는게 사실인가요?</a></span>
+							<span>등록일</span>
+							<span>작성자</span>						
+						</li>
+								<li>
+							<span>번호</span>
+							<span>부서</span>
+							<span><a href="#">쿼카는 어느 부서 사람인가요 </a></span>
+							<span>등록일</span>
+							<span>작성자</span>						
+						</li>
+								<li>
+							<span>번호</span>
+							<span>부서</span>
+							<span><a href="#">쿼카는 퇴근이 하고싶다.</a></span>
+							<span>등록일</span>
+							<span>작성자</span>						
+						</li>
+										<li>
+							<span>번호</span>
+							<span>부서</span>
+							<span><a href="#">메가커피 무알콜 하이볼은 회사에서 먹을 수 있나요?</a></span>
+							<span>등록일</span>
+							<span>작성자</span>						
+						</li>
+										<li>
+							<span>번호</span>
+							<span>부서</span>
+							<span><a href="#">우리 회사는 블랙기업 인가요? 왜 휴가 승인이 안되요</a></span>
+							<span>등록일</span>
+							<span>작성자</span>						
+						</li>
+										<li>
+							<span>번호</span>
+							<span>부서</span>
+							<span><a href="#">우리 부장님은 짜장면이 좋다고 하셨어</a></span>
 							<span>등록일</span>
 							<span>작성자</span>						
 						</li>
@@ -76,8 +119,65 @@
 			</div>
 
 
-			<!--기능2-->
-			<div class="dashboard"></div>
+			<!--최근 추가된 물품 리스트-->
+			<div class="dashboard">
+				<div class="lately-item cmposting-format">
+				
+					<p class="subfont">최근 물품리스트</p>
+					<ul>
+						<li> <!--목차입니다.-->
+							<span>코드</span>
+							<span>이름</span>
+							<span>가격</span>
+							<span>단위</span>
+						</li>
+						<li>
+							<span>번호</span>
+							<span>부서</span>
+							<span></span>
+							<span>작성자</span>						
+						</li>
+								<li>
+							<span>번호</span>
+							<span>부서</span>
+							<span>물소텐트</span>
+							<span>작성자</span>						
+						</li>
+								<li>
+							<span>번호</span>
+							<span>부서</span>
+							<span></span>
+							<span>작성자</span>						
+						</li>
+								<li>
+							<span>번호</span>
+							<span>부서</span>
+							<span></span>
+							<span>작성자</span>						
+						</li>
+										<li>
+							<span>번호</span>
+							<span>부서</span>
+							<span></span>
+							<span>작성자</span>						
+						</li>
+										<li>
+							<span>번호</span>
+							<span>부서</span>
+							<span></span>
+							<span>작성자</span>						
+						</li>
+										<li>
+							<span>번호</span>
+							<span>부서</span>
+							<span></span>
+							<span>작성자</span>						
+						</li>
+					</ul>	
+				</div>
+			
+			
+			</div>
 
 
 			<!--기능3-->

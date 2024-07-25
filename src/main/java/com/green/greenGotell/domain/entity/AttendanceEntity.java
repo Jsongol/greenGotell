@@ -24,6 +24,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -51,16 +52,21 @@ public class AttendanceEntity {
 	@JoinColumn(name = "employee_id", referencedColumnName = "id")
 	private EmployeesEntity employee;
 	
+	
+	//출근날짜 
+    @Column(nullable = false)
+    private LocalDate date;
+	
     //출근시간
 	@CreationTimestamp
 	@Column(nullable = false,columnDefinition ="timestamp" )
-	private LocalDateTime clokIn;;
+	private LocalDateTime clokIn;
 	
 	
 	 //퇴근시간
 	@UpdateTimestamp
 	@Column(nullable = false,columnDefinition ="timestamp" )
-	private LocalDateTime clokOut;;
+	private LocalDateTime clokOut;
 	
 	
 	//일한시간(분)
@@ -76,10 +82,18 @@ public class AttendanceEntity {
 	private String commutingIssues;
 	
 	
+	// 근무상태
 	@Enumerated(EnumType.STRING)
 	private AttendanceStatus attendanceStatus;
 	
-	// 분 단위로 일한 시간
+	
+	//자동으로 출근시간을 찍으면 이 출근시간의 날짜가 출근날짜에 저장 됌 
+    @PrePersist
+    public void prePersist() {
+        if (this.date == null) {
+            this.date = this.clokIn.toLocalDate();
+        }
+    }
 
 	
 
