@@ -13,7 +13,7 @@
 			<div class="dashboard">
 				<ul>
 					<li></li>
-					<li><span th:text="${#authentication.principal.department.getKoName()}"></span><span sec:authentication="principal.name"></span></li>
+					<li sec:authorize="isAuthenticated()"><span th:text="${#authentication.principal.department.getKoName()}"></span><span sec:authentication="principal.name"></span></li>
 				</ul>
 			
 			</div>

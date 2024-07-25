@@ -26,13 +26,6 @@ public class PersonnelController {
 	
 	private final PersonnelService personnelService;
 	
-	@GetMapping("/login")
-	public String getMethodName() {
-		
-		return "/login";
-	}
-	
-	
 
    //초기 직원조회
 	@GetMapping("/personnel")

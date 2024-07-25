@@ -32,31 +32,31 @@ public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
+			response.sendRedirect("/");
 		//로그인 페이지로 보내는 방법이 2가지가 있어요
 		//클라이언트가 자의적으로 로그인 버튼을 눌러서 이동하는 방법
 		//인증이 안되어 있는데 인증이 필요한 기능을 요청하면 -> 시큐리티가 리다이렉트 하여 페이지를 이동시킬때(인증이 필요하기 때문)
 		//2번째의 경우 인증이 성공하면 최초 요청한 페이지로 이동하면 됩니다.
 		
-		clearAuthenticationAttributes(request);//인증 실패 또는 인증과 관련된 메세지와 상태정보가 이후 요청에 영향을 미치지 않도록 제거
-		String targetUrl=getDefaultTargetUrl();// 기본 타겟 URL을 가져옵니다.
-		
-		SavedRequest savedRequest=requestCache.getRequest(request, response); // 이전에 저장된 요청을 가져옵니다.
-		System.out.println("savedRequest 이거임:"+savedRequest);
-		
-	 	String prevPage=(String) request.getSession().getAttribute("prevPage"); //이전 페이지 URL을 세션에서 가져옵니다.
-	 	System.out.println("prevPage 이거임:"+prevPage);
-		
-		if(savedRequest !=null && !savedRequest.getRedirectUrl().contains("login")) {
-			targetUrl=savedRequest.getRedirectUrl().split("[?]")[0]; // 저장된 요청 URL을 타겟 URL로 설정합니다.
-		}else if(prevPage !=null) {
-			targetUrl=prevPage; // 이전 페이지를 타겟 URL로 설정합니다.
-			request.getSession().removeAttribute("prevPage"); // 세션에서 이전 페이지 정보를 제거합니다.
+//		clearAuthenticationAttributes(request);//인증 실패 또는 인증과 관련된 메세지와 상태정보가 이후 요청에 영향을 미치지 않도록 제거
+//		String targetUrl=getDefaultTargetUrl();// 기본 타겟 URL을 가져옵니다.
+//		SavedRequest savedRequest=requestCache.getRequest(request, response); // 이전에 저장된 요청을 가져옵니다.
+//		System.out.println("savedRequest 이거임:"+savedRequest);
+//		
+//	 	String prevPage=(String) request.getSession().getAttribute("prevPage"); //이전 페이지 URL을 세션에서 가져옵니다.
+//	 	System.out.println("prevPage 이거임:"+prevPage);
+//		
+//		if(savedRequest !=null && !savedRequest.getRedirectUrl().contains("login")) {
+//			targetUrl=savedRequest.getRedirectUrl().split("[?]")[0]; // 저장된 요청 URL을 타겟 URL로 설정합니다.
+//		}else if(prevPage !=null) {
+//			targetUrl=prevPage; // 이전 페이지를 타겟 URL로 설정합니다.
+//			request.getSession().removeAttribute("prevPage"); // 세션에서 이전 페이지 정보를 제거합니다.
 			
 		}
 		
-		System.out.println("targetUrl 최종 이동할 페이지: "+targetUrl);
-	 	
-	 	redirectStrategy.sendRedirect(request, response, targetUrl); // 최종 타겟 URL로 리다이렉트합니다.
-	}
+//		System.out.println("targetUrl 최종 이동할 페이지: "+targetUrl);
+//	 	
+//	 	redirectStrategy.sendRedirect(request, response, targetUrl); // 최종 타겟 URL로 리다이렉트합니다.
+//	}
 
 }
