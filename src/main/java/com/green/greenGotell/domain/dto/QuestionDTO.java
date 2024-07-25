@@ -5,7 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
+@ToString
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,5 +16,5 @@ public class QuestionDTO {
 
 	private int questionNo;
 	private String category;
-	private String questionText;
+	private int parent;
 }

@@ -2,6 +2,7 @@ package com.green.greenGotell.domain.entity;
 
 import org.hibernate.annotations.DynamicUpdate;
 
+import com.green.greenGotell.domain.dto.QuestionDTO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,5 +36,10 @@ public class QuestionEntity {
 	@JoinColumn(name = "parent")
     private QuestionEntity parent;
     
+    public QuestionDTO toQuestionDTO() {
+    	return QuestionDTO.builder()
+    			.questionNo(questionNo).category(category).parent(parent.questionNo)
+    			.build();
+    }
 
 }
