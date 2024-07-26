@@ -8,6 +8,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.green.greenGotell.domain.enums.Role;
+
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -30,21 +32,25 @@ public class SecurityConfig {
 						authorize -> authorize
 						.requestMatchers("/css/**", "/js/**", "/images/**","/webjars/**","/favicon.ico*").permitAll() // 인증 없이
 						.requestMatchers("/login").permitAll() // 인증 없이 접속 가능
+						
+						// EMP 사용자에게 접근을 허용할 페이지
+			            .requestMatchers("/").permitAll() // 홈 페이지는 모든 사용자에게 허용
+			            .requestMatchers("/inventory/**", "/notices/**", "/calendar/**", "/mypage/**").permitAll() // EMP에게 허용할 추가 페이지들
+						
 						.requestMatchers("/personnel/**").hasAuthority("DEPT_HUMAN_RESOURCES") // 특정 권한을 요구하는 URL
-						//.requestMatchers("/").permitAll() // 인증 없이 접속 가능
-						// .requestMatchers("/hr/*").hasRole("HR") // 특정 권한을 요구하는 URL (주석 해제 시 사용)
-						// .requestMatchers("/admin/*").hasRole("ADMIN") // 특정 권한을 요구하는 URL (주석 해제 시 사용)
+						// 부장에게 특정 패턴에 대한 권한 부여
+			            //.requestMatchers("/notices/new").hasAuthority("ROLE_" + Role.DIR.name())
+						
+						// CEO에게 모든 권한 부여
+			            .requestMatchers("/**").hasAuthority("ROLE_" + Role.CEO.name())						
 						.anyRequest().authenticated() // 위 설정을 제외한 나머지는 인증 필요 (항상 마지막에 위치)
 				).formLogin(login -> login
 						.loginPage("/login") // 로그인 페이지 URL
-						//.loginProcessingUrl("/login") // 로그인 처리 URL (form action과 일치하도록 설계 필요)
 						.permitAll() // 로그인 페이지 접근 허용
 						.usernameParameter("email") // 사용자 이름 파라미터 이름 설정 (기본값: username)
 						.passwordParameter("pass") // 비밀번호 파라미터 이름 설정 (기본값: password)
 						.successHandler(customAuthenticationSuccessHandler) // 로그인 성공 이후 처리할 내용을 정의
 				).logout(logout -> logout.logoutSuccessUrl("/") // 로그아웃 성공 후 이동할 URL
-						.logoutUrl("/logout") // 로그아웃 URL 명시적으로 설정
-						.logoutSuccessUrl("/") // 로그아웃 성공 후 이동할 URL
 						.invalidateHttpSession(true) // 세션 무효화
 						.permitAll() // 로그아웃 URL 접근 허용
 				)

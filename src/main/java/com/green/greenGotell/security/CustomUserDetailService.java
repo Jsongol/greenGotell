@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.green.greenGotell.domain.entity.EmployeesEntity;
 import com.green.greenGotell.domain.repository.EmployeesEntityRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -26,16 +27,9 @@ public class CustomUserDetailService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		System.out.println(">>>>>>>> username"+email);
-		
-		return new CustomUserDetails(repository.findByEmail(email).orElseThrow());
-		
-	}
-
+		EmployeesEntity employee = repository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
+        
+        return new CustomUserDetails(employee);
+    }
 }
-
-/*
-return new User(email, entity.getPass(), entity.getRoles().stream()
-	    .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
-	    .collect(Collectors.toSet()));
- */
