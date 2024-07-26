@@ -1,17 +1,29 @@
 package com.green.greenGotell.domain.dto;
 
+import java.util.List;
+import java.util.Optional;
+
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
+@ToString
 @Getter
 @Setter
 public class ItemSearchDTO {
 	
 	private String name;
-	private String category;
+	private List<String> categoryId;
+	
+	//
+	public String maxCategoryId() {
+		Optional<String> max = categoryId.stream().max(String::compareTo);
+		return max.orElse("0");
+	}
 	
 	public boolean isEmpty() {
-		return category==null && (name == null || name.trim().isEmpty());
+				
+		return  maxCategoryId().isEmpty() && (name == null || name.trim().isEmpty());
 		
 	}
 

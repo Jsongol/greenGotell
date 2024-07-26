@@ -40,7 +40,7 @@ public class ItemServiceProcess implements ItemService {
 		
 		Sort sort = Sort.by(Direction.DESC,"id");
 		
-		Pageable pageable = PageRequest.of(page,10, sort);
+		Pageable pageable = PageRequest.of(page,18, sort);
 		
 		Page<ItemEntity> item = itemrepository.findAll(pageable);
 		
@@ -54,17 +54,23 @@ public class ItemServiceProcess implements ItemService {
 	public void showSearchItemList(int page, ItemSearchDTO dto, Model model) {
 		
 		Sort sort = Sort.by(Direction.DESC,"id");
-		Pageable pageable = PageRequest.of(page,10, sort);
+		Pageable pageable = PageRequest.of(page,18, sort);
 		
 		Page<ItemEntity> itemEntity;
 		if (dto.isEmpty()) {
 			itemEntity = itemrepository.findAll(pageable);
 		}else {
-			itemEntity = itemrepository.findBySearchItem(
-					dto.getName(),
-					dto.getCategory(),
-					pageable);
+			Long categoryId=null;
+			if(!dto.maxCategoryId().isEmpty()) categoryId=Long.valueOf(dto.maxCategoryId());
+			
+			//itemEntity = itemrepository.findBySearchItem(dto.getName(),Long.valueOf(dto.maxCategoryId()),pageable);
+			//itemEntity=itemrepository.findByCategory_id(categoryId,pageable);
+			//itemEntity=itemrepository.findItemsByCategoryAndDescendants(categoryId,pageable);
+			//itemEntity=itemrepository.findItemsByCategoryAndDescendants(categoryId,dto.getName(),pageable);
+			System.out.println("----categoryId>>>>:"+categoryId);
+			itemEntity=itemrepository.findItemsByCategoryAndDescendantsAndSearName(categoryId,dto.getName(),pageable);
 		}
+		System.out.println("------------------------------------------");
 		model.addAttribute("inventorys", itemEntity.getContent().stream().map(ItemEntity :: toItemDTO).collect(Collectors.toList()));
 		
 		model.addAttribute("currentPage", itemEntity.getNumber());
