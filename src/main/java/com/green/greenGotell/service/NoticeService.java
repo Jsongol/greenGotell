@@ -1,9 +1,15 @@
 package com.green.greenGotell.service;
 
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.ui.Model;
 
+import com.green.greenGotell.domain.dto.NoticeListDTO;
 import com.green.greenGotell.domain.dto.NoticeSaveDTO;
 import com.green.greenGotell.domain.dto.NoticeUpdateDTO;
+import com.green.greenGotell.domain.entity.NoticeEntity;
 import com.green.greenGotell.security.CustomUserDetails;
 
 public interface NoticeService {
@@ -19,6 +25,10 @@ public interface NoticeService {
 
 	void deleteProcess(long no);
 
-	
+	void listProcessByUser(Long userId, int page, Model model);
+
+	Page<NoticeEntity> searchNotices(String division, String searchType, String keyword, Pageable pageable);
+
+	List<NoticeListDTO> getRecentNotices();
 
 }

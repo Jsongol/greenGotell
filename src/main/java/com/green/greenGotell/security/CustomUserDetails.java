@@ -22,22 +22,20 @@ public class CustomUserDetails extends User{
 	private String name;	//한글이름
 	private Department department;
 	
-	
+	// 생성자: EmployeesEntity에서 필요한 정보를 추출하여 User 객체 생성
 	public CustomUserDetails(EmployeesEntity entity) {
-		super(entity.getEmail(), entity.getPass(), getAuthorities(entity));
-//		super(entity.getEmail(),entity.getPass(),
-//				entity.getRoles().stream()
-//				.map(role -> new SimpleGrantedAuthority("ROLE_" + role))
-//			    .collect(Collectors.toSet()));
+		super(entity.getEmail(), entity.getPass(), getAuthorities(entity)); // 상위 클래스의 생성자 호출
 		
-		email=entity.getEmail();
-		name=entity.getName();
-		department=entity.getDepartment();
-		id=entity.getId();
+		this.email=entity.getEmail();
+		this.name=entity.getName();
+		this.department=entity.getDepartment();
+		this.id=entity.getId();
 	}
+	
+	// 사용자 권한을 생성하는 메소드
 	private static Set<GrantedAuthority> getAuthorities(EmployeesEntity entity) {
 		Set<GrantedAuthority> authorities = entity.getRoles().stream()
-				.map(role -> new SimpleGrantedAuthority("ROLE_" + role))
+				.map(role -> new SimpleGrantedAuthority("ROLE_" + role.name()))// Role 객체를 SimpleGrantedAuthority로 변환
 				.collect(Collectors.toSet());
 
 		// 부서 정보를 권한에 추가

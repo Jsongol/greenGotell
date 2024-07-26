@@ -1,5 +1,6 @@
 package com.green.greenGotell.service.impl;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
+import com.green.greenGotell.domain.dto.NoticeListDTO;
 import com.green.greenGotell.domain.dto.NoticeSaveDTO;
 import com.green.greenGotell.domain.dto.NoticeUpdateDTO;
 import com.green.greenGotell.domain.entity.EmployeesEntity;
@@ -102,12 +104,7 @@ public class NoticeServiceProcess implements NoticeService{
 
 	//공지사항 상세 페이지 출력
 	@Override
-	public void detailProcess(CustomUserDetails userDetails,long no, Model model) { // 상세정보 조회해서 model에 담아라
-		//Null Pointer Exception 방지:
-//		NoticeEntity result=repository.findById(no).orElseThrow();
-//		model.addAttribute("detail", result.toNoticeDetailDTO());
-//		repository.save(result);
-		
+	public void detailProcess(CustomUserDetails userDetails,long no, Model model) { // 상세정보 조회해서 model에 담아라		
 		String currentUserName = userDetails.getName();
 
         // 공지사항 조회
@@ -132,7 +129,6 @@ public class NoticeServiceProcess implements NoticeService{
 				
 	}
 
-
 	//no(pk)해당하는 공지사항 DB에서 삭제
 	@Override
 	public void deleteProcess(long no) {
@@ -140,7 +136,39 @@ public class NoticeServiceProcess implements NoticeService{
 		
 	}
 
+	//내가 작성한 공지사항 리스트
+	@Override
+    public void listProcessByUser(Long userId, int page, Model model) {
+        int pageSize = 10;
+        Sort sort = Sort.by(Direction.DESC, "fixed", "no");
+        Pageable pageable = PageRequest.of(page - 1, pageSize, sort);
+
+        Page<NoticeEntity> result = repository.findAllByEmployeeId(userId, pageable);
+
+        model.addAttribute("list", result.getContent().stream()
+                .map(NoticeEntity::toNoticeListDTO)
+                .collect(Collectors.toList()));
+        model.addAttribute("page", result);
+    }
 	
+	@Override
+    public List<NoticeListDTO> getRecentNotices() {
+		 int pageSize = 7; // 최근 공지사항 7개를 가져오겠다는 가정
+		    
+		    // Sort: fixed DESC, updatedAt DESC
+		    Sort sort = Sort.by(Direction.DESC, "fixed").and(Sort.by(Direction.DESC, "updatedAt"));
+		    Pageable pageable = PageRequest.of(0, pageSize, sort);
 
+		    Page<NoticeEntity> result = repository.findAll(pageable);
 
+		    return result.getContent().stream()
+		            .map(NoticeEntity::toNoticeListDTO)
+		            .collect(Collectors.toList());
+		}
+
+	@Override
+	public Page<NoticeEntity> searchNotices(String division, String searchType, String keyword, Pageable pageable) {
+	    return repository.searchNotices(division, searchType, keyword, pageable);
+	}
+	
 }

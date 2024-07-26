@@ -47,7 +47,6 @@
 			<!--최근 공지사항-->
 			<div class="dashboard lately-notice-wrap">
 				<div class="lately-notice cmposting-format">
-				
 					<p class="subfont">최근 공지사항</p>
 					<ul>
 						<li> <!--목차입니다.-->
@@ -57,56 +56,16 @@
 							<span>등록일</span>
 							<span>글쓴이</span>
 						</li>
-						<li>
-							<span>번호</span>
-							<span>부서</span>
-							<span><a href="#">무야호</a></span>
-							<span>등록일</span>
-							<span>작성자</span>						
+						<li th:each="notice:${recentNotices}" >
+							<span th:text="${notice.fixed} ? '❗' : ${notice.no} " class="no">번호</span>
+							<span th:text="${notice.division}" style="width: 8%;">부서</span>
+							<span>
+								<a th:href="|/notices/detail/${notice.no}|" th:text="${notice.title}">제목</a>
+							</span>
+							<span th:text="${notice.updatedAt.toLocalDate}">등록일</span>
+							<span th:text="${notice.name}">작성자</span>						
 						</li>
-								<li>
-							<span>번호</span>
-							<span>부서</span>
-							<span><a href="#">우리회사에 물소텐트가 있다는게 사실인가요?</a></span>
-							<span>등록일</span>
-							<span>작성자</span>						
-						</li>
-								<li>
-							<span>번호</span>
-							<span>부서</span>
-							<span><a href="#">쿼카는 어느 부서 사람인가요 </a></span>
-							<span>등록일</span>
-							<span>작성자</span>						
-						</li>
-								<li>
-							<span>번호</span>
-							<span>부서</span>
-							<span><a href="#">쿼카는 퇴근이 하고싶다.</a></span>
-							<span>등록일</span>
-							<span>작성자</span>						
-						</li>
-										<li>
-							<span>번호</span>
-							<span>부서</span>
-							<span><a href="#">메가커피 무알콜 하이볼은 회사에서 먹을 수 있나요?</a></span>
-							<span>등록일</span>
-							<span>작성자</span>						
-						</li>
-										<li>
-							<span>번호</span>
-							<span>부서</span>
-							<span><a href="#">우리 회사는 블랙기업 인가요? 왜 휴가 승인이 안되요</a></span>
-							<span>등록일</span>
-							<span>작성자</span>						
-						</li>
-										<li>
-							<span>번호</span>
-							<span>부서</span>
-							<span><a href="#">우리 부장님은 짜장면이 좋다고 하셨어</a></span>
-							<span>등록일</span>
-							<span>작성자</span>						
-						</li>
-					</ul>	
+					</ul>
 				</div>
 			</div>
 
