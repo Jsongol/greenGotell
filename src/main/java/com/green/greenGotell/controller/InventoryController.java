@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,7 +43,7 @@ public class InventoryController {
 	//선택 카테고리 조회
 	@GetMapping("/search")
 	public String list(@RequestParam(name="page",defaultValue = "0") int page,ItemSearchDTO dto, Model model) {
-		
+		//System.out.println("max>>>>"+dto.maxCategoryId());
 		itemservice.showSearchItemList(page,dto,model);
 		return "views/inventory/item-list";
 	}

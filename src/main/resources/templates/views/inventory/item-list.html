@@ -4,7 +4,8 @@
 <head>
 	<link rel="stylesheet" href="/css/inventory/item_list.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-	<script src="/js/inventory/category.js"></script>
+	<script src="/js/inventory/category2.js"></script>
+	<!--<script src="/js/inventory/search.js"></script>-->
 </head>
 
 <body>
@@ -24,7 +25,7 @@
 				<form th:action="@{/inventory/search}" method="get">
 					<div>
 						<label for="parentCategory">대분류:</label>
-						<select id="parentCategory">
+						<select id="parentCategory" name="categoryId">
 							<option value="">선택하세요</option>
 							<option th:each="category : ${categories}" th:value="${category.id}"
 								th:text="${category.name}"></option>
@@ -33,7 +34,7 @@
 
 					<div>
 						<label for="middleCategory">중분류:</label>
-						<select id="middleCategory">
+						<select id="middleCategory" name="categoryId">
 							<option value="">선택하세요</option>
 						</select>
 					</div>

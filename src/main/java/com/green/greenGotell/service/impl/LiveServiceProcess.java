@@ -64,7 +64,7 @@ public class LiveServiceProcess implements LiveService {
 		}else {
 			itemEntity = liveRepository.findBySearchItem(
 					dto.getName(),
-					dto.getCategory(),
+					dto.maxCategoryId(),
 					pageable);
 		}
 		model.addAttribute("inventorys", itemEntity.getContent().stream().map(ItemEntity :: toItemDTO).collect(Collectors.toList()));

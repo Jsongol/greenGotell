@@ -55,8 +55,8 @@ public class CategoryEntity {
     @Column(nullable = false)
     private int level;
     
-    private String middleCategory;
-    private String subCategory;
+    //private String middleCategory;
+    //private String subCategory;
 
     public CategoryDTO toCategoryDTO() {
     	return CategoryDTO.builder()
