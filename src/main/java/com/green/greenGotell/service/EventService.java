@@ -25,4 +25,15 @@ public class EventService {
                 .map(Event::toEventDTO)
                 .collect(Collectors.toList());
     }// 신규
+    public void updateEvent(Long id, String title, String description) {
+        Event event = eventRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Event not found"));
+        event.setTitle(title);
+        event.setDescription(description);
+        eventRepository.save(event);
+    }
+
+    public void deleteEvent(Long id) {
+        eventRepository.deleteById(id);
+    }
 }
