@@ -18,7 +18,6 @@ import com.green.greenGotell.domain.entity.EmployeePhotoEntity;
 import com.green.greenGotell.domain.entity.EmployeesEntity;
 import com.green.greenGotell.domain.repository.EmployeePhotoEntityRepository;
 import com.green.greenGotell.domain.repository.EmployeesEntityRepository;
-import com.green.greenGotell.security.CustomUserDetails;
 import com.green.greenGotell.service.PersonnelService;
 
 import jakarta.transaction.Transactional;

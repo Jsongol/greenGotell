@@ -4,6 +4,8 @@ import java.time.LocalTime;
 
 import org.hibernate.annotations.DynamicUpdate;
 
+import com.green.greenGotell.domain.dto.EmployeeScheduleListDTO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -47,6 +49,14 @@ public class EmployeeScheduleEntity {
     //퇴근스케줄
     @Column(nullable = false)
     private LocalTime scheduledEnd;
+
+
+	public EmployeeScheduleListDTO toEmployeeScheduleListDTO(){
+		
+		
+		return EmployeeScheduleListDTO.builder().employee(employee.toEmployeeDTO()).scheduledStart(scheduledStart).scheduledEnd(scheduledEnd).build();
+		
+	};
 
 	
 

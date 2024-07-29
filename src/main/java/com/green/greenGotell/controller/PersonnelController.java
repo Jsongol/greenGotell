@@ -71,7 +71,8 @@ public class PersonnelController {
 	       personnelService.updateEmployee(id, employeeUpdateDTO);
 	       return "redirect:/personnel"; // 수정 후 직원 목록 페이지로 리다이렉트
      }
-
+	 
+	
 	
 	
 

@@ -13,7 +13,8 @@ public enum Department {
 	SECURITY(4,"보안부"),
 	HUMAN_RESOURCES(5,"인사부"),
 	SUPPORT(6,"지원부"),
-	MARKETING(7,"마케팅부");
+	MARKETING(7,"마케팅부"),
+	EXECUTIVE(8,"최고경영진");
 	
 	private final int number;
 	private final String KoName;

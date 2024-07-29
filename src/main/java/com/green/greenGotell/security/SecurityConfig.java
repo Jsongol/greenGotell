@@ -35,7 +35,7 @@ public class SecurityConfig {
 						
 						// EMP 사용자에게 접근을 허용할 페이지
 			            .requestMatchers("/").permitAll() // 홈 페이지는 모든 사용자에게 허용
-			            .requestMatchers("/inventory/**", "/notices/**", "/calendar/**", "/mypage/**").permitAll() // EMP에게 허용할 추가 페이지들
+			            .requestMatchers("/inventory/**", "/notices/**", "/calendar/**", "/mypage/**" ,"/status","/clock-in","/clock-out").permitAll() // EMP에게 허용할 추가 페이지들
 						
 						.requestMatchers("/personnel/**").hasAuthority("DEPT_HUMAN_RESOURCES") // 특정 권한을 요구하는 URL
 						// 부장에게 특정 패턴에 대한 권한 부여

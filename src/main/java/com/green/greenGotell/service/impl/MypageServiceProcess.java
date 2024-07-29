@@ -1,20 +1,15 @@
 package com.green.greenGotell.service.impl;
 
-import java.io.IOException;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import com.green.greenGotell.domain.dto.CreateEmployeeDTO;
 import com.green.greenGotell.domain.dto.ProfileUpdateDTO;
 import com.green.greenGotell.domain.entity.EmployeePhotoEntity;
-import com.green.greenGotell.domain.entity.EmployeesEntity;
 import com.green.greenGotell.domain.repository.EmployeePhotoEntityRepository;
 import com.green.greenGotell.domain.repository.EmployeesEntityRepository;
 import com.green.greenGotell.security.CustomUserDetails;
 import com.green.greenGotell.service.MypageService;
-import com.green.greenGotell.service.PersonnelService;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

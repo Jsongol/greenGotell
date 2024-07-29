@@ -9,6 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.green.greenGotell.domain.dto.AttendanceListDTO;
 import com.green.greenGotell.domain.enums.AttendanceStatus;
 import com.green.greenGotell.domain.enums.Department;
 import com.green.greenGotell.domain.enums.EmployeeStatus;
@@ -31,6 +32,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @DynamicUpdate
 @Getter
@@ -44,7 +46,7 @@ public class AttendanceEntity {
 	//no
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int no;
+	private Long no;
 	
 	
 	//직원코드
@@ -64,16 +66,18 @@ public class AttendanceEntity {
 	
 	
 	 //퇴근시간
-	@UpdateTimestamp
+    @Setter
 	@Column(nullable = false,columnDefinition ="timestamp" )
 	private LocalDateTime clokOut;
 	
 	
 	//일한시간(분)
+    @Setter
 	@Column(columnDefinition = "int")
 	private int workHoursInMinutes; 
     
 	//초과 근무시간(분)
+    @Setter
 	@Column(columnDefinition = "int")
 	private int overtimeHoursInMinutes;
 	
@@ -83,6 +87,7 @@ public class AttendanceEntity {
 	
 	
 	// 근무상태
+	@Setter
 	@Enumerated(EnumType.STRING)
 	private AttendanceStatus attendanceStatus;
 	
@@ -94,6 +99,19 @@ public class AttendanceEntity {
             this.date = this.clokIn.toLocalDate();
         }
     }
+    
+    
+    // toAttendanceListDTO
+    
+    public AttendanceListDTO toAttendanceListDTO() {
+    	
+    	
+		return AttendanceListDTO.builder().name(employee.getName()).date(date).clokIn(clokIn.toString())
+				                          .clokOut(clokOut !=null? clokOut.toString() : null)
+				                          .workHoursInMinutes(workHoursInMinutes).overtimeHoursInMinutes(overtimeHoursInMinutes/60).attendanceStatus(attendanceStatus).commutingIssues(commutingIssues).department(employee.getDepartment()).roles(employee.getRoles()) .build();
+    	
+    };
+    
 
 	
 

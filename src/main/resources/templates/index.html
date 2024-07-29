@@ -1,32 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{views/common/layout :: layout(~{::head} ,~{::main} ) }">
 <head>
-<link rel="stylesheet" href="/css/index.css">
-<script src="/js/index.js"></script>
-	<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
-	<script>
-		document.addEventListener('DOMContentLoaded', function() {
-			var calendarEl = document.getElementById('calendar');
+	<meta name="_csrf" th:content="${_csrf.token}"/>
+	<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 
-			// 비동기로 이벤트 데이터 가져오기
-			fetch('/calendar/events')
-					.then(response => response.json())
-					.then(eventsData => {
-						var calendar = new FullCalendar.Calendar(calendarEl, {
-							initialView: 'dayGridMonth',
-							height: '100%',
-							events: eventsData.map(event => ({
-								title: event.title,
-								start: event.start
-							}))
-						});
-						calendar.render();
-					})
-					.catch(error => {
-						console.error('Error fetching events:', error);
-					});
-		});
-	</script>
+	<link rel="stylesheet" href="/css/index.css">
+	<script src="/js/index.js"></script>
+	<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
 
 </head>
 <body>
@@ -36,7 +16,7 @@
 			<!--프로필 대시보드-->
 			<div class="dashboard profile">
 				<ul>
-					 <li class="profilePhoto"><img th:if="${#authorization.expression('isAuthenticated()')}"th:src="${ProfilePhoto.profileImage != null ? 'data:image/jpeg;base64,' + ProfilePhoto.profileImage : 'https://i.pinimg.com/564x/a5/e8/4d/a5e84dd8104ba6287b72e16401d173d7.jpg'}"alt="프로필 사진" ></li>   
+					<li class="profilePhoto"><img th:if="${#authorization.expression('isAuthenticated()')}"th:src="${ProfilePhoto.profileImage != null ? 'data:image/jpeg;base64,' + ProfilePhoto.profileImage : 'https://i.pinimg.com/564x/a5/e8/4d/a5e84dd8104ba6287b72e16401d173d7.jpg'}"alt="프로필 사진" ></li>  
 					<li class="subfont" th:text="${#authentication.principal.department.getKoName()}"></li>
 					<li sec:authentication="principal.name"></li>
 				</ul>
@@ -44,6 +24,7 @@
 			</div>
 
 
+			
 			<!--최근 공지사항-->
 			<div class="dashboard lately-notice-wrap">
 				<div class="lately-notice cmposting-format">
@@ -77,8 +58,8 @@
 
 					<ul class="today-commute-schedule">
 						<li class="subfont">오늘의 출퇴근 스케줄</li>
-						<li><span>출근 시간 : </span><span>09:00</span></li>
-						<li><span>퇴근 시간 : </span><span>18:00</span></li>
+						<li><span>출근 시간 : </span><span th:text="${todaySchedule.scheduledStart}">09:00</span></li>
+						<li><span>퇴근 시간 : </span><span th:text="${todaySchedule.scheduledEnd}">18:00</span></li>
 					</ul>
 
 
