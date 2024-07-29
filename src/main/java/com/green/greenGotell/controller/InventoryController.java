@@ -33,20 +33,26 @@ public class InventoryController {
 	private final CategoryService categoryService;
 	private final ItemService itemservice; 
 	
-	//초기 카테고리 조회
+	// 초기 카테고리 조회
 	@GetMapping
-    public String listCategories(@RequestParam(name="page",defaultValue = "0") int page, Model model) {
-		itemservice.list(page,model);
+	public String listCategories(@RequestParam(name="page", defaultValue = "0") int page, ItemSearchDTO dto, Model model) {
+		if (dto == null) {
+			dto = new ItemSearchDTO(); // dto가 null일 경우 새 객체로 초기화
+		}
+		itemservice.list(page, model);
 		model.addAttribute("categories", categoryService.getAll());
-        return "views/inventory/item-list";
-    }
+		itemservice.showSearchItemList(page, dto, model);
+		return "views/inventory/item-list";
+	}
+    
+    /*
 	//선택 카테고리 조회
 	@GetMapping("/search")
 	public String list(@RequestParam(name="page",defaultValue = "0") int page,ItemSearchDTO dto, Model model) {
 		//System.out.println("max>>>>"+dto.maxCategoryId());
 		itemservice.showSearchItemList(page,dto,model);
 		return "views/inventory/item-list";
-	}
+	}*/
 	
 	// 중분류
     @GetMapping("/categories")
