@@ -43,7 +43,7 @@ public class ItemServiceProcess implements ItemService {
 		
 		Sort sort = Sort.by(Direction.DESC,"id");
 		
-		Pageable pageable = PageRequest.of(page,6, sort);
+		Pageable pageable = PageRequest.of(page,7, sort);
 		
 		Page<ItemEntity> item = itemrepository.findAll(pageable);
 		
