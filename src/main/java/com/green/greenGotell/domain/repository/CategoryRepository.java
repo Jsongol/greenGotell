@@ -21,6 +21,8 @@ public interface CategoryRepository extends JpaRepository<CategoryEntity, Long>{
 	List<CategoryEntity> findByParent_id(Long parentId);
 
 	void save(ItemEntity entity);
+
+	List<CategoryEntity> findAllByParentIsNull();
 	
 	
 }

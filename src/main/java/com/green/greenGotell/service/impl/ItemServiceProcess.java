@@ -1,7 +1,10 @@
 package com.green.greenGotell.service.impl;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -36,17 +39,18 @@ public class ItemServiceProcess implements ItemService {
 
 	
 	@Override
-	public void list(int page, Model model) {
+	public List<ItemDTO> list(int page, Model model) {
 		
 		Sort sort = Sort.by(Direction.DESC,"id");
 		
-		Pageable pageable = PageRequest.of(page,18, sort);
+		Pageable pageable = PageRequest.of(page,6, sort);
 		
 		Page<ItemEntity> item = itemrepository.findAll(pageable);
 		
 		model.addAttribute("inventorys", item.getContent().stream().map(ItemEntity :: toItemDTO).collect(Collectors.toList()));
 		model.addAttribute("currentPage", item.getNumber());
 		model.addAttribute("totalPages", item.getTotalPages());
+		return null;
 	}
 
 
@@ -54,7 +58,7 @@ public class ItemServiceProcess implements ItemService {
 	public void showSearchItemList(int page, ItemSearchDTO dto, Model model) {
 		
 		Sort sort = Sort.by(Direction.DESC,"id");
-		Pageable pageable = PageRequest.of(page,18, sort);
+		Pageable pageable = PageRequest.of(page,15, sort);
 		
 		Page<ItemEntity> itemEntity;
 		if (dto.isEmpty()) {
@@ -76,5 +80,24 @@ public class ItemServiceProcess implements ItemService {
 		model.addAttribute("currentPage", itemEntity.getNumber());
 		model.addAttribute("totalPages", itemEntity.getTotalPages());
 	}
+
+
+    @Cacheable("rootCategories")
+    public List<CategoryEntity> getAllRootCategories() {
+        return categoryRepository.findAllByParentIsNull();
+    }
+
+    @Cacheable(value = "category", key = "#id")
+    public CategoryEntity getCategoryById(Long id) {
+        return categoryRepository.findById(id).orElse(null);
+    }
+
+    @CacheEvict(value = {"rootCategories", "category"}, allEntries = true)
+    public void updateCategory(CategoryEntity category) {
+        categoryRepository.save(category);
+    }
+
+
+
 
 }

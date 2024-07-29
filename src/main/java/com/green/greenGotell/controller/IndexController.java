@@ -7,9 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import com.green.greenGotell.domain.dto.AttendanceListDTO;
+import com.green.greenGotell.domain.dto.ItemDTO;
 import com.green.greenGotell.domain.dto.NoticeListDTO;
 import com.green.greenGotell.security.CustomUserDetails;
 import com.green.greenGotell.service.IndexService;
+import com.green.greenGotell.service.ItemService;
 import com.green.greenGotell.service.NoticeService;
 
 import lombok.RequiredArgsConstructor;
@@ -26,6 +28,7 @@ public class IndexController {
 	
 	private final IndexService indexService;
 	private final NoticeService noticeService;
+	private final ItemService itemService;
 	
 	
 	  @GetMapping("/") public String getMethodName(@AuthenticationPrincipal
@@ -37,6 +40,8 @@ public class IndexController {
 	  // 최근 공지사항 목록을 모델에 추가
       List<NoticeListDTO> recentNotices = noticeService.getRecentNotices();
       model.addAttribute("recentNotices", recentNotices);
+      
+      List<ItemDTO> itemList = itemService.list(0, model);
       
       
 	  return "index"; }
