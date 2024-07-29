@@ -57,7 +57,13 @@ public class SecurityConfig {
 				.exceptionHandling(exceptions -> exceptions
 			            .accessDeniedHandler(customAccessDeniedHandler) // 커스텀 핸들러 등록
 			    )
-		        .userDetailsService(customUserDetailService); // 사용자 세부 정보를 로드하는 서비스 설정
+		        .userDetailsService(customUserDetailService) // 사용자 세부 정보를 로드하는 서비스 설정
+		
+		        .headers(headers -> headers
+                .frameOptions(frameOptions -> frameOptions
+                    .sameOrigin()
+                )
+            );
 
 		return http.build();
 	}
