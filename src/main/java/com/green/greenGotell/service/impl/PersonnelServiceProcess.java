@@ -123,10 +123,7 @@ public class PersonnelServiceProcess implements PersonnelService {
 		
 		 EmployeesEntity employee=rep.findById(id).orElseThrow().update(employeeUpdateDTO);
 				 
-				 
-				 
-				 
-				 
+				  
 		
 	}
 	
