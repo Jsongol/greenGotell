@@ -28,7 +28,7 @@ public class ChatBotController {
     public void hello(HelloDTO dto) {
     	System.out.println(">>>:"+dto);
         long key = dto.getKey();
-        String pattern = "{0}님 안녕하세요!";
+        String pattern = "안녕하세요! 원하시는 질문을 눌러주세요";
         messagingTemplate.convertAndSend("/topic/bot/" + key, MessageFormat.format(pattern, dto.getName())
 				);
 	}
