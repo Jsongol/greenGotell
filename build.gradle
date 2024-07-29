@@ -11,6 +11,7 @@ bootJar{
 	archiveFileName= "greenGotell-${version}.jar"
 	exclude '**/ssh/*'
 }
+
 jar{
 	enabled = false
 }
