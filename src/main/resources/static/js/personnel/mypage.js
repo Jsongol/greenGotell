@@ -153,11 +153,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 	currentPass.onkeyup = function() {
-		console.log('Keyup event triggered');
 		clearTimeout(debounceTimer);
 
 		debounceTimer = setTimeout(function() {
-			console.log('Making AJAX request');
 			if (currentPass.value.length > 0) {
 				$.ajax({
 					beforeSend: function(xhr) { xhr.setRequestHeader(csrfHeader, csrfToken); },
@@ -165,7 +163,6 @@ document.addEventListener('DOMContentLoaded', function () {
 					type: 'POST',
 					data: { pass: currentPass.value },
 					success: function(response) {
-						console.log('AJAX request successful:', response);
 						if (response.valid) {
 							currentPassFailureMessage.classList.add('hide');
 						} else {
@@ -227,8 +224,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		addressInput.value = fullAddress;
 		profileForm.appendChild(addressInput);
 
-		alert('전화번호:'+ phoneWithoutHyphen);
-		alert('주소:'+ fullAddress);
 	};
 	
 	//새비밀번호 제출 이벤트

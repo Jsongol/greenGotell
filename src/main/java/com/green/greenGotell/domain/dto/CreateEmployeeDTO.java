@@ -33,7 +33,8 @@ public class CreateEmployeeDTO {
 		// TODO Auto-generated method stub
 	
 		
-		EmployeesEntity entity = EmployeesEntity.builder().name(name).email(email).pass(pe.encode(pass)).department(department).hireDate(hireDate).employeeStatus(employeeStatus).build();
+		EmployeesEntity entity = EmployeesEntity.builder().name(name).email(email).pass(pe.encode(pass)).department(department)
+				                                          .hireDate(hireDate).employeeStatus(employeeStatus).build();
 		
 		switch (role) {
 		case "CEO": entity.addRole(Role.CEO);
