@@ -30,7 +30,7 @@ public class CreateEmployeeDTO {
 	
 	
 	public EmployeesEntity toEntity(PasswordEncoder pe) {
-		// TODO Auto-generated method stub
+	
 	
 		
 		EmployeesEntity entity = EmployeesEntity.builder().name(name).email(email).pass(pe.encode(pass)).department(department)

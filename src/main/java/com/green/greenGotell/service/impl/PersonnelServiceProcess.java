@@ -1,5 +1,6 @@
 package com.green.greenGotell.service.impl;
 
+import java.time.LocalTime;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
@@ -15,8 +16,10 @@ import com.green.greenGotell.domain.dto.CreateEmployeeDTO;
 import com.green.greenGotell.domain.dto.EmployeeListDTO;
 import com.green.greenGotell.domain.dto.EmployeeSearchDTO;
 import com.green.greenGotell.domain.entity.EmployeePhotoEntity;
+import com.green.greenGotell.domain.entity.EmployeeScheduleEntity;
 import com.green.greenGotell.domain.entity.EmployeesEntity;
 import com.green.greenGotell.domain.repository.EmployeePhotoEntityRepository;
+import com.green.greenGotell.domain.repository.EmployeeScheduleEntityRepository;
 import com.green.greenGotell.domain.repository.EmployeesEntityRepository;
 import com.green.greenGotell.service.PersonnelService;
 
@@ -29,6 +32,7 @@ public class PersonnelServiceProcess implements PersonnelService {
 
 	private final EmployeesEntityRepository rep;
 	private final EmployeePhotoEntityRepository employeePhotoEntityRep;
+	private final EmployeeScheduleEntityRepository employeeScheduleEntityRepository;
 	private final PasswordEncoder pe;
 	
 	//직원가입
@@ -40,10 +44,21 @@ public class PersonnelServiceProcess implements PersonnelService {
 	    // 프로필 엔티티 생성 및 저장
 	     EmployeePhotoEntity photoEntity = EmployeePhotoEntity.builder()
 	                .employee(employee) // 저장된 직원 엔티티 사용 자동으로 id값 매핑
-	                .fileContent(new byte[0]) // 초기에는 null할당
+	                .fileContent(null) // 초기에는 null할당
 	                .build();
 
 	        employeePhotoEntityRep.save(photoEntity);
+	        
+	        
+	    //초기 직원 스케쥴 임의 할당
+	        EmployeeScheduleEntity  scheduleEntity= EmployeeScheduleEntity.builder()
+	        		.employee(employee)
+	        		.scheduledStart(LocalTime.of(9, 0))
+	        		.scheduledEnd(LocalTime.of(18, 0))
+	        		.build();
+	        
+	        employeeScheduleEntityRepository.save(scheduleEntity);
+	        
 	    }
 	
 	//페이지넘기는 처리 
