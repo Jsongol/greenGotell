@@ -18,7 +18,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 
-@Profile("ssh")
+
 @Configuration
 public class SSHTunnellingConfig {
 	

@@ -12,7 +12,6 @@ import lombok.ToString;
 @ToString
 @Getter
 @Setter
-@Profile("ssh")
 @Component
 @ConfigurationProperties("spring.ssh.tunnel")
 public class SSHTunnellingProperties {

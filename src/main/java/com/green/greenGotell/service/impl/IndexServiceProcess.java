@@ -40,10 +40,11 @@ public class IndexServiceProcess implements IndexService {
 	@Override
 	public void list(CustomUserDetails userDetails, org.springframework.ui.Model model) {
 	
-		EmployeesEntity employee = employeesEntityRepository.findById(userDetails.getId()).orElseThrow();
-		
-		model.addAttribute("ProfilePhoto",employeePhotoEntityRepository.findByEmployeeId(userDetails.getId()).orElseThrow().toProfileImageDTO() );
-		model.addAttribute("todaySchedule", employeeScheduleEntityRepository.findByEmployee(employee).orElseThrow().toEmployeeScheduleListDTO());
+		if(userDetails!=null) {
+			EmployeesEntity employee = employeesEntityRepository.findById(userDetails.getId()).orElseThrow();
+			model.addAttribute("todaySchedule", employeeScheduleEntityRepository.findByEmployee(employee).orElseThrow().toEmployeeScheduleListDTO());
+			model.addAttribute("ProfilePhoto",employeePhotoEntityRepository.findByEmployeeId(userDetails.getId()).orElseThrow().toProfileImageDTO() );
+		}
 	
 		
 	}
@@ -142,6 +143,9 @@ public class IndexServiceProcess implements IndexService {
 	            .build());
 	}
 
+	
+	
+	
 	private AttendanceListDTO convertToAttendanceListDTO(AttendanceEntity attendance) {
 	    return AttendanceListDTO.builder()
 	        .employee(attendance.getEmployee().getId())
