@@ -25,12 +25,12 @@ public class LiveInventoryController {
 	private final LiveService liveService; 
 	@GetMapping
 	public String list() {
-		return "/views/inventory/live_list";
+		return "views/inventory/live_list";
 	}
 	
 	@GetMapping("/arrival_exit")
 	public String createLive() {
-		return "/views/inventory/live_write";
+		return "views/inventory/live_write";
 	}
 	// 중분류
     @GetMapping("/categories")

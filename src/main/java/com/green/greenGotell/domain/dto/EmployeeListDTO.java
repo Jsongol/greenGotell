@@ -40,8 +40,7 @@ public class EmployeeListDTO {
 	private Set<Role> roles;
 	
 	//프로필사진
-	 private byte[] fileContent;
-	 private String profileImage;
+	 private String profileImageUrl;
 	 
 	 @Setter
 	 private Role highestRole;

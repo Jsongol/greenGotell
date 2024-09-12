@@ -43,7 +43,7 @@ public class IndexServiceProcess implements IndexService {
 		if(userDetails!=null) {
 			EmployeesEntity employee = employeesEntityRepository.findById(userDetails.getId()).orElseThrow();
 			model.addAttribute("todaySchedule", employeeScheduleEntityRepository.findByEmployee(employee).orElseThrow().toEmployeeScheduleListDTO());
-			model.addAttribute("ProfilePhoto",employeePhotoEntityRepository.findByEmployeeId(userDetails.getId()).orElseThrow().toProfileImageDTO() );
+			model.addAttribute("ProfilePhoto",employeePhotoEntityRepository.findByEmployeeId(userDetails.getId()).orElseThrow().toEmployeeDTO() );
 		}
 	
 		
