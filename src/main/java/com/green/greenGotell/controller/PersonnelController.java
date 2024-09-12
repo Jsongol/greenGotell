@@ -33,7 +33,7 @@ public class PersonnelController {
 		
 		personnelService.showEmployeeList(page,model);
 		
-		return "/views/personnel/employee/list";
+		return "views/personnel/employee/list";
 	}
 	
 	

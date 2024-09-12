@@ -36,7 +36,7 @@ public class MypageController {
 		
 		mypageService.mypagelist(userDetails,model);
 		
-		return "/views/personnel/employee/mypage";
+		return "views/personnel/employee/mypage";
 	}
 	
 	

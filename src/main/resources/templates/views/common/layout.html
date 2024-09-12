@@ -28,9 +28,9 @@
 	
 	<div class="layoutWrap">
 
-		<th:block th:replace="~{/views/common/header}"/>
+		<th:block th:replace="~{views/common/header :: cmheader}"/>
 		
-		<th:block th:replace="~{/views/common/nav}"/>
+		<th:block th:replace="~{views/common/nav :: cmnav}"/>
 		
 		
 		<th:block th:replace="${pMain}"/>
@@ -39,7 +39,7 @@
 	    <!--사용하지 않습니다.-->
 	    <!--<footer th:replace="~{/views/common/footer}"></footer> -->
 	   
-		<th:block th:replace="~{/views/chatbot/list}"/>
+		<th:block th:replace="~{views/chatbot/list :: cmchatbot}"/>
 		
 	
 		

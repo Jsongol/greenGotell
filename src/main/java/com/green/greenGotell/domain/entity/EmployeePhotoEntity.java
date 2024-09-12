@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Base64;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.hibernate.annotations.DynamicUpdate;
@@ -49,6 +50,9 @@ public class EmployeePhotoEntity {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id",referencedColumnName = "id", unique = true, nullable = false)
     private EmployeesEntity employee;
+    
+    private String profileImageUrl;
+  	private String profileImagekey;
 
 
     //프로필의 소스코드 
@@ -57,43 +61,24 @@ public class EmployeePhotoEntity {
     private byte[] fileContent; //최대 16mb
 
 
-    //프로필 사진을 바이트로 변환
-    public EmployeePhotoEntity update(ProfileUpdateDTO dto) {
-        // 기존의 파일 내용 저장
-        byte[] existingFileContent = this.fileContent;
-
-        try {
-            if (dto.getFileContent() != null && !dto.getFileContent().isEmpty()) {
-                // 파일 내용이 있을 경우 바이트 배열로 변환
-                this.fileContent = dto.getFileContent().getBytes();
-            } else {
-                // 파일 내용이 없을 경우 기존 내용을 유지
-                this.fileContent = existingFileContent;
-            }
-        } catch (IOException e) {
-            // IOException 발생 시, 기존 내용을 유지
-            this.fileContent = existingFileContent;
-        }
-        
+    
+    public EmployeePhotoEntity update(String profileImageUrl,String key) {
+    	
+    	this.profileImagekey=key;
+    	this.profileImageUrl=profileImageUrl;
+    	
+    
         return this; // 업데이트 후 현재 객체를 반환
     }
 
     //직원 정보 얻어올때 dto
 	public EmployeeListDTO toEmployeeDTO() {
 		
-		String base64Image = (fileContent != null) ? Base64.getEncoder().encodeToString(fileContent) : null;
-		return EmployeeListDTO.builder().profileImage(base64Image).build();
+		return EmployeeListDTO.builder().profileImageUrl(profileImageUrl).build();
 		
 	}
 
-   //직원 이미지 파일 얻어올때 dto
-	public ProfileImageDTO toProfileImageDTO() {
-		
-		String base64Image = (fileContent != null) ? Base64.getEncoder().encodeToString(fileContent) : null;
-		return ProfileImageDTO.builder().profileImage(base64Image).build();
-	
-		
-	}
+ 
 
  
 	

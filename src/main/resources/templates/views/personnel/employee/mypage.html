@@ -31,7 +31,7 @@
 			
 				<div class="Profile cmbox" >
 				    <h1 class="subfont">프로필</h1>
-					<img th:src="${mypagePhoto.profileImage != null ? 'data:image/jpeg;base64,' + mypagePhoto.profileImage : 'https://i.pinimg.com/564x/a5/e8/4d/a5e84dd8104ba6287b72e16401d173d7.jpg'}" alt="프로필 사진">
+					<img th:if="${#authorization.expression('isAuthenticated()')}" th:src="${mypagePhoto != null and mypagePhoto.profileImageUrl != null ? 'https:' + mypagePhoto.profileImageUrl : 'https://i.pinimg.com/564x/a5/e8/4d/a5e84dd8104ba6287b72e16401d173d7.jpg'}" alt="프로필 사진">
 					<p th:text="${maypageList.name}"></p>
 					<div>
 						

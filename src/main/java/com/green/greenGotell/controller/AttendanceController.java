@@ -23,13 +23,13 @@ public class AttendanceController {
 		
 		attendanceService.showAttendanceList(page,model);
 		
-		return "/views/personnel/attendance/attendanceRecord";
+		return "views/personnel/attendance/attendanceRecord";
 	}
 	
 	
 	@GetMapping("/personnel/attendance/leave-request")
 	public String gleaveRequestIist() {
-		return "/views/personnel/attendance/leaveRequest";
+		return "views/personnel/attendance/leaveRequest";
 	}
 	
 
