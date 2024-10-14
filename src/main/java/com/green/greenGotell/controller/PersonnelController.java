@@ -1,20 +1,21 @@
 package com.green.greenGotell.controller;
 
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.green.greenGotell.domain.dto.CreateEmployeeDTO;
-import com.green.greenGotell.domain.dto.EmployeeListDTO;
-import com.green.greenGotell.domain.dto.EmployeeSearchDTO;
-import com.green.greenGotell.domain.entity.EmployeesEntity;
-import com.green.greenGotell.security.CustomUserDetails;
+import com.green.greenGotell.domain.dto.PageRequestDTO;
+import com.green.greenGotell.domain.dto.employee.CreateEmployeeDTO;
+import com.green.greenGotell.domain.dto.employee.EmployeeListDTO;
+import com.green.greenGotell.domain.dto.employee.EmployeeSearchDTO;
 import com.green.greenGotell.service.PersonnelService;
 
 import lombok.RequiredArgsConstructor;
@@ -27,25 +28,18 @@ public class PersonnelController {
 	private final PersonnelService personnelService;
 	
 
-   //초기 직원조회
-	@GetMapping("/personnel")
-	public String list(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
-		
-		personnelService.showEmployeeList(page,model);
-		
+    //통합직원목록조회
+	@GetMapping("/personnel/list")
+	public String list(@ModelAttribute PageRequestDTO pageDTO, EmployeeSearchDTO  searchDTO , Model model) {
+        System.out.println("작동");
+        System.out.println(searchDTO);
+		model.addAttribute("employees",personnelService.showEmployeeList(pageDTO,searchDTO));
+	
 		return "views/personnel/employee/list";
 	}
 	
 	
-	
-	//원하는 직원 조회
-	@PostMapping("/personnel/search")
-	public String list(@RequestParam(name = "page", defaultValue = "0") int page,EmployeeSearchDTO dto, Model model ) {
-		
-		personnelService.showSearchEmployeeList(page,dto,model);
-		
-		return "views/personnel/employee/list";
-	}
+
 	
 	
 	//직원추가
@@ -53,7 +47,7 @@ public class PersonnelController {
 	public String create(CreateEmployeeDTO dto) {
 		personnelService.createEmployee(dto);
 		
-		return "redirect:/personnel";
+		return "redirect:/personnel/list";
 	}
 	
 	
@@ -69,7 +63,7 @@ public class PersonnelController {
 	 @PutMapping("/personnel/update/{id}")
 	   public String updateEmployee(@PathVariable(name = "id")  Long id,CreateEmployeeDTO employeeUpdateDTO) {
 	       personnelService.updateEmployee(id, employeeUpdateDTO);
-	       return "redirect:/personnel"; // 수정 후 직원 목록 페이지로 리다이렉트
+	       return "redirect:/personnel/list"; // 수정 후 직원 목록 페이지로 리다이렉트
      }
 	 
 	

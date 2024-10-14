@@ -7,9 +7,9 @@ import java.util.Set;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.green.greenGotell.domain.dto.CreateEmployeeDTO;
-import com.green.greenGotell.domain.dto.EmployeeListDTO;
 import com.green.greenGotell.domain.dto.ProfileUpdateDTO;
+import com.green.greenGotell.domain.dto.employee.CreateEmployeeDTO;
+import com.green.greenGotell.domain.dto.employee.EmployeeListDTO;
 import com.green.greenGotell.domain.enums.Department;
 import com.green.greenGotell.domain.enums.EmployeeStatus;
 import com.green.greenGotell.domain.enums.Role;

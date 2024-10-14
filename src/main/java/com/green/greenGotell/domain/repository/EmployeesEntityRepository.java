@@ -1,5 +1,6 @@
 package com.green.greenGotell.domain.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -27,5 +28,15 @@ public interface EmployeesEntityRepository extends JpaRepository<EmployeesEntity
 	            @Param("employeeStatus") EmployeeStatus employeeStatus,
 	            @Param("name") String name,
 	            Pageable pageable);
+
+
+	   @Query("SELECT e FROM EmployeesEntity e WHERE " +
+	           "(:department IS NULL OR e.department = :department) AND " +
+	           "(:employeeStatus IS NULL OR e.employeeStatus = :employeeStatus) AND " +
+	           "(:name IS NULL OR e.name LIKE %:name%)")
+	   List<EmployeesEntity> findBySearchEmployee(	            
+			   @Param("department") Department department,
+	            @Param("employeeStatus") EmployeeStatus employeeStatus,
+	            @Param("name") String name);
 
 }

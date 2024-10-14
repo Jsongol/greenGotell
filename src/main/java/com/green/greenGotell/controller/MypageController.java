@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
-import com.green.greenGotell.domain.dto.CreateEmployeeDTO;
 import com.green.greenGotell.domain.dto.ProfileUpdateDTO;
+import com.green.greenGotell.domain.dto.employee.CreateEmployeeDTO;
 import com.green.greenGotell.security.CustomUserDetails;
 import com.green.greenGotell.service.MypageService;
 import com.green.greenGotell.service.PersonnelService;

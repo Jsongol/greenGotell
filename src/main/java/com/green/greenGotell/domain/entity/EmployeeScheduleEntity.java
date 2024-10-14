@@ -4,7 +4,7 @@ import java.time.LocalTime;
 
 import org.hibernate.annotations.DynamicUpdate;
 
-import com.green.greenGotell.domain.dto.EmployeeScheduleListDTO;
+import com.green.greenGotell.domain.dto.employee.EmployeeScheduleListDTO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

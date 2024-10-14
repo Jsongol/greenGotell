@@ -1,4 +1,4 @@
-package com.green.greenGotell.domain.dto;
+package com.green.greenGotell.domain.dto.employee;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -17,8 +17,10 @@ import lombok.ToString;
 
 
 
+
 @Setter
 @Getter
+@ToString
 public class EmployeeSearchDTO {
 	
 	private String name;

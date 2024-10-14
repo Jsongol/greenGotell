@@ -19,7 +19,7 @@
 			</div>
 
 			<div id="cmsearch-form">
-				<form class="search-form " th:action="@{/personnel/search}" method="post">
+				<form class="search-form " action="/personnel/list" method="get">
 
 					<select class="cmselect" id="department" name="department" >
 					     <option value="">전체부서</option>
@@ -37,8 +37,6 @@
 					</select>
 					
 					<input type="text" name="name" placeholder="이름을 입력해주세요.">
-					<input type="hidden" th:name="${_csrf.parameterName}"th:value="${_csrf.token}" />
-					<input type="hidden" name="page" value="0">
 
 					<button type="submit">검색</button>
 				</form>
@@ -59,11 +57,11 @@
 						<span></span>
 					</li>
 
-					<li th:each="employees:${employees}"><!--타임리프 적용하려야하는 곳 입니다.-->
+					<li th:each="employees:${employees.dtoList}"><!--타임리프 적용하려야하는 곳 입니다.-->
 						<span th:text="${employees.id}">사번</span>
 						<span th:text="${employees.name}">성명</span>
 						<span th:text="${employees.department.getKoName()}">부서</span>
-						<span  th:text="${employees.HighRole != null ? employees.HighRole.roleName : '미할당'}">직급</span>
+						<span th:text="${employees.HighRole != null ? employees.HighRole.roleName : '미할당'}">직급</span>
 						<span th:text="${employees.phone !=null ? employees.phone : '미등록' }">연락처</span>
 						<span th:text="${employees.address !=null ? employees.address : '미등록' }">주소</span>
 						<span th:text="${employees.email}">이메일</span>
@@ -74,18 +72,25 @@
 
 				</ul>
 			</div>
-
-			<div class="pagination" th:if="${totalPages > 1}">
-				<span th:if="${currentPage > 0}"> <a
-					th:href="@{/personnel(page=${currentPage - 1})}">&laquo; 이전</a>
-				</span> <span th:each="pageNum : ${#numbers.sequence(0, totalPages - 1)}">
-					<a th:href="@{/personnel(page=${pageNum})}"
-					th:text="${pageNum + 1}"
-					th:class="${pageNum == currentPage} ? 'active' : ''"></a>
-				</span> <span th:if="${currentPage < totalPages - 1}"> <a
-					th:href="@{/personnel(page=${currentPage + 1})}">다음 &raquo;</a>
-				</span>
+			
+			
+			<div class="pagination-wrap">
+			    <ul>
+			        <li class="page-item" th:if="${employees.prev}">
+			            <a class="page-link" th:href="@{/personnel/list(page=${employees.start + 1})}" tabindex="+1">이전</a>
+			        </li>
+			
+			        <li th:class="${'page-item' + (employees.page == page ? ' active' : '')}" th:each="page : ${employees.pageList}">
+			            <a class="page-link" th:href="@{/personnel/list(page=${page})}">[[${page}]]</a>
+			        </li>
+			
+			        <li class="page-item" th:if="${employees.next}">
+			            <a class="page-link" th:href="@{/personnel/list(page=${employees.end + 1})}">다음</a>
+			        </li>
+			    </ul>
 			</div>
+			
+
 
 
 
